@@ -28,7 +28,7 @@ This Java application assists users in planning their study abroad experience by
    - Google Flights API (flight data)
    - Google Mail API (emailing itinerary)
 
-3. **Dependencies** – Use Maven or Gradle for managing dependencies. The APIs might require specific libraries for API calls, JSON handling, etc.
+3. **Dependencies** – The APIs might require specific libraries for API calls, JSON handling, etc.
 
 ### Installation
 
@@ -81,13 +81,13 @@ This project integrates with the following APIs to provide a full-service experi
 - **Usage**: Sends an email with the user’s itinerary details to the user’s specified email address.
 - **Note**: Configure API keys and email settings in `GoogleMailService.java`.
 
-## Usage
+## User story
 
-1. **Create an Account**: Register an account and fill in personal details.
-2. **Select Program**: View and filter study abroad programs based on suitability.
-3. **Sort Programs by Cost**: Sort available options based on cost.
-4. **Choose University**: Select a university and proceed to book flights and accommodations.
-5. **Email Itinerary**: Review the final summary and email it for easy reference.
+1. **Create an Account**: Register an account and fill in personal details. - Alisa 
+2. **Select and Sort Program**: View and filter study abroad programs based on suitability. - Muhtasim 
+3. **Google Flight API call**: Calling the Google Flight API and giving the user a list of options to choose from - Sanyukta
+4. **Accommodations**: Call the AIRBNB API and give the user a list of options to choose from - Rosa 
+5. **Email Itinerary**: Review the final summary and email it for easy reference. - Ariuntuya
 
 ## License
 This project was developed as part of a course at the University of Toronto and is intended solely for educational purposes. Redistribution or commercial use of the code is not permitted without permission.
