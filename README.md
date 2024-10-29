@@ -89,6 +89,12 @@ This project integrates with the following APIs to provide a full-service experi
 4. **Accommodations**: Call the AIRBNB API and give the user a list of options to choose from - Rosa 
 5. **Email Itinerary**: Review the final summary and email it for easy reference. - Ariuntuya
 
+## Branch Protection Guidelines
+- All code changes to the `main` branch must go through a pull request.
+- Each pull request must have at least one approval from another team member before merging.
+- Remember to keep the `main` branch protected by following these guidelines.
+
+
 ## License
 This project was developed as part of a course at the University of Toronto and is intended solely for educational purposes. Redistribution or commercial use of the code is not permitted without permission.
 
