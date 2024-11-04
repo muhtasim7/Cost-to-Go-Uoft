@@ -2,7 +2,15 @@
 
 This Java application assists users in planning their study abroad experience by connecting them to tailored university programs, flights, and accommodations. By creating an account and filling out personal information, users can discover study abroad options that match their preferences and make informed decisions about studying overseas. The program provides a seamless process from program selection to flight and accommodation booking and allows users to receive their final itinerary via email.
 
+## Group Members 
+- Alisa Iskakova (alisa-isk)
+- Ariuntuya Ganbold (ambutsa)
+- Muhtasim Khan (muhtasim7)
+- Sanyukta Negi (sanyuktanegi)
+- Rosa Martinez (rosamartinezz)
+
 ## Table of Contents
+
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [API Integrations](#api-integrations)
