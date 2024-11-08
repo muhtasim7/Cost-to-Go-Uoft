@@ -54,6 +54,7 @@ This Java application assists users in planning their study abroad experience by
 
 ### Running the Program
 
+-In src/main/java/service/AuthService.java change line file path to your own file path of where Data/users.csv is located
 Run the program through your Java IDE or by executing the main class in the terminal.
 
 ## API Integrations
