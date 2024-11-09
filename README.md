@@ -54,11 +54,12 @@ This Java application assists users in planning their study abroad experience by
 
 ### Running the Program
 
+-In src/main/java/usecases/AuthService.java change line file path to your own file path of where Data/users.csv is located
 Run the program through your Java IDE or by executing the main class in the terminal.
 
 ## API Integrations
 
-This project integrates with the following APIs to provide a full-service experience for users:
+This project integrates with the following APIs to provide a full-usecases experience for users:
 
 1. **Airbnb API**  
    Provides data on available accommodations in the program's city. Users can browse accommodation options based on preferences (e.g., cost, proximity to campus).  

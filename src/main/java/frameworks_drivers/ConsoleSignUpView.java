@@ -1,6 +1,6 @@
-package view;
+package frameworks_drivers;
 
-import controller.AuthController;
+import interface_adapters.AuthController;
 import java.util.Scanner;
 
 public class ConsoleSignUpView {

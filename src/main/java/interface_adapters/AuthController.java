@@ -1,7 +1,7 @@
-package controller;
+package interface_adapters;
 
-import model.User;
-import service.AuthService;
+import entities.User;
+import usecases.AuthService;
 
 public class AuthController {
     private final AuthService authService;

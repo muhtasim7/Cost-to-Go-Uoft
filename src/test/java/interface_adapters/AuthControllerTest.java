@@ -1,9 +1,8 @@
-package controller;
+package interface_adapters;
 
-import model.User;
 import org.junit.Before;
 import org.junit.Test;
-import service.AuthService;
+import usecases.AuthService;
 
 import static org.junit.Assert.*;
 
