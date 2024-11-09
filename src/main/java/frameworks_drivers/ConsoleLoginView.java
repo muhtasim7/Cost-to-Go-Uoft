@@ -1,6 +1,6 @@
 package view;
 
-import controller.AuthController;
+import interface_adapters.AuthController;
 import java.util.Scanner;
 
 public class ConsoleLoginView {

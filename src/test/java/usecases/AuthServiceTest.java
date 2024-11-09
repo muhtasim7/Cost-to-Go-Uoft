@@ -1,6 +1,6 @@
 package service;
 
-import model.User;
+import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
