@@ -1,8 +1,9 @@
 import controller.AuthController;
 import service.AuthService;
+
+import java.util.Scanner;
 import view.ConsoleLoginView;
 import view.ConsoleSignUpView;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {

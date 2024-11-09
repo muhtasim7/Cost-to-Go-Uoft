@@ -12,18 +12,22 @@ public class ConsoleSignUpView {
 
     public void display() {
         Scanner scanner = new Scanner(System.in);
+        boolean signUpComplete = false;
 
-        System.out.println("Sign Up Page");
-        System.out.print("Enter username: ");
-        String username = scanner.nextLine();
+        while (!signUpComplete) {
+            System.out.println("Sign Up Page");
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
 
-        System.out.print("Enter password: ");
-        String password = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
 
-        if (authController.signUp(username, password)) {
-            System.out.println("Sign up successful!");
-        } else {
-            System.out.println("Sign up failed. Please try again.");
+            if (authController.signUp(username, password)) {
+                System.out.println("Sign up successful!");
+                signUpComplete = true;  // Exit loop on success
+            } else {
+                System.out.println("Sign up failed. Please try again.");
+            }
         }
     }
 }
