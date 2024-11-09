@@ -2,34 +2,48 @@ package service;
 
 import model.User;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class AuthService {
     private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv";// update this line with actual file path
 
+    /**
+     * This is used to input the new user's data into the databse
+     * @param user the new user's object which has their user_name and password
+     * @return true if successful else false
+     */
     public boolean signUp(User user) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true)))
+        {
             writer.write(user.getUsername() + "," + user.getPassword());
             writer.newLine();
             return true;
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
             return false;
         }
     }
 
+    /**
+     * This simply checks if the user_name and password exists in the database.
+     * @param username the username of the user logging in.
+     * @param password the password of the user loggin in.
+     * @return True if successful else false
+     */
     public boolean login(String username, String password) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH)))
+        {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null)
+            {
                 String[] credentials = line.split(",");
                 if (credentials[0].equals(username) && credentials[1].equals(password)) {
                     return true;
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
+            return false;
         }
         return false;
     }
