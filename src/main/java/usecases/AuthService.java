@@ -1,4 +1,4 @@
-package service;
+package usecases;
 
 import entities.User;
 import java.io.*;

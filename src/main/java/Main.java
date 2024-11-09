@@ -1,9 +1,9 @@
-import controller.AuthController;
-import service.AuthService;
+import interface_adapters.AuthController;
+import usecases.AuthService;
 
 import java.util.Scanner;
-import view.ConsoleLoginView;
-import view.ConsoleSignUpView;
+import frameworks_drivers.ConsoleLoginView;
+import frameworks_drivers.ConsoleSignUpView;
 
 public class Main {
     public static void main(String[] args) {

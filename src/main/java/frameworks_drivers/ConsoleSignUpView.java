@@ -1,4 +1,4 @@
-package view;
+package frameworks_drivers;
 
 import interface_adapters.AuthController;
 import java.util.Scanner;
