@@ -11,6 +11,10 @@ public class AuthService {
      * @return true if successful else false
      */
     public boolean signUp(User user) {
+        if (userExists(user.getUsername()) || user.getUsername() == null || user.getPassword() == null) {
+            return false;
+        }
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, true)))
         {
             writer.write(user.getUsername() + "," + user.getPassword());
@@ -22,6 +26,28 @@ public class AuthService {
             return false;
         }
     }
+
+    /**
+     * Helper method to check if a user with the given username already exists in the database.
+     * @param username the username to check.
+     * @return true if the user exists, false otherwise.
+     */
+    private boolean userExists(String username) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] credentials = line.split(",");
+                if (credentials[0].equals(username)) {
+                    return true; // User exists
+                }
+            }
+        } catch (IOException e) {
+            // Handle error if necessary
+        }
+        return false; // User does not exist
+    }
+
+
 
     /**
      * This simply checks if the user_name and password exists in the database.
