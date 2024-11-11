@@ -1,13 +1,13 @@
-# Cost-to-Go-Uoft
+# Cost-to-Go-UofT
 
 This Java application assists users in planning their study abroad experience by connecting them to tailored university programs, flights, and accommodations. By creating an account and filling out personal information, users can discover study abroad options that match their preferences and make informed decisions about studying overseas. The program provides a seamless process from program selection to flight and accommodation booking and allows users to receive their final itinerary via email.
 
 ## Group Members 
-- Alisa Iskakova (alisa-isk)
-- Ariuntuya Ganbold (ambutsa)
-- Muhtasim Khan (muhtasim7)
-- Sanyukta Negi (sanyuktanegi)
-- Rosa Martinez (rosamartinezz)
+- Alisa Iskakova ([alisa-isk](https://github.com/alisa-isk))
+- Ariuntuya Ganbold ([ambutsa](https://github.com/ambutsa))
+- Muhtasim Khan ([muhtasim7](https://github.com/muhtasim7))
+- Sanyukta Negi ([sanyuktanegi](https://github.com/sanyuktanegi))
+- Rosa Martinez ([rosamartinezz](https://github.com/rosamartinezz))
 
 ## Table of Contents
 
@@ -55,10 +55,12 @@ This Java application assists users in planning their study abroad experience by
 
 ### Running the Program
 
+-In src/main/java/usecases/AuthService.java change line file path to your own file path of where Data/users.csv is located
+Run the program through your Java IDE or by executing the main class in the terminal.
 
 ## API Integrations
 
-This project integrates with the following APIs to provide a full-service experience for users:
+This project integrates with the following APIs to provide a full-usecases experience for users:
 
 1. **Airbnb API**  
    Provides data on available accommodations in the program's city. Users can browse accommodation options based on preferences (e.g., cost, proximity to campus).  
@@ -89,19 +91,18 @@ This project integrates with the following APIs to provide a full-service experi
 - **Usage**: Sends an email with the user’s itinerary details to the user’s specified email address.
 - **Note**: Configure API keys and email settings in `GoogleMailService.java`.
 
-## User story
+## User Story
 
-1. **Create an Account**: Register an account and fill in personal details. - Alisa 
-2. **Select and Sort Program**: View and filter study abroad programs based on suitability. - Muhtasim 
-3. **Google Flight API call**: Calling the Google Flight API and giving the user a list of options to choose from - Sanyukta
-4. **Accommodations**: Call the AIRBNB API and give the user a list of options to choose from - Rosa 
-5. **Email Itinerary**: Review the final summary and email it for easy reference. - Ariuntuya
+1. **Create an Account**: Register an account and fill in personal details. - *Alisa* 
+2. **Select and Sort Program**: View and filter study abroad programs based on suitability. - *Muhtasim* 
+3. **Google Flight API call**: Calling the Google Flight API and giving the user a list of options to choose from - *Sanyukta*
+4. **Accommodations**: Call the AIRBNB API and give the user a list of options to choose from - *Rosa* 
+5. **Email Itinerary**: Review the final summary and email it for easy reference. - *Ariuntuya*
 
 ## Branch Protection Guidelines
 - All code changes to the `main` branch must go through a pull request.
 - Each pull request must have at least one approval from another team member before merging.
 - Remember to keep the `main` branch protected by following these guidelines.
-
 
 ## License
 This project was developed as part of a course at the University of Toronto and is intended solely for educational purposes. Redistribution or commercial use of the code is not permitted without permission.
