@@ -3,7 +3,7 @@ package usecases;
 import entities.User;
 import java.io.*;
 public class AuthService {
-    private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv";// update this line with actual file path
+    private static final String FILE_PATH = "\\Users\\alisa.isk\\IdeaProjects\\Cost-to-Go-Uoft\\Data\\users.csv";// update this line with actual file path
 
     /**
      * This is used to input the new user's data into the databse
