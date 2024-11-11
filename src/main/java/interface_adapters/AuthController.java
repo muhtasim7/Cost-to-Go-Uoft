@@ -14,6 +14,10 @@ public class AuthController {
         this.authService = authService;
     }
 
+    public AuthController(service.AuthService authService, AuthService authService1) {
+        this.authService = authService1;
+    }
+
     /**
      * Setting up the information to be passed on to authService by calling on User for sign up.
      * @param username the new user's username.
