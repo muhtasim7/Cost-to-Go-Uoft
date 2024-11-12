@@ -9,56 +9,58 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import usecases.PropertyRepository;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AIRBNB implements PropertyRepository {
-    private static final String API_KEY = "37a70792aemsh77418466425637ap112d5bjsn16ec621693de";  // Replace with your actual API key
-    //private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\jsonformatter.txt";
+    //private static final String API_KEY = "37a70792aemsh77418466425637ap112d5bjsn16ec621693de";  // Replace with your actual API key
+    private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\jsonformatter.txt";
 
     @Override
     public List<Property> searchProperties(String city) throws Exception {
         // Uncomment this code block to make a real API call
 
-        OkHttpClient client = new OkHttpClient();
-
-        // URL structure with placeholders for customization
-        String url = "https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByLocationV2?location=" + city +
-                "&totalRecords=40&currency=USD&adults=1&checkin=2025-01-01&checkout=2025-04-30";
-
-        Request request = new Request.Builder()
-                .url(url)
-                .get()
-                .addHeader("x-rapidapi-key", API_KEY)
-                .addHeader("x-rapidapi-host", "airbnb19.p.rapidapi.com")
-                .build();
-
-        Response response = client.newCall(request).execute();
-
-        if (!response.isSuccessful() || response.body() == null) {
-            throw new Exception("API call failed: " + response.message());
-        }
-
-        // Parse JSON response from API
-        String jsonResponse = response.body().string();
-
+//        OkHttpClient client = new OkHttpClient();
+//
+//        // URL structure with placeholders for customization
+//        String url = "https://airbnb19.p.rapidapi.com/api/v1/searchPropertyByLocationV2?location=" + city +
+//                "&totalRecords=40&currency=USD&adults=1&checkin=2025-01-01&checkout=2025-04-30";
+//
+//        Request request = new Request.Builder()
+//                .url(url)
+//                .get()
+//                .addHeader("x-rapidapi-key", API_KEY)
+//                .addHeader("x-rapidapi-host", "airbnb19.p.rapidapi.com")
+//                .build();
+//
+//        Response response = client.newCall(request).execute();
+//
+//        if (!response.isSuccessful() || response.body() == null) {
+//            throw new Exception("API call failed: " + response.message());
+//        }
+//
+//        // Parse JSON response from API
+//        String jsonResponse = response.body().string();
+//
 
         // Read JSON data from local file instead of making an API call
-        //String jsonResponse = readJsonFromFile();
+        String jsonResponse = readJsonFromFile();
         return parseProperties(jsonResponse);
     }
 
-//    private String readJsonFromFile() throws IOException {
-//        // Read the contents of the JSON file and return it as a string
-//        FileReader fileReader = new FileReader(FILE_PATH);
-//        StringBuilder jsonData = new StringBuilder();
-//        int i;
-//        while ((i = fileReader.read()) != -1) {
-//            jsonData.append((char) i);
-//        }
-//        fileReader.close();
-//        return jsonData.toString();
-//    }
+    private String readJsonFromFile() throws IOException {
+        // Read the contents of the JSON file and return it as a string
+        FileReader fileReader = new FileReader(FILE_PATH);
+        StringBuilder jsonData = new StringBuilder();
+        int i;
+        while ((i = fileReader.read()) != -1) {
+            jsonData.append((char) i);
+        }
+        fileReader.close();
+        return jsonData.toString();
+    }
 
     private List<Property> parseProperties(String jsonResponse) {
         JSONObject jsonObject = new JSONObject(jsonResponse);
