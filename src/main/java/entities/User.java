@@ -20,5 +20,6 @@ public interface User {
     String getGpa();
     String getDegreeType();
     String getProgram();
+    String getLanguage();
 
 }
