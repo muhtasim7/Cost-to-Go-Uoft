@@ -149,33 +149,6 @@ public class OverviewScreen extends JFrame {
         return panel;
     }
 
-    // Creates the panel with the email input
-    private JPanel createEmailPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(255, 255, 255));
-
-        JLabel promptLabel = new JLabel("Get a copy of your itinerary!");
-        promptLabel.setFont(regularFont);
-
-        JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        inputPanel.setBackground(new Color(255, 255, 255));
-
-        JLabel emailLabel = new JLabel("Email:");
-        emailLabel.setFont(regularFont);
-
-        JTextField emailTextField = new JTextField(20);
-        emailTextField.setFont(regularFont);
-
-        panel.add(promptLabel);
-        inputPanel.add(emailLabel);
-        inputPanel.add(emailTextField);
-        panel.add(inputPanel);
-
-        return panel;
-    }
-
     public static void main(String[] args) {
         OverviewScreen screen = new OverviewScreen();
         screen.setVisible(true);

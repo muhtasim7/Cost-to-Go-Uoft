@@ -1,11 +1,14 @@
 package interface_adapters;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EmailItinerary extends JFrame {
+    // Makes the screen for where you can email your itinerary to yourself
     public EmailItinerary() {
         setTitle("Email Yourself Your Itinerary!");
 
@@ -20,10 +23,11 @@ public class EmailItinerary extends JFrame {
 
         add(new JScrollPane(mainPanel));
     }
-
+    // Fonts for the labels
     Font regularFont = new Font("Apple LiGothic", Font.PLAIN, 20);
     Color blue = new Color(159, 224, 229);
 
+    // Creates the email panel
     private JPanel createEmailPanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(4, 1));
@@ -42,6 +46,20 @@ public class EmailItinerary extends JFrame {
         JTextField emailTextField = new JTextField(20);
         emailTextField.setFont(regularFont);
 
+        JButton submitButton = getjButton(emailTextField, panel);
+
+        inputPanel.add(emailLabel);
+        inputPanel.add(emailTextField);
+
+        panel.add(promptLabel);
+        panel.add(inputPanel);
+        panel.add(submitButton);
+
+        return panel;
+    }
+    // Extracted method for the submit button
+    @NotNull
+    private JButton getjButton(JTextField emailTextField, JPanel panel) {
         JButton submitButton = new JButton("Submit");
         submitButton.setFont(regularFont);
 
@@ -57,17 +75,9 @@ public class EmailItinerary extends JFrame {
                 }
             }
         });
-
-        inputPanel.add(emailLabel);
-        inputPanel.add(emailTextField);
-
-        panel.add(promptLabel);
-        panel.add(inputPanel);
-        panel.add(submitButton);
-
-        return panel;
+        return submitButton;
     }
-
+    // Checks if emial is valid
     private boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
         return email.matches(emailRegex);
