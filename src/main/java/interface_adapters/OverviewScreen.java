@@ -4,16 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OverviewScreen extends JFrame {
-
+    // The code to put the overview screen together
     public OverviewScreen() {
-        setTitle("Study Abroad Overview");
+        setTitle("Study Abroad Itinerary");
         setSize(600, 800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        // Initialize university panel
+        // Initialize the sub-panels
         JPanel universityPanel = createUniversityPanel();
         JPanel rentalPanel = createRentalPanel();
         JPanel flightPanel = createFlightPanel();
@@ -25,16 +25,17 @@ public class OverviewScreen extends JFrame {
         mainPanel.add(flightPanel);
         mainPanel.add(totalPanel);
 
-
         add(new JScrollPane(mainPanel));
     }
 
+    // Fonts for the labels
     Font regularFont = new Font("Apple LiGothic", Font.PLAIN, 20);
     Font boldFont = new Font("Apple LiGothic", Font.BOLD, 30);
 
+    // Creates the panel with the university information
     private JPanel createUniversityPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(8, 1)); // Adjusted layout for less space
+        panel.setLayout(new GridLayout(8, 1));
         panel.setBackground(new Color(190, 211, 115));
         JLabel universityLabel = new JLabel("University Details:");
         universityLabel.setFont(boldFont);
@@ -71,10 +72,10 @@ public class OverviewScreen extends JFrame {
 
         return panel;
     }
-
+    // Creates the panel with the rental information
     private JPanel createRentalPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1)); // Adjusted layout for less space
+        panel.setLayout(new GridLayout(6, 1));
         panel.setBackground(new Color(159, 224, 229));
         JLabel hotelLabel = new JLabel("Hotel Details:");
         hotelLabel.setFont(boldFont);
@@ -103,49 +104,75 @@ public class OverviewScreen extends JFrame {
 
         return panel;
     }
-
+    // Creates the panel with the flight information
     private JPanel createFlightPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1)); // Adjusted layout for less space
+        panel.setLayout(new GridLayout(5, 1));
 
         JLabel flightLabel = new JLabel("Flight Details:");
         flightLabel.setFont(boldFont);
         panel.setBackground(new Color(235, 194, 235));
 
-        JLabel flightNumberLabel = new JLabel("Flight Number:");
-        flightNumberLabel.setFont(regularFont);
+        JLabel originLabel = new JLabel("Origin: Toronto International Airport");
+        originLabel.setFont(regularFont);
+
+        JLabel destinationLabel = new JLabel("Destination:");
+        destinationLabel.setFont(regularFont);
+
+        JLabel priceLabel = new JLabel("Price:");
+        priceLabel.setFont(regularFont);
 
         JLabel durationLabel = new JLabel("Duration:");
         durationLabel.setFont(regularFont);
 
-        JLabel lengthLabel = new JLabel("Length:");
-        lengthLabel.setFont(regularFont);
-
-        JLabel layoversLabel = new JLabel("Layovers:");
-        layoversLabel.setFont(regularFont);
-
-        JLabel flightTimeLabel = new JLabel("When the flight is:");
-        flightTimeLabel.setFont(regularFont);
+        JLabel dateLabel = new JLabel("Date:");
+        dateLabel.setFont(regularFont);
 
         panel.add(flightLabel);
-        panel.add(flightNumberLabel);
+        panel.add(originLabel);
+        panel.add(priceLabel);
         panel.add(durationLabel);
-        panel.add(lengthLabel);
-        panel.add(layoversLabel);
-        panel.add(flightTimeLabel);
+        panel.add(dateLabel);
 
         return panel;
     }
-
+    // Creates the panel that displays the total cost
     private JPanel createTotalPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(1, 1)); // Adjusted layout for less space
+        panel.setLayout(new GridLayout(1, 1));
 
         JLabel costLabel = new JLabel("Total Cost:");
         costLabel.setFont(boldFont);
         panel.setBackground(new Color(255, 191, 71));
 
         panel.add(costLabel);
+        return panel;
+    }
+
+    // Creates the panel with the email input
+    private JPanel createEmailPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(new Color(255, 255, 255));
+
+        JLabel promptLabel = new JLabel("Get a copy of your itinerary!");
+        promptLabel.setFont(regularFont);
+
+        JPanel inputPanel = new JPanel();
+        inputPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        inputPanel.setBackground(new Color(255, 255, 255));
+
+        JLabel emailLabel = new JLabel("Email:");
+        emailLabel.setFont(regularFont);
+
+        JTextField emailTextField = new JTextField(20);
+        emailTextField.setFont(regularFont);
+
+        panel.add(promptLabel);
+        inputPanel.add(emailLabel);
+        inputPanel.add(emailTextField);
+        panel.add(inputPanel);
+
         return panel;
     }
 
