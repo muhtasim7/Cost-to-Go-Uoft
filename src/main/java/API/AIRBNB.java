@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AIRBNB implements PropertyRepository {
-    //private static final String API_KEY = "37a70792aemsh77418466425637ap112d5bjsn16ec621693de";  // Replace with your actual API key
+    //private static final String API_KEY = "f980612bd5msh4536668cad5f89bp1c7ddejsn36d7c9d6b0be";  // Replace with your actual API key
     private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\jsonformatter.txt";
 
     @Override
     public List<Property> searchProperties(String city) throws Exception {
         // Uncomment this code block to make a real API call
-
+//
 //        OkHttpClient client = new OkHttpClient();
 //
 //        // URL structure with placeholders for customization
@@ -43,7 +43,7 @@ public class AIRBNB implements PropertyRepository {
 //
 //        // Parse JSON response from API
 //        String jsonResponse = response.body().string();
-//
+
 
         // Read JSON data from local file instead of making an API call
         String jsonResponse = readJsonFromFile();
