@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         this.loggedInViewModel.setState(loggedInState);
         this.loggedInViewModel.firePropertyChanged();
 
-        this.viewManagerModel.setState(loggedInViewModel.getViewName());
+        this.viewManagerModel.setState("dashboardView");
         this.viewManagerModel.firePropertyChanged();
     }
 

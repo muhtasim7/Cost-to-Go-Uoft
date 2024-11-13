@@ -10,6 +10,7 @@ import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
+import view.DashboardView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,6 +57,10 @@ public class MainWithFile {
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
+
+        final DashboardView dashboardView = new DashboardView(viewManagerModel);
+        views.add(dashboardView, dashboardView.getViewName());
+
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
