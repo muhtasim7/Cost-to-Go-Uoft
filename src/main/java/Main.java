@@ -17,10 +17,7 @@ public class Main {
         AuthService authService = new AuthService();
         AuthController authController = new AuthController(authService);
 
-        // Initialize dependencies for property search
-        AIRBNB propertyRepository = new AIRBNB();
-        PropertySearchUseCase propertySearchUseCase = new PropertySearchUseCase(propertyRepository);
-        PropertyController propertyController = new PropertyController(propertySearchUseCase);
+
 
         System.out.println("Welcome! Choose an option:\n1. Sign Up\n2. Login\n3. Search Properties");
         int choice = scanner.nextInt();
@@ -33,6 +30,10 @@ public class Main {
             ConsoleLoginView loginView = new ConsoleLoginView(authController);
             loginView.display();
         } else if (choice == 3) {
+            // Initialize dependencies for property search
+            AIRBNB propertyRepository = new AIRBNB();
+            PropertySearchUseCase propertySearchUseCase = new PropertySearchUseCase(propertyRepository);
+            PropertyController propertyController = new PropertyController(propertySearchUseCase);
             ConsolePropertySearchView propertySearchView = new ConsolePropertySearchView(propertyController);
             propertySearchView.display();
         } else {
