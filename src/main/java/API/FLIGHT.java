@@ -71,7 +71,7 @@ public class FLIGHT { // Class name changed to Sanyuktatest
 
     private static List<Flight> parseFlights(String jsonResponse) {
         JSONObject response = new JSONObject(jsonResponse);
-        JSONObject options = JSONObject.getJSONObject("response");
+        JSONObject options = response.getJSONObject("response");
 
 
         System.out.println(response);
