@@ -101,6 +101,22 @@ public class PropertySearchPresenter {
         }
     }
 
+    public Property getPropertyByIndex(int index) {
+        if (tableModel == null || index < 0 || index >= tableModel.getRowCount()) {
+            System.out.println("Index out of bounds or table model not set.");
+            return null;
+        }
+
+        String name = (String) tableModel.getValueAt(index, 0);
+        String rating = (String) tableModel.getValueAt(index, 1);
+        String discountedPrice = (String) tableModel.getValueAt(index, 2);
+        String originalPrice = (String) tableModel.getValueAt(index, 3);
+        String roomType = (String) tableModel.getValueAt(index, 4);
+
+        return new Property(name, rating, discountedPrice, originalPrice, roomType);
+    }
+
+
     /**
      * Extracts properties from the current table model.
      * Filters out properties where both Discounted Price and Original Price are 0.0.

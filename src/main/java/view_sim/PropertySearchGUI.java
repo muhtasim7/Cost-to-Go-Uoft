@@ -6,16 +6,17 @@ import interface_adapters_sim.property.PropertyController;
 import interface_adapters_sim.property.PropertySearchPresenter;
 import usecases_sim.property.PropertySearchUseCase;
 
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class PropertySearchGUI extends JFrame {
         inputPanel.add(sortDropdown);
 
         // Create the table to display properties
-        String[] columnNames = {"Name", "Rating", "Discounted Price", "Original Price", "Room Type"};
+        String[] columnNames = {"Name", "Rating", "Discounted Price", "Original Price", "Room Type", "Select"};
         tableModel = new DefaultTableModel(columnNames, 0);
         propertyTable = new JTable(tableModel);
         propertyTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION); // Enable single row selection
@@ -96,6 +97,10 @@ public class PropertySearchGUI extends JFrame {
             }
         });
 
+        // Add the custom button renderer and editor for the "Select" column
+        propertyTable.getColumn("Select").setCellRenderer(new ButtonRenderer());
+        propertyTable.getColumn("Select").setCellEditor(new ButtonEditor(new JCheckBox()));
+
         JScrollPane scrollPane = new JScrollPane(propertyTable);
 
         // Add components to the main panel
@@ -118,21 +123,6 @@ public class PropertySearchGUI extends JFrame {
                 } else {
                     // Low to High
                     presenter.sortPropertiesByPrice(true);
-                }
-            }
-        });
-
-        // Add mouse listener for row selection
-        propertyTable.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                if (e.getClickCount() == 2) {  // Double-click to select
-                    int selectedRow = propertyTable.getSelectedRow();
-                    if (selectedRow >= 0) {
-                        Map<String, String> propertyDetails = getSelectedPropertyDetails(selectedRow);
-                        showPropertyDetails(propertyDetails);
-                        // Here, you can call another function to use the propertyDetails map.
-                    }
                 }
             }
         });
@@ -167,20 +157,6 @@ public class PropertySearchGUI extends JFrame {
         return propertyDetails;
     }
 
-    /**
-     * Displays a dialog with the details of the selected property.
-     * @param propertyDetails Map containing the property details to display.
-     */
-    private void showPropertyDetails(Map<String, String> propertyDetails) {
-        String message = "Name: " + propertyDetails.get("Name") +
-                "\nRating: " + propertyDetails.get("Rating") +
-                "\nDiscount: " + propertyDetails.get("Discount") +
-                "\nOriginal: " + propertyDetails.get("Original") +
-                "\nRoom Type: " + propertyDetails.get("Room Type");
-
-        JOptionPane.showMessageDialog(this, message, "Property Details", JOptionPane.INFORMATION_MESSAGE);
-    }
-
     public static void main(String[] args) {
         AIRBNB airbnbRepository = new AIRBNB();
         PropertySearchUseCase useCase = new PropertySearchUseCase(airbnbRepository);
@@ -191,5 +167,63 @@ public class PropertySearchGUI extends JFrame {
             PropertySearchGUI gui = new PropertySearchGUI(controller, presenter);
             gui.setVisible(true);
         });
+    }
+
+    // Custom button renderer
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+        public ButtonRenderer() {
+            setText("Select");
+        }
+
+        @Override
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+            return this;
+        }
+    }
+
+    // Custom button editor
+    class ButtonEditor extends DefaultCellEditor {
+        private final JButton button;
+        private int row;
+
+        public ButtonEditor(JCheckBox checkBox) {
+            super(checkBox);
+            button = new JButton("Select");
+            button.addActionListener(e -> {
+                Map<String, String> propertyDetails = getSelectedPropertyDetails(row);
+                showPropertyDetails(propertyDetails);
+            });
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.row = row;
+            return button;
+        }
+    }
+
+    /**
+     * Displays a dialog with the details of the selected property.
+     * @param propertyDetails Map containing the property details to display.
+     */
+    private ArrayList<String> showPropertyDetails(Map<String, String> propertyDetails) {
+        ArrayList<String> pro = new ArrayList<>();
+        String message = "Name: " + propertyDetails.get("Name") +
+                "\nRating: " + propertyDetails.get("Rating") +
+                "\nDiscount: " + propertyDetails.get("Discount") +
+                "\nOriginal: " + propertyDetails.get("Original") +
+                "\nRoom Type: " + propertyDetails.get("Room Type");
+
+        pro.add("Name: "+ propertyDetails.get("Name"));
+        pro.add("Rating: " + propertyDetails.get("Rating"));
+        pro.add("Discount: "+ propertyDetails.get("Discount"));
+        pro.add("Original: "+ propertyDetails.get("Original"));
+        pro.add("Room Type: "+ propertyDetails.get("Room Type"));
+
+        JOptionPane.showMessageDialog(this, message, "Property Details", JOptionPane.INFORMATION_MESSAGE);
+        System.out.println(pro);
+
+        System.exit(0);
+        return pro;
     }
 }
