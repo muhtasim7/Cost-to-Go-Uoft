@@ -19,7 +19,17 @@ public class Property {
     // Getters
     public String getListingName() { return listingName; }
     public String getAvgRatingLocalized() { return avgRatingLocalized; }
-    public String getDiscountedPrice() { return discountedPrice; }
-    public String getOriginalPrice() { return originalPrice; }
+    public String getDiscountedPrice() {
+        if (discountedPrice.equals("N/A")) {
+            return "0.0";
+        }
+        return discountedPrice;
+    }
+    public String getOriginalPrice() {
+        if (originalPrice.equals("N/A")) {
+            return "0.0";
+        }
+        return originalPrice;
+    }
     public String getRoomTye() { return  roomType; }
 }
