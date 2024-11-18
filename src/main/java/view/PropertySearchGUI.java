@@ -1,10 +1,9 @@
-package view_sim;
+package view;
 
-import data_access_sim.AIRBNB;
-import entities.Property;
-import interface_adapters_sim.property.PropertyController;
-import interface_adapters_sim.property.PropertySearchPresenter;
-import usecases_sim.property.PropertySearchUseCase;
+import data_access.AIRBNB;
+import interface_adapters.property.PropertyController;
+import interface_adapters.property.PropertySearchPresenter;
+import usecases.property.PropertySearchUseCase;
 
 
 import javax.swing.*;

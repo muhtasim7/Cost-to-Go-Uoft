@@ -1,13 +1,10 @@
-package data_access_sim;
+package data_access;
 
 
 import entities.Property;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import usecases_sim.property.PropertyRepository;
+import usecases.property.PropertyRepository;
 
 import java.io.FileReader;
 import java.io.IOException;

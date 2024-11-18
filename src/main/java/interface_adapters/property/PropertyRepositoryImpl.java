@@ -1,8 +1,8 @@
-package interface_adapters_sim.property;
+package interface_adapters.property;
 
-import data_access_sim.AIRBNB;
+import data_access.AIRBNB;
 import entities.Property;
-import usecases_sim.property.PropertyRepository;
+import usecases.property.PropertyRepository;
 
 import java.util.List;
 
