@@ -1,7 +1,2 @@
-user_name,password
-sim,test
-sim,test
-zach,sim
-,hello
-me,no
-hello123,test1234
+username,password,gpa,degree,program,language,email
+ambu,test,6,grad,stat,korean,test
