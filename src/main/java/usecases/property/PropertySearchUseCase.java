@@ -1,4 +1,4 @@
-package usecases_sim.property;
+package usecases.property;
 
 import entities.Property;
 import java.util.List;

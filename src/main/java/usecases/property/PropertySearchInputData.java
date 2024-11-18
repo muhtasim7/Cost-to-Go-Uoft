@@ -1,4 +1,4 @@
-package usecases_sim.property;
+package usecases.property;
 
 public class PropertySearchInputData {
     private String city;

@@ -1,8 +1,8 @@
-package interface_adapters_sim.property;
+package interface_adapters.property;
 
 import entities.Property;
-import usecases_sim.property.PropertySearchInputData;
-import usecases_sim.property.PropertySearchUseCase;
+import usecases.property.PropertySearchInputData;
+import usecases.property.PropertySearchUseCase;
 
 import java.util.List;
 

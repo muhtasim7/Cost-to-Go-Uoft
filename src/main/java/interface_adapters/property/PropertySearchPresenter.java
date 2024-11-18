@@ -1,4 +1,4 @@
-package interface_adapters_sim.property;
+package interface_adapters.property;
 
 import entities.Property;
 import javax.swing.table.DefaultTableModel;
