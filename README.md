@@ -10,6 +10,7 @@ This Java application assists users in planning their study abroad experience by
 - Rosa Martinez ([rosamartinezz](https://github.com/rosamartinezz))
 
 ## Table of Contents
+
 - [Features](#features)
 - [Getting Started](#getting-started)
 - [API Integrations](#api-integrations)
