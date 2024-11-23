@@ -1,27 +1,31 @@
 package interface_adapters.property;
 
-import entities.Property;
-import usecases.property.PropertySearchInputData;
-import usecases.property.PropertySearchUseCase;
+import usecases.property.PropertyInputBoundary;
+import usecases.property.PropertyInputData;
 
-import java.util.List;
-
+/**
+ * The controller for the Property Use Case.
+ */
 public class PropertyController {
-    private final PropertySearchUseCase propertySearchUseCase;
-    private final PropertySearchPresenter presenter;
 
-    public PropertyController(PropertySearchUseCase propertySearchUseCase, PropertySearchPresenter presenter) {
-        this.propertySearchUseCase = propertySearchUseCase;
-        this.presenter = presenter;
+    private final PropertyInputBoundary propertyInteractor;
+
+    public PropertyController(PropertyInputBoundary propertyInteractor) {
+        this.propertyInteractor = propertyInteractor;
     }
 
+    /**
+     * Executes the Property Search Use Case.
+     * @param city the city to search properties in.
+     */
     public void searchProperties(String city) {
-        PropertySearchInputData inputData = new PropertySearchInputData(city);
         try {
-            List<Property> results = propertySearchUseCase.searchProperties(inputData);
-            presenter.presentSearchResults(results);  // Display results in the GUI table
+            final PropertyInputData inputData = new PropertyInputData(city);
+            propertyInteractor.handle(inputData);
         } catch (Exception e) {
-            System.out.println("Error occurred during property search: " + e.getMessage());
+            // Log or display the error
+            System.out.println("Error occurred while searching properties: " + e.getMessage());
         }
     }
+
 }
