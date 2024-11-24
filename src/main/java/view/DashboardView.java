@@ -8,6 +8,7 @@ import java.awt.*;
 public class DashboardView extends JPanel {
     private final JButton updateInfoButton;
     private final JButton findProgramButton;
+    private final JButton rentSearchButton;
     private final ViewManagerModel viewManagerModel;
 
     public DashboardView(ViewManagerModel viewManagerModel) {
@@ -19,6 +20,7 @@ public class DashboardView extends JPanel {
 
         updateInfoButton = new JButton("Update Information");
         findProgramButton = new JButton("Find Program");
+        rentSearchButton = new JButton("Rent Search");
 
         // Action listener for "Update Information"
         updateInfoButton.addActionListener(e -> {
@@ -33,9 +35,16 @@ public class DashboardView extends JPanel {
             System.out.println("Find Program button clicked");
         });
 
+        //Action listener for "Rent Search"
+        rentSearchButton.addActionListener(e -> {
+            viewManagerModel.setState("propertyView");
+            viewManagerModel.firePropertyChanged();
+        });
+
         add(titleLabel);
         add(updateInfoButton);
         add(findProgramButton);
+        add(rentSearchButton);
     }
 
     public String getViewName() {
