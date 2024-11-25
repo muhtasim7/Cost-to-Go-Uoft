@@ -1,16 +1,16 @@
 package app;
 
 import data_access.FileUserDataAccessObject;
+import data_access.AIRBNB;
+import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
-import view.DashboardView;
+import usecases.property.PropertyUserDataAccessInterface;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,9 +50,14 @@ public class MainWithFile {
         final LoginViewModel loginViewModel = new LoginViewModel();
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
+        final PropertyViewModel propertyViewModel = new PropertyViewModel();
 
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
         final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv", new CommonUserFactory());
+        final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
+
+        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel,propertyViewModel, airbnb, "Toronto");
+        views.add(propertyView, "propertyView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
