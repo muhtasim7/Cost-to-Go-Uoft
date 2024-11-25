@@ -24,4 +24,9 @@ public class PropertyInteractor implements PropertyInputBoundary {
         // Pass the output data to the presenter
         presenter.present(outputData);
     }
+
+    @Override
+    public void switchToDashboardView() {
+        presenter.switchToDashboardView();
+    }
 }

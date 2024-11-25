@@ -1,7 +1,9 @@
 package interface_adapters.property;
 
+import interface_adapters.ViewManagerModel;
 import usecases.property.PropertyOutputBoundary;
 import usecases.property.PropertyOutputData;
+import view.ViewManager;
 
 /**
  * The Presenter for the Property Use Case.
@@ -9,23 +11,30 @@ import usecases.property.PropertyOutputData;
 public class PropertyPresenter implements PropertyOutputBoundary {
 
     private final PropertyViewModel propertyViewModel;
+    private final ViewManagerModel viewManagerModel;
 
-    public PropertyPresenter(PropertyViewModel propertyViewModel) {
+    public PropertyPresenter(PropertyViewModel propertyViewModel, ViewManagerModel viewManagerModel) {
         this.propertyViewModel = propertyViewModel;
+        this.viewManagerModel = viewManagerModel;
     }
 
     @Override
     public void present(PropertyOutputData data) {
-        // Update the ViewModel with the list of properties
-        final PropertyState state = propertyViewModel.getState();
-        state.setProperties(data.getProperties());
-        propertyViewModel.setState(state);
+        // Update the ViewModel with property data
+        propertyViewModel.getState().setProperties(data.getProperties());
         propertyViewModel.firePropertyChanged();
     }
 
     @Override
     public void handleError(String error) {
-        // Log or display errors, but this is not reflected in the state
-        System.out.println("Error occurred: " + error);
+        // Handle errors if needed
+        System.out.println("Error: " + error);
+    }
+
+    @Override
+    public void switchToDashboardView() {
+        // Switch to the dashboard using ViewManagerModel
+        viewManagerModel.setState("dashboardView");
+        viewManagerModel.firePropertyChanged();
     }
 }

@@ -3,6 +3,7 @@ package view;
 import entities.CommonProperty;
 import entities.Property;
 import interface_adapters.property.PropertyController;
+import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import usecases.property.PropertyUtils;
 
@@ -104,6 +105,7 @@ public class PropertyView extends JPanel {
     private class ButtonEditor extends DefaultCellEditor {
         private final JButton button;
         private int row;
+        PropertyState state;
 
         public ButtonEditor() {
             super(new JCheckBox());
@@ -118,8 +120,13 @@ public class PropertyView extends JPanel {
 
                 // Use CommonProperty (or another concrete class) to display details
                 Property property = new CommonProperty(name, rating, discountedPrice, originalPrice, roomType);
-                displayPropertyDetails(property);
-                System.exit(0); // Exit the application after a selection is made
+                PropertyState state = viewModel.getState();
+                state.setSelectedProperty(property);
+                viewModel.setState(state);
+
+                System.out.println("Selected Property Saved: " + state.getSelectedProperty());
+
+                controller.switchToDashboardView();
             });
         }
 

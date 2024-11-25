@@ -39,4 +39,15 @@ public class CommonProperty implements Property {
     public String getRoomType() {
         return roomType;
     }
+
+    @Override
+    public String toString() {
+        return "Property{" +
+                "name='" + name + '\'' +
+                ", rating='" + rating + '\'' +
+                ", discountedPrice='" + discountedPrice + '\'' +
+                ", originalPrice='" + originalPrice + '\'' +
+                ", roomType='" + roomType + '\'' +
+                '}';
+    }
 }
