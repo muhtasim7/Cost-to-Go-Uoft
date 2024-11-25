@@ -27,5 +27,8 @@ public class PropertyController {
             System.out.println("Error occurred while searching properties: " + e.getMessage());
         }
     }
+    public void switchToDashboardView() {
+        propertyInteractor.switchToDashboardView();
+    }
 
 }

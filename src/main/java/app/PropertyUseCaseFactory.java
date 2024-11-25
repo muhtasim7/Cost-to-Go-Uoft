@@ -1,5 +1,6 @@
 package app;
 
+import interface_adapters.ViewManagerModel;
 import interface_adapters.property.PropertyController;
 import interface_adapters.property.PropertyPresenter;
 import interface_adapters.property.PropertyViewModel;
@@ -14,24 +15,51 @@ import view.PropertyView;
  */
 public final class PropertyUseCaseFactory {
 
+    /** Prevent instantiation. */
     private PropertyUseCaseFactory() {
-        // Prevent instantiation
+
     }
 
-    public static PropertyView create(PropertyUserDataAccessInterface propertyUserDataAccess, String city) {
-        PropertyViewModel propertyViewModel = new PropertyViewModel();
-        PropertyController propertyController = createPropertyUseCase(propertyUserDataAccess, propertyViewModel);
+    /**
+     * Factory function for creating the PropertyView.
+     * @param viewManagerModel the ViewManagerModel to inject into the PropertyView
+     * @param propertyViewModel the PropertyViewModel to inject into the PropertyView
+     * @param propertyUserDataAccess the PropertyUserDataAccessInterface to inject into the PropertyInteractor
+     * @param city the city to search properties in
+     * @return the PropertyView created for the provided input classes
+     */
+    public static PropertyView create(
+            ViewManagerModel viewManagerModel,
+            PropertyViewModel propertyViewModel,
+            PropertyUserDataAccessInterface propertyUserDataAccess,
+            String city) {
+
+        final PropertyController propertyController = createPropertyUseCase(
+                viewManagerModel, propertyViewModel, propertyUserDataAccess);
 
         return new PropertyView(propertyController, propertyViewModel, city);
     }
 
+    /**
+     * Helper function to create the PropertyController.
+     * @param viewManagerModel the ViewManagerModel to inject into the Presenter
+     * @param propertyViewModel the PropertyViewModel to inject into the Presenter
+     * @param propertyUserDataAccess the PropertyUserDataAccessInterface to inject into the Interactor
+     * @return the PropertyController
+     */
     private static PropertyController createPropertyUseCase(
-            PropertyUserDataAccessInterface propertyUserDataAccess,
-            PropertyViewModel propertyViewModel) {
+            ViewManagerModel viewManagerModel,
+            PropertyViewModel propertyViewModel,
+            PropertyUserDataAccessInterface propertyUserDataAccess) {
 
-        PropertyOutputBoundary propertyPresenter = new PropertyPresenter(propertyViewModel);
-        PropertyInputBoundary propertyInteractor = new PropertyInteractor(propertyUserDataAccess, propertyPresenter);
+        // Create the Presenter with the ViewManagerModel and ViewModel
+        final PropertyOutputBoundary propertyPresenter = new PropertyPresenter(propertyViewModel, viewManagerModel);
 
+        // Create the Interactor with the data access object and the presenter
+        final PropertyInputBoundary propertyInteractor =
+                new PropertyInteractor(propertyUserDataAccess, propertyPresenter);
+
+        // Return the Controller
         return new PropertyController(propertyInteractor);
     }
 }
