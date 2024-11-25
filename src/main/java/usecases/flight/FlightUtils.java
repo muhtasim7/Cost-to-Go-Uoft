@@ -25,18 +25,13 @@ public class FlightUtils {
     }
 
     /**
-     * Determines the price used for sorting: Discounted Price if available, otherwise Original Price.
+     * Determines the price used for sorting: Using the price provided by getPrice().
      *
      * @param flight the flight
-     * @return the price used for sorting
+     * @return the price used for sorting (price)
      */
     public static double getPriceForSorting(Flight flight) {
-        double discountedPrice = getPriceAsDouble(flight.getDiscountedPrice());
-        if (discountedPrice != 0.0) {
-            return discountedPrice;
-        } else {
-            return getPriceAsDouble(flight.getOriginalPrice());
-        }
+        return getPriceAsDouble(flight.getPrice());
     }
 
     /**
@@ -51,7 +46,7 @@ public class FlightUtils {
 
         // Filter flights with non-zero prices
         for (Flight flight : flights) {
-            if (getPriceAsDouble(flight.getDiscountedPrice()) != 0.0 || getPriceAsDouble(flight.getOriginalPrice()) != 0.0) {
+            if (getPriceAsDouble(flight.getPrice()) != 0.0) {
                 filteredFlights.add(flight);
             }
         }
