@@ -1,0 +1,21 @@
+{
+Country: "Brazil"
+City: "Brasil"
+University: "University of Brazil"
+Langauge: "Portugese"
+Tuition: "Paid to university"
+Requirements: "2.0 GPA"
+}
+{
+Listing Name: "Hilton In London"
+Discounted Price: "1200"
+Original Price: "1300"
+Star Rating: "4"
+Bedroom Type: "Private"
+}
+{
+Destination: "YYV"
+Duration: "5 hours"
+Fare: "1200"
+Date: "January 5th 11:30 am"
+}
