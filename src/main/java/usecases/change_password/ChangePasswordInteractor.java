@@ -33,4 +33,9 @@ public class ChangePasswordInteractor implements ChangePasswordInputBoundary {
     }
     @Override
     public void switchToDashboardView(){userPresenter.switchToDashboardView();}
+
+    @Override
+    public void switchToItineraryView() {userPresenter.switchToItineraryView();
+
+    }
 }
