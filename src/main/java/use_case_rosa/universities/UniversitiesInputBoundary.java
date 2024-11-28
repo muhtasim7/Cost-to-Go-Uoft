@@ -5,5 +5,5 @@ public interface UniversitiesInputBoundary {
     /**
      * Executes the login use case.
      */
-    void execute ();
+    void execute (UniversitiesInputData universitiesInputData);
 }

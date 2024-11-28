@@ -30,7 +30,8 @@ public class DashboardView extends JPanel {
         // Action listener for "Find Program"
         findProgramButton.addActionListener(e -> {
             // Navigate to the program search view or implement the search logic
-            System.out.println("Find Program button clicked");
+            viewManagerModel.setState("StudyAbroadOptions"); // rosa
+            viewManagerModel.firePropertyChanged(); // rosa
         });
 
         add(titleLabel);
