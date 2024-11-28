@@ -1,8 +1,9 @@
 package data_access;
 
-import entities.Flight;
+import entities.*;
 
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -11,28 +12,32 @@ import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import data_access.AirportCode;
+import usecases.flight.FlightUserDataAccessInterface;
 
-public class FLIGHT { // Class name changed to Sanyuktatest
-    private static final String FILE_PATH =
-            "C:\\Users\\Sanyukta\\IdeaProjects\\Cost-to-Go-Uoft\\Data\\fllight_data.txt";
-    public static void main(String[] args) throws IOException {
-         //Define the API endpoint and parameters
+public class FLIGHT implements FlightUserDataAccessInterface { // Class name changed to Sanyuktatest
+    private static CommonFlightFactory FlightFactory = new CommonFlightFactory();
+
+    public FLIGHT(CommonFlightFactory FlightFactory) {
+        this.FlightFactory = FlightFactory;
+    }
+
+    public List<Flight> searchFlights(String destination)throws Exception {
         String apiKey = "04b7d118caa4499d7035c0ac8f127349ffe7726a103e88159c191a8fe3876a39";
 
         AirportCode airportCodeFetcher = new AirportCode();
 
-        // Fetch airport code for the arrival city (AUS example)
-        List<String> airportCodes;
-        try {
-            airportCodes = airportCodeFetcher.getAirportDetails("Austin");
-        } catch (Exception e) {
-            System.out.println("Error fetching airport code: " + e.getMessage());
-            return;
+        List <String> airportDetails = airportCodeFetcher.getAirportDetails("Vancouver");
+        String arrivalAirportCode = "";
+        for (int a = 0; a < airportDetails.size(); a++) {
+            arrivalAirportCode = airportDetails.get(a);
+            if (arrivalAirportCode != ""){
+                break;
+            }
         }
-
-        String arrivalAirportCode = airportCodes.isEmpty() ? "AUS" : airportCodes.get(0);
 
         Map<String, String> parameters = Map.of(
                 "engine", "google_flights",
@@ -63,7 +68,11 @@ public class FLIGHT { // Class name changed to Sanyuktatest
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 // Print the successful response
-                System.out.println("Response: " + response.body());
+               // System.out.println("Response: " + response.body());
+                List<Flight> flights;
+                //System.out.println(response.body());
+                flights = parseFlights(response.body());
+                return flights;
             } else {
                 // Print error details if the status code is not 200
                 System.out.println("Error: " + response.statusCode());
@@ -73,32 +82,43 @@ public class FLIGHT { // Class name changed to Sanyuktatest
             // Print exception details
             e.printStackTrace();
         }
-        String hold = readJsonFromFile();
-        List<Flight> hold1 = parseFlights(hold);
-        System.out.println(hold1);
+        return null;
     }
 
-    private static String readJsonFromFile() throws IOException {
-        // Read the contents of the JSON file and return it as a string
-        FileReader fileReader = new FileReader(FILE_PATH);
-        StringBuilder jsonData = new StringBuilder();
-        int i;
-        while ((i = fileReader.read()) != -1) {
-            jsonData.append((char) i);
-        }
-        fileReader.close();
-        return jsonData.toString();
-    }
 
     private static List<Flight> parseFlights(String jsonResponse) {
         JSONObject response = new JSONObject(jsonResponse);
-        JSONObject options = response.getJSONObject("response");
+        List<Flight> flightList = new ArrayList<>();
 
+        JSONArray hold = response.getJSONArray("best_flights");
+        for (int i = 0; i < hold.length(); i++) {
+            JSONObject first = hold.getJSONObject(i);
+            String duration = String.valueOf(first.getInt("total_duration"));
 
-        System.out.println(options);
+            String price = String.valueOf(first.getInt("price"));
 
+            JSONArray flights = first.getJSONArray("flights");
+            for (int j = 0; j < flights.length(); j++) {
+                JSONObject index1 = flights.getJSONObject(j);
+                //System.out.println("index1"+ " " +index1);
+            }
 
-        return null;
+            JSONObject index = flights.getJSONObject(flights.length() - 1);
+
+            JSONObject departure_airport = flights.getJSONObject(0).getJSONObject("departure_airport");
+            String departurename = departure_airport.getString("name");
+            String departuretime = departure_airport.getString("time");
+
+            JSONObject arrival_airport = index.getJSONObject("arrival_airport");
+            String arrivalname = arrival_airport.getString("name");
+            String arrivaltime = arrival_airport.getString("time");
+
+            Flight flight = FlightFactory.create(departuretime, arrivaltime, departurename, arrivalname, duration, price);
+            flightList.add(flight);
+
+        }
+
+        return flightList;
     }
 
     //Helper method to convert Map<String, String> to a URL query string

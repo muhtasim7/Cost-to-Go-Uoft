@@ -6,17 +6,15 @@ public class CommonFlight implements Flight {
     private final String departureAirport;
     private final String arrivalAirport;
     private final String flightDuration;
-    private final String layovers;
     private final String price;
 
     public CommonFlight(String departureTime, String arrivalTime, String departureAirport,
-                        String arrivalAirport, String flightDuration, String layovers, String price) {
+                        String arrivalAirport, String flightDuration, String price) {
         this.departureTime = departureTime;
         this.arrivalTime = arrivalTime;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.flightDuration = flightDuration;
-        this.layovers = layovers;
         this.price = price;
     }
 
@@ -45,26 +43,19 @@ public class CommonFlight implements Flight {
         return flightDuration;
     }
 
-    @Override
-    public String getLayovers() {
-        return layovers;
-    }
 
     @Override
-    public String getPrice() {
-        return price;
-    }
+    public String getPrice() {return price;}
 
     @Override
     public String toString() {
         return "Flight{" +
-                "departureTime='" + departureTime + '\'' +
-                ", arrivalTime='" + arrivalTime + '\'' +
-                ", departureAirport='" + departureAirport + '\'' +
-                ", arrivalAirport='" + arrivalAirport + '\'' +
-                ", flightDuration='" + flightDuration + '\'' +
-                ", layovers='" + layovers + '\'' +
-                ", price='" + price + '\'' +
+                "Departure Time ='" + departureTime + '\'' +
+                ", Arrival Time ='" + arrivalTime + '\'' +
+                ", Departure Airport ='" + departureAirport + '\'' +
+                ", Arrival Airport ='" + arrivalAirport + '\'' +
+                ", Flight Duration ='" + flightDuration + '\'' +
+                ", Price ='" + price + '\'' +
                 '}';
     }
 }

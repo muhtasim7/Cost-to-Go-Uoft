@@ -15,13 +15,11 @@ public class FlightInteractor implements FlightInputBoundary {
 
     @Override
     public void handle(FlightInputData inputData) throws Exception {
-        // Fetch flights from the data access interface
+        // Fetch flights from data access interface, then prepare output data and pass it to presenter
         List<Flight> flights = userDataAccess.searchFlights(inputData.getDestination());
 
-        // Prepare the output data
         FlightOutputData outputData = new FlightOutputData(flights);
 
-        // Pass the output data to the presenter
         presenter.present(outputData);
     }
 

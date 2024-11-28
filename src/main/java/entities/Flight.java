@@ -6,6 +6,5 @@ public interface Flight {
     String getDepartureAirport();
     String getArrivalAirport();
     String getFlightDuration();
-    String getLayovers();
     String getPrice();
 }

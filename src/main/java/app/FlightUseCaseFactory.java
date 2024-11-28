@@ -52,14 +52,14 @@ public final class FlightUseCaseFactory {
             FlightViewModel flightViewModel,
             FlightUserDataAccessInterface flightUserDataAccess) {
 
-        // Create the Presenter with the ViewManagerModel and ViewModel
+        // Create Presenter with ViewManagerModel and ViewModel
         final FlightOutputBoundary flightPresenter = new FlightPresenter(flightViewModel, viewManagerModel);
 
-        // Create the Interactor with the data access object and the presenter
+        // Create Interactor with data access object and presenter
         final FlightInputBoundary flightInteractor =
                 new FlightInteractor(flightUserDataAccess, flightPresenter);
 
-        // Return the Controller
+        // Return Controller
         return new FlightController(flightInteractor);
     }
 }

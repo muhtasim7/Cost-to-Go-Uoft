@@ -10,6 +10,7 @@ public class DashboardView extends JPanel {
     private final JButton findProgramButton;
     private final JButton rentSearchButton;
     private final ViewManagerModel viewManagerModel;
+    private final JButton flightSearchButton;
 
     public DashboardView(ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
@@ -21,6 +22,7 @@ public class DashboardView extends JPanel {
         updateInfoButton = new JButton("Update Information");
         findProgramButton = new JButton("Find Program");
         rentSearchButton = new JButton("Rent Search");
+        flightSearchButton = new JButton("Flight Search");
 
         // Action listener for "Update Information"
         updateInfoButton.addActionListener(e -> {
@@ -41,10 +43,17 @@ public class DashboardView extends JPanel {
             viewManagerModel.firePropertyChanged();
         });
 
+        flightSearchButton.addActionListener(e -> {
+            viewManagerModel.setState("flightView");
+            viewManagerModel.firePropertyChanged();
+        });
+
+
         add(titleLabel);
         add(updateInfoButton);
         add(findProgramButton);
         add(rentSearchButton);
+        add(flightSearchButton);
     }
 
     public String getViewName() {

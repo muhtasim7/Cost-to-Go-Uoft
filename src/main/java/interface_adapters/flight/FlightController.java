@@ -16,14 +16,14 @@ public class FlightController {
 
     /**
      * Executes the Flight Search Use Case.
-     * @param destination the destination to search flights for.
+     * @param destination the destination we are searching flights for.
      */
     public void searchFlights(String destination) {
         try {
             final FlightInputData inputData = new FlightInputData(destination);
             flightInteractor.handle(inputData);
         } catch (Exception e) {
-            // Log or display the error
+            // Display the error
             System.out.println("Error occurred while searching flights: " + e.getMessage());
         }
     }
