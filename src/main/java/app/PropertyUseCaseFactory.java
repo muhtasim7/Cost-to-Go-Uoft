@@ -3,6 +3,8 @@ package app;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.property.PropertyController;
 import interface_adapters.property.PropertyPresenter;
+import interface_adapters.property.PropertySelectedCallback;
+import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import usecases.property.PropertyInputBoundary;
 import usecases.property.PropertyInteractor;
@@ -16,9 +18,7 @@ import view.PropertyView;
 public final class PropertyUseCaseFactory {
 
     /** Prevent instantiation. */
-    private PropertyUseCaseFactory() {
-
-    }
+    private PropertyUseCaseFactory() {}
 
     /**
      * Factory function for creating the PropertyView.
@@ -26,18 +26,23 @@ public final class PropertyUseCaseFactory {
      * @param propertyViewModel the PropertyViewModel to inject into the PropertyView
      * @param propertyUserDataAccess the PropertyUserDataAccessInterface to inject into the PropertyInteractor
      * @param city the city to search properties in
+     * @param state the shared PropertyState to store the selected property
      * @return the PropertyView created for the provided input classes
      */
     public static PropertyView create(
             ViewManagerModel viewManagerModel,
             PropertyViewModel propertyViewModel,
             PropertyUserDataAccessInterface propertyUserDataAccess,
-            String city) {
+            String city,
+            PropertyState state) {
 
         final PropertyController propertyController = createPropertyUseCase(
                 viewManagerModel, propertyViewModel, propertyUserDataAccess);
 
-        return new PropertyView(propertyController, propertyViewModel, city);
+        // Create the callback to update the shared PropertyState
+        PropertySelectedCallback callback = state::setSelectedProperty;
+
+        return new PropertyView(propertyController, propertyViewModel, city, callback);
     }
 
     /**

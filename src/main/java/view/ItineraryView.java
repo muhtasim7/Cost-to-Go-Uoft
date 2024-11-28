@@ -1,108 +1,96 @@
 package view;
 
-import entities.Property;
 import interface_adapters.itinerary.ItineraryController;
-import interface_adapters.itinerary.ItineraryViewModel; // Updated to use the correct ViewModel
-import interface_adapters.ViewModel;
+import interface_adapters.itinerary.ItineraryViewModel;
+import interface_adapters.property.PropertyState;
+import usecases.itinerary.ItineraryOutputData;
+import entities.Property;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.List;
 
 public class ItineraryView extends JPanel implements PropertyChangeListener {
-    private final String viewName = "itinerary view";
     private final JPanel propertiesPanel = new JPanel();
     private final ItineraryController itineraryController;
-    private final ItineraryViewModel viewModel;  // Updated to use the correct ViewModel type
+    private final ItineraryViewModel viewModel;
 
-    // Fonts for the labels
     private final Font regularFont = new Font("Apple LiGothic", Font.PLAIN, 20);
     private final Font boldFont = new Font("Apple LiGothic", Font.BOLD, 30);
 
     public ItineraryView(ItineraryController itineraryController, ItineraryViewModel viewModel) {
         this.itineraryController = itineraryController;
         this.viewModel = viewModel;
-        this.viewModel.addPropertyChangeListener(this);  // Listen to property changes
+        this.viewModel.addPropertyChangeListener(this);
         setLayout(new BorderLayout());
 
-        JLabel title = new JLabel("Your Itinerary");
-        title.setFont(boldFont);
-        title.setHorizontalAlignment(SwingConstants.CENTER);
-        add(title, BorderLayout.NORTH);
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new BorderLayout());
+        titlePanel.setBackground(new Color(255,191,71));
+
+        JLabel titleLabel = new JLabel("Your Itinerary");
+        titleLabel.setFont(boldFont);
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titlePanel.add(titleLabel, BorderLayout.CENTER);
+        add(titlePanel, BorderLayout.NORTH);
 
         propertiesPanel.setLayout(new BoxLayout(propertiesPanel, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(propertiesPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-        // Display initial labels (placeholders)
-        updateItinerary();
+                updateItinerary();
     }
 
     private JPanel createPropertyPanel(Property property) {
         JPanel panel = new JPanel();
         panel.setLayout(new GridLayout(6, 1));
-        panel.setBackground(new Color(159, 224, 229)); // Original blue color
+        panel.setBackground(new Color(159, 224, 229));
 
-        JLabel hotelLabel = new JLabel("Hotel Details:");
-        hotelLabel.setFont(boldFont);
 
-        JLabel listingNameLabel = new JLabel("Listing Name: ");
-        listingNameLabel.setFont(boldFont);
-        JLabel listingNameDetail = new JLabel(property != null ? property.getName() : "N/A");
+        JLabel rentalLabel = new JLabel("Rental Details:");
+        rentalLabel.setFont(boldFont);
+
+        JLabel listingNameDetail = new JLabel(property != null ? "Listing Name: " + property.getName() : "Listing Name: N/A");
         listingNameDetail.setFont(regularFont);
 
-        JLabel discountedPriceLabel = new JLabel("Discounted Price: ");
-        discountedPriceLabel.setFont(boldFont);
-        JLabel discountedPriceDetail = new JLabel(property != null ? property.getDiscountedPrice() : "N/A");
+        JLabel discountedPriceDetail = new JLabel(property != null ? "Discounted Price: " + property.getDiscountedPrice() : "Discounted Price: N/A");
         discountedPriceDetail.setFont(regularFont);
 
-        JLabel originalPriceLabel = new JLabel("Original Price: ");
-        originalPriceLabel.setFont(boldFont);
-        JLabel originalPriceDetail = new JLabel(property != null ? property.getOriginalPrice() : "N/A");
+        JLabel originalPriceDetail = new JLabel(property != null ? "Original Price: " + property.getOriginalPrice() : "Original Price: N/A");
         originalPriceDetail.setFont(regularFont);
 
-        JLabel starRatingLabel = new JLabel("Star Rating: ");
-        starRatingLabel.setFont(boldFont);
-        JLabel starRatingDetail = new JLabel(property != null ? property.getRating() : "N/A");
+        JLabel starRatingDetail = new JLabel(property != null ? "Rating: " + property.getRating() : "Rating: N/A");
         starRatingDetail.setFont(regularFont);
 
-        JLabel roomTypeLabel = new JLabel("Room Type: ");
-        roomTypeLabel.setFont(boldFont);
-        JLabel roomTypeDetail = new JLabel(property != null ? property.getRoomType() : "N/A");
+        JLabel roomTypeDetail = new JLabel(property != null ? "Room type: " + property.getRoomType() : "Room type: N/A");
         roomTypeDetail.setFont(regularFont);
 
-        // Add labels to the panel
-        panel.add(hotelLabel);
-        panel.add(listingNameLabel);
+        panel.add(rentalLabel);
         panel.add(listingNameDetail);
-        panel.add(discountedPriceLabel);
         panel.add(discountedPriceDetail);
-        panel.add(originalPriceLabel);
         panel.add(originalPriceDetail);
-        panel.add(starRatingLabel);
         panel.add(starRatingDetail);
-        panel.add(roomTypeLabel);
         panel.add(roomTypeDetail);
 
         return panel;
     }
 
     private void updateItinerary() {
-        propertiesPanel.removeAll(); // Clear previous panels
+        propertiesPanel.removeAll();
 
-        List<Property> itinerary = viewModel.getState().getProperties();
-        if (itinerary.isEmpty()) {
-            // If there are no properties, show placeholder labels
-            propertiesPanel.add(createPropertyPanel(null));
+        // Get the selected property from the ItineraryViewModel
+        Property selectedProperty = viewModel.getSelectedProperty();
+
+        // Add a panel to show the property details if a property is selected
+        if (selectedProperty != null) {
+            propertiesPanel.add(createPropertyPanel(selectedProperty));
         } else {
-            // Otherwise, display the properties
-            for (Property property : itinerary) {
-                propertiesPanel.add(createPropertyPanel(property));
-            }
+            propertiesPanel.add(createPropertyPanel(null));  // No property selected
         }
 
+        // Refresh the UI to show the updated property
         propertiesPanel.revalidate();
         propertiesPanel.repaint();
     }
@@ -118,6 +106,7 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         return "itinerary view";
     }
 }
+
 
 
 

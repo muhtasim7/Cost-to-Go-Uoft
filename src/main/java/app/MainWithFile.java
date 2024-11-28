@@ -37,7 +37,7 @@ public class MainWithFile {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        final JFrame application = new JFrame("Login Example");
+        final JFrame application = new JFrame("Cost-to-Go UofT");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         final CardLayout cardLayout = new CardLayout();
@@ -58,20 +58,26 @@ public class MainWithFile {
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
         final PropertyViewModel propertyViewModel = new PropertyViewModel();
-        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel();  // This is your itinerary model
+        final PropertyState propertyState = new PropertyState();
+        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
+                new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
 
 
-        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb, "Toronto");
+
+
+        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
+                "Toronto", propertyState);
         views.add(propertyView, "propertyView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
-        final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel, userDataAccessObject);
+        final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
+                userDataAccessObject, propertyState);
         views.add(dashboardView, dashboardView.getViewName());
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
@@ -82,7 +88,8 @@ public class MainWithFile {
                 loggedInViewModel, userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
 
-        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,userDataAccessObject);
+        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,
+                userDataAccessObject);
         views.add(itineraryView, itineraryView.getViewName());
 
         // Set the initial view to be the signup view (this is the view that's visible when the application starts)
@@ -93,4 +100,3 @@ public class MainWithFile {
         application.setVisible(true);
     }
 }
-

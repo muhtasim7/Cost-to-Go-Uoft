@@ -29,3 +29,4 @@ public class PropertyState {
         this.selectedProperty = selectedProperty;
     }
 }
+
