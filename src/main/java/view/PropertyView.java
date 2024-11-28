@@ -4,6 +4,7 @@ import entities.CommonProperty;
 import entities.Property;
 import interface_adapters.property.PropertyController;
 import interface_adapters.property.PropertySelectedCallback;
+
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import usecases.property.PropertyUtils;
@@ -27,7 +28,6 @@ public class PropertyView extends JPanel {
         this.callback = callback;
 
         setLayout(new BorderLayout());
-
         String[] columnNames = {"Name", "Rating", "Discounted Price", "Original Price", "Room Type", "Select"};
         tableModel = new DefaultTableModel(columnNames, 0);
         propertyTable = new JTable(tableModel) {
@@ -37,6 +37,7 @@ public class PropertyView extends JPanel {
             }
         };
 
+        // Add custom button renderer and editor for the "Select" column
         propertyTable.getColumn("Select").setCellRenderer(new ButtonRenderer());
         propertyTable.getColumn("Select").setCellEditor(new ButtonEditor());
 
@@ -46,6 +47,7 @@ public class PropertyView extends JPanel {
         JScrollPane scrollPane = new JScrollPane(propertyTable);
         add(scrollPane, BorderLayout.CENTER);
 
+        // Automatically trigger the search
         searchProperties(city);
     }
 
@@ -77,7 +79,6 @@ public class PropertyView extends JPanel {
             });
         }
     }
-
     private class ButtonEditor extends DefaultCellEditor {
         private final JButton button;
         private int row;
@@ -86,6 +87,8 @@ public class PropertyView extends JPanel {
             super(new JCheckBox());
             button = new JButton("Select");
             button.addActionListener(e -> {
+
+                // Fetch the property details directly from the propertyTable
                 String name = (String) tableModel.getValueAt(row, 0);
                 String rating = (String) tableModel.getValueAt(row, 1);
                 String discountedPrice = (String) tableModel.getValueAt(row, 2);
@@ -98,6 +101,7 @@ public class PropertyView extends JPanel {
                 if (callback != null) {
                     callback.onPropertySelected(property);
                 }
+
 
                 controller.switchToDashboardView();
             });

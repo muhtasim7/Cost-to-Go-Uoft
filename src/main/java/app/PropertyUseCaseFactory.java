@@ -38,7 +38,6 @@ public final class PropertyUseCaseFactory {
 
         final PropertyController propertyController = createPropertyUseCase(
                 viewManagerModel, propertyViewModel, propertyUserDataAccess);
-
         // Create the callback to update the shared PropertyState
         PropertySelectedCallback callback = state::setSelectedProperty;
 

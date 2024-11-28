@@ -77,9 +77,4 @@ public class DashboardView extends JPanel implements PropertyChangeListener {
     public String getViewName() {
         return "dashboardView";
     }
-
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-        // handle property change events if needed
-    }
 }
