@@ -1,39 +1,40 @@
 package view;
 
+import entities.Property;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
+import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.property.PropertySelectedCallback;
 import interface_adapters.property.PropertyState;
+import usecases.itinerary.ItineraryDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class DashboardView extends JPanel implements ActionListener, PropertyChangeListener {
+public class DashboardView extends JPanel implements PropertyChangeListener {
     private final JButton updateInfoButton;
     private final JButton findProgramButton;
     private final JButton rentSearchButton;
     private final ViewManagerModel viewManagerModel;
     private final JButton itineraryButton;
     private final ItineraryController itineraryController;
-    private final PropertyState state;
-    private final PropertySelectedCallback callback;
+    private final ItineraryViewModel itineraryViewModel;
+    private final ItineraryDataAccessInterface userDataAccessObject;
 
-    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, PropertyState state, PropertySelectedCallback callback) {
+    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject) {
         this.viewManagerModel = viewManagerModel;
         this.itineraryController = itineraryController;
-        this.state = state;
-        this.callback = callback;
+        this.itineraryViewModel = itineraryViewModel;
+        this.userDataAccessObject = userDataAccessObject;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         updateInfoButton = new JButton("Update Information");
-        findProgramButton = new JButton("Find Program");
+        findProgramButton = new JButton("Find University");
         rentSearchButton = new JButton("Rent Search");
         itineraryButton = new JButton("Overview");
 
@@ -57,10 +58,13 @@ public class DashboardView extends JPanel implements ActionListener, PropertyCha
         });
 
         itineraryButton.addActionListener(e -> {
-            viewManagerModel.setState("itinerary view");
-            viewManagerModel.firePropertyChanged();
-            System.out.println("Overview button clicked");
-            System.out.println(state.getSelectedProperty());
+            // Create and display the ItineraryView when the button is clicked
+            ItineraryView itineraryView = new ItineraryView(itineraryController, itineraryViewModel);
+            JFrame itineraryFrame = new JFrame("Itinerary Overview");
+            itineraryFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            itineraryFrame.getContentPane().add(itineraryView);
+            itineraryFrame.pack();
+            itineraryFrame.setVisible(true);
         });
 
         add(titleLabel);
@@ -72,11 +76,6 @@ public class DashboardView extends JPanel implements ActionListener, PropertyCha
 
     public String getViewName() {
         return "dashboardView";
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // handle action events if needed
     }
 
     @Override

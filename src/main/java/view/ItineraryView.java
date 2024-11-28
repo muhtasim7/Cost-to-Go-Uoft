@@ -3,9 +3,8 @@ package view;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.property.PropertyState;
-import usecases.itinerary.ItineraryOutputData;
 import entities.Property;
-
+import usecases.itinerary.ItineraryOutputData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +15,7 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
     private final JPanel propertiesPanel = new JPanel();
     private final ItineraryController itineraryController;
     private final ItineraryViewModel viewModel;
+    private PropertyState propertyState = new PropertyState();
 
     private final Font regularFont = new Font("Apple LiGothic", Font.PLAIN, 20);
     private final Font boldFont = new Font("Apple LiGothic", Font.BOLD, 30);
@@ -40,7 +40,7 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         JScrollPane scrollPane = new JScrollPane(propertiesPanel);
         add(scrollPane, BorderLayout.CENTER);
 
-                updateItinerary();
+        updateItinerary(propertyState);
     }
 
     private JPanel createPropertyPanel(Property property) {
@@ -48,23 +48,28 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         panel.setLayout(new GridLayout(6, 1));
         panel.setBackground(new Color(159, 224, 229));
 
+        String name = property.getName() != null ? property.getName() : "N/A";
+        String discountPrice = property.getDiscountedPrice() != null ? property.getDiscountedPrice() : "N/A";
+        String originalPrice = property.getOriginalPrice() != null ? property.getOriginalPrice() : "N/A";
+        String rating = property.getRating() != null ? property.getRating() : "N/A";
+        String roomType = property.getRoomType() != null ? property.getRoomType() : "N/A";
 
         JLabel rentalLabel = new JLabel("Rental Details:");
         rentalLabel.setFont(boldFont);
 
-        JLabel listingNameDetail = new JLabel(property != null ? "Listing Name: " + property.getName() : "Listing Name: N/A");
+        JLabel listingNameDetail = new JLabel("Listing Name: " + name);
         listingNameDetail.setFont(regularFont);
 
-        JLabel discountedPriceDetail = new JLabel(property != null ? "Discounted Price: " + property.getDiscountedPrice() : "Discounted Price: N/A");
+        JLabel discountedPriceDetail = new JLabel("Discounted Price: " + discountPrice);
         discountedPriceDetail.setFont(regularFont);
 
-        JLabel originalPriceDetail = new JLabel(property != null ? "Original Price: " + property.getOriginalPrice() : "Original Price: N/A");
+        JLabel originalPriceDetail = new JLabel("Original Price: " + originalPrice);
         originalPriceDetail.setFont(regularFont);
 
-        JLabel starRatingDetail = new JLabel(property != null ? "Rating: " + property.getRating() : "Rating: N/A");
+        JLabel starRatingDetail = new JLabel("Rating: " + rating);
         starRatingDetail.setFont(regularFont);
 
-        JLabel roomTypeDetail = new JLabel(property != null ? "Room type: " + property.getRoomType() : "Room type: N/A");
+        JLabel roomTypeDetail = new JLabel("Room type: " + roomType);
         roomTypeDetail.setFont(regularFont);
 
         panel.add(rentalLabel);
@@ -76,29 +81,25 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
 
         return panel;
     }
-
-    private void updateItinerary() {
+    private void updateItinerary(PropertyState state) {
         propertiesPanel.removeAll();
 
         // Get the selected property from the ItineraryViewModel
         Property selectedProperty = viewModel.getSelectedProperty();
 
         // Add a panel to show the property details if a property is selected
-        if (selectedProperty != null) {
-            propertiesPanel.add(createPropertyPanel(selectedProperty));
-        } else {
-            propertiesPanel.add(createPropertyPanel(null));  // No property selected
-        }
+        propertiesPanel.add(createPropertyPanel(selectedProperty));
 
         // Refresh the UI to show the updated property
         propertiesPanel.revalidate();
         propertiesPanel.repaint();
     }
 
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("state".equals(evt.getPropertyName())) {
-            updateItinerary();
+            updateItinerary(propertyState);
         }
     }
 
@@ -106,25 +107,3 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         return "itinerary view";
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -77,7 +77,7 @@ public class MainWithFile {
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, propertyState);
+                userDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
@@ -87,10 +87,10 @@ public class MainWithFile {
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
                 loggedInViewModel, userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
-
-        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,
-                userDataAccessObject);
-        views.add(itineraryView, itineraryView.getViewName());
+//
+//        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,
+//                userDataAccessObject);
+//        views.add(itineraryView, itineraryView.getViewName());
 
         // Set the initial view to be the signup view (this is the view that's visible when the application starts)
         viewManagerModel.setState(signupView.getViewName());
