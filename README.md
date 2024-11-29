@@ -1,14 +1,18 @@
-# Cost-to-Go-UofT
-
-## Summary
-
-Cost-to-Go-UofT is a comprehensive tool designed to assist users in planning their study abroad experience. The tool not only helps users find a suitable university program but also provides recommendations for flights and accommodations. Users can receive a final itinerary summarizing all the relevant information to simplify their study abroad journey.
-
-The idea for this application originated from feedback regarding the University of Toronto's study abroad page, which many users found condensed and unhelpful. It failed to provide a complete picture, such as details about rental and flight costs. Cost-to-Go-UofT addresses these gaps by offering an end-to-end solution.
+Here's the updated, polished, and formatted README file for your project:
 
 ---
 
-## Group Members
+# **Cost-to-Go-UofT**
+
+## **Summary**
+
+**Cost-to-Go-UofT** is a comprehensive tool designed to assist users in planning their study abroad experience. This tool goes beyond merely helping users find a suitable university program—it also provides personalized recommendations for flights and accommodations. Users receive a final itinerary summarizing all the relevant information, making it easier to organize their study abroad plans.
+
+This application was inspired by feedback regarding the University of Toronto's study abroad page, which users often found overwhelming and insufficient. The original page lacked detailed information, such as rental and flight costs, leaving users without a clear picture of the full experience. **Cost-to-Go-UofT** fills these gaps by offering an all-in-one solution.
+
+---
+
+## **Group Members**
 
 - **Muhtasim Khan** ([muhtasim7](https://github.com/muhtasim7))
 - **Alisa Iskakova** ([alisa-isk](https://github.com/alisa-isk))
@@ -18,153 +22,166 @@ The idea for this application originated from feedback regarding the University 
 
 ---
 
-## Table of Contents
+## **Table of Contents**
 
 1. [Features](#features)
 2. [Getting Started](#getting-started)
 3. [API Integrations](#api-integrations)
 4. [Usage](#usage)
-5. [Feedback and Contributions](#feedback-and-contributions)
-6. [License](#license)
+5. [Feedback](#feedback)
+6. [Contribution](#contribution)
+7. [License](#license)
 
 ---
 
-## Features
+## **Features**
 
-- **User Account Management**: Users can create an account to store preferences and personal details.
-  ![Signup page](docs/images/signup_page.png)
-  ![Signup page](docs/images/login_page.png)
+- **User Account Management**: Users can create an account to store preferences and personal details.  
+  ![Signup Page](docs/images/signup_page.png)  
+  ![Login Page](docs/images/login_page.png)
+
 - **University Selection**: Provides resources for flights and accommodations in the university's city.
-- **Flight**: Recommends flights tailored to the user's preferences
-- **Accommodation Booking**:  Airbnb accommodations tailored to the user's preferences.
-  ![Airbnb page](docs/images/airbnb_page.png)
-- **Itinerary Summary**: Generates a comprehensive itinerary.
+
+- **Flight Recommendations**: Suggests flights tailored to the user's preferences.
+
+- **Accommodation Recommendations**: Provides tailored Airbnb accommodation options.  
+  ![Airbnb Page](docs/images/airbnb_page.png)
+
+- **Itinerary Summary**: Generates a comprehensive itinerary summarizing the user's choices.
 
 ---
 
-## Getting Started
+## **Getting Started**
 
-### Prerequisites
+### **Prerequisites**
 
 1. **Java Development Kit (JDK)**: Ensure Java JDK 11 or later is installed.
 2. **API Keys**: Obtain the following:
-   - Airbnb API Key
-   - Google Flights API Key
-   - Ninja API Key for Airport Codes
-3. **Dependencies**:
-   - Libraries for JSON parsing, API calls, and HTTP requests.
+    - Airbnb API Key
+    - Google Flights API Key
+    - Ninja API Key for Airport Codes
+3. **Dependencies**: Libraries for JSON parsing, API calls, and HTTP requests.
 
-### Installation
+---
 
-1. Clone the repository:
+### **Installation**
+
+1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/study-abroad-program-finder.git
-   cd study-abroad-program-finder
+   git clone https://github.com/muhtasim7/Cost-to-Go-Uoft.git
+   cd Cost-to-Go-Uoft
    ```
 
-2. Configure API keys:
-   - Add your keys to the `config.properties` file located in the `resources` folder.
+2. **Configure API Keys**:  
+   a) **Airbnb API Key**
+    - Obtain your API key from [Airbnb RapidAPI](https://rapidapi.com/apiheya/api/airbnb45/playground/apiendpoint_72dde06c-ddca-43d4-b418-96ea9725c65a).
+    - Update line 25 in `data_access.Airbnb`:
+      ```java
+      private static final String API_KEY = "your-airbnb-api-key";
+      ```
 
-3. Update file paths (if on Windows):
-   - Modify the file path in `app.MainWithFile` (line 64):
-     ```java
-     final FileUserDataAccessObject userDataAccessObject = 
-         new FileUserDataAccessObject("C:\\Users\\YourUsername\\path\\to\\users.csv");
-     ```
-   ![Change user filePath](docs/images/Change_user_file.png)
-   - Modify the file path in `data_access.airbnb` (line 20):
-     ```java
-     private static final String FILE_PATH = 
-         "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
-     ```
-   ![Change jsonformatter filePath](docs/images/Change_jasonformatter_filepath.png)
+   b) **Ninja API Key**
+    - Obtain your API key from [API Ninjas](https://api-ninjas.com/profile).
+    - Update line 14 in `data_access.AirportCode`:
+      ```java
+      private static final String API_KEY = "your-ninja-api-key";
+      ```
 
-4. Run the program:
-   - Open the project in an IDE (e.g., IntelliJ IDEA).
-   - Execute the main class.
+3. **Update File Paths (Windows Users)**:
+    - Modify the file path in `app.MainWithFile` (line 64):
+      ```java
+      final FileUserDataAccessObject userDataAccessObject = 
+          new FileUserDataAccessObject("C:\\Users\\YourUsername\\path\\to\\users.csv");
+      ```  
+      ![Change User File Path](docs/images/Change_user_file.png)
+
+    - Modify the file path in `data_access.Airbnb` (line 20):
+      ```java
+      private static final String FILE_PATH = 
+          "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
+      ```  
+      ![Change JSON Formatter File Path](docs/images/Change_jsonformatter_filepath.png)
+
+4. **Run the Program**:
+    - Open the project in an IDE (e.g., IntelliJ IDEA).
+    - Execute the main class.
 
 ---
 
-## API Integrations
+## **API Integrations**
 
 1. **Airbnb API**
-   - Retrieves accommodation options based on user preferences.
-   - **Endpoint**: `/locations/search`
-   - **Method**: GET
+    - Retrieves accommodation options based on user preferences.
+    - **Endpoint**: `/locations/search`
+    - **Method**: GET
 
 2. **Google Flights API**
-   - Provides flight options for selected destinations.
-   - **Endpoint**: `/search`
-   - **Method**: GET
+    - Provides flight options for selected destinations.
+    - **Endpoint**: `/search`
+    - **Method**: GET
 
-3**AirportCode API**
-   - Serves as a helper function for the Google Flights API by retrieving airport codes (IATA) for a given city name.
-   - **Endpoint**: `/airports?name=<city>`
-   - **Method**: GET
-   - **Implementation**:
-      - This feature ensures that users can search for flights using the correct IATA airport codes, enhancing the reliability of the flight recommendation process.
+3. **AirportCode API**
+    - A helper for the Google Flights API that retrieves airport codes (IATA) based on the city name.
+    - **Endpoint**: `/airports?name=<city>`
+    - **Method**: GET
+    - **Implementation**: Ensures users can search for flights using the correct IATA airport codes, improving accuracy.
 
-> All API configurations can be updated in their respective service classes (`AIRBNB.java`, `FLIGHT.java`, `AirportCode.java`).
+> API configurations are managed in their respective service classes: `Airbnb.java`, `Flight.java`, and `AirportCode.java`.
 
 ---
 
-## Usage
+## **Usage**
 
-1. **Create an Account**:
-   - Register and provide personal details.
-   ![Signup page](docs/images/signup_page.png)
-   ![Signup page](docs/images/login_page.png)
-2. **Select Programs**:
-   - Browse filtered programs and sort them by cost.
+1. **Create an Account**:  
+   Register and provide personal details.  
+   ![Signup Page](docs/images/signup_page.png)  
+   ![Login Page](docs/images/login_page.png)
+
+2. **Select Programs**:  
+   Browse filtered programs and sort them by cost.
+
 3. **View Accommodations and Flights**:
-   - Choose accommodations 
-4. **Flights from the recommended options:**:
-   - Choose flights
-   ![Airbnb page](docs/images/airbnb_page.png)
-5. **Itinerary**:
-   - Generate the final itinerary.
+    - Choose accommodations.
+    - Select flights.  
+      ![Airbnb Page](docs/images/airbnb_page.png)
+
+4. **Generate Itinerary**:  
+   Get the final itinerary summarizing your study abroad plans.
 
 ---
 
-## Technical Details
-
-- **Java Version**: Requires JDK 11 or higher.
-- **Required Packages**:
-   - OkHttp for HTTP requests.
-   - JSON libraries for parsing API responses.
-- **Platform-Specific Instructions**:
-   - Update file paths if running on Windows as detailed in the [Getting Started](#getting-started) section.
-
----
-
-## Feedback 
+## **Feedback**
 
 We value your feedback to improve the "Cost to Go UofT" tool! Please share your thoughts by completing this quick survey:
 
 [**Submit Feedback via Google Form**](https://docs.google.com/forms/d/e/1FAIpQLSfBQT9fWh2ThmqRl-7_cY-GtExRZ6i26OpZ8rm3esO8uuPirQ/viewform?embedded=true)
 
+Alternatively, you can share suggestions or report bugs on [GitHub Discussions](https://github.com/muhtasim7/Cost-to-Go-Uoft/discussions).
 
 ---
 
-### Contributions
+## **Contribution**
 
-1. Fork the repository:
+1. **Fork the Repository**:
    ```bash
-   git fork https://github.com/yourusername/study-abroad-program-finder.git
+   git fork https://github.com/muhtasim7/Cost-to-Go-Uoft.git
    ```
 
-2. Create a branch for your changes:
+2. **Create a Branch**:
    ```bash
    git checkout -b feature-name
    ```
 
-3. Submit a pull request:
-   - Ensure your changes are well-documented and tested.
+3. **Submit a Pull Request**:
+    - Document and test your changes thoroughly.
+    - Provide a concise description of your changes.
 
 ---
 
-## License
+## **License**
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
 
----
+--- 
+
+Let me know if you need further adjustments!
