@@ -71,12 +71,13 @@ The idea for this application originated from feedback regarding the University 
      final FileUserDataAccessObject userDataAccessObject = 
          new FileUserDataAccessObject("C:\\Users\\YourUsername\\path\\to\\users.csv");
      ```
+   ![Change user filePath](docs/images/Change_user_file.png)
    - Modify the file path in `data_access.airbnb` (line 20):
      ```java
      private static final String FILE_PATH = 
          "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
      ```
-   Add screenshots illustrating this step. (See instructions below on adding images.)
+   ![Change jsonformatter filePath](docs/images/Change_jasonformatter_filepath.png)
 
 4. Run the program:
    - Open the project in an IDE (e.g., IntelliJ IDEA).
