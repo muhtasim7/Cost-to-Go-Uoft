@@ -13,7 +13,7 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-public class DashboardView extends JPanel implements PropertyChangeListener {
+public class DashboardView extends JPanel {
     private final JButton updateInfoButton;
     private final JButton findProgramButton;
     private final JButton rentSearchButton;
