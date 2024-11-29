@@ -152,7 +152,7 @@ We value your feedback to improve the "Cost to Go UofT" tool! Please share your 
 
 [**Submit Feedback via Google Form**](https://docs.google.com/forms/d/e/1FAIpQLSfBQT9fWh2ThmqRl-7_cY-GtExRZ6i26OpZ8rm3esO8uuPirQ/viewform?embedded=true)
 
-Alternatively, you can share suggestions or report bugs on [GitHub Discussions](https://github.com/muhtasim7/Cost-to-Go-Uoft/discussions).
+Alternatively, you can share suggestions or report bugs on [GitHub Discussions](https://github.com/muhtasim7/Cost-to-Go-Uoft/discussions/20).
 
 ---
 
