@@ -100,7 +100,7 @@ This application was inspired by feedback regarding the University of Toronto's 
 
 4. **Run the Program**:
     - Open the project in an IDE (e.g., IntelliJ IDEA).
-    - Execute the main class.
+    - Execute the MainWithFile class.
 
 ---
 
