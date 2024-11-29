@@ -96,7 +96,7 @@ This application was inspired by feedback regarding the University of Toronto's 
       private static final String FILE_PATH = 
           "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
       ```  
-      ![Change JSON Formatter File Path](docs/images/Change_jsonformatter_filepath.png)
+      ![Change JSON Formatter File Path](docs/images/Change_jasonformatter_filepath.png)
 
 4. **Run the Program**:
     - Open the project in an IDE (e.g., IntelliJ IDEA).
