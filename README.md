@@ -137,11 +137,14 @@ The idea for this application originated from feedback regarding the University 
 
 ---
 
-## Feedback and Contributions
+## Feedback 
 
-### Feedback
+We value your feedback to improve the "Cost to Go UofT" tool! Please share your thoughts by completing this quick survey:
 
-- Submit feedback via [GitHub Discussions](https://github.com/yourusername/study-abroad-program-finder/discussions).
+[**Submit Feedback via Google Form**](https://docs.google.com/forms/d/e/1FAIpQLSfBQT9fWh2ThmqRl-7_cY-GtExRZ6i26OpZ8rm3esO8uuPirQ/viewform?embedded=true)
+
+
+---
 
 ### Contributions
 
