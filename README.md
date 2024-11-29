@@ -1,5 +1,3 @@
-Here's the updated, polished, and formatted README file for your project:
-
 ---
 
 # **Cost-to-Go-UofT**
@@ -183,5 +181,3 @@ Alternatively, you can share suggestions or report bugs on [GitHub Discussions](
 This project is licensed under the **MIT License**.
 
 --- 
-
-Let me know if you need further adjustments!
