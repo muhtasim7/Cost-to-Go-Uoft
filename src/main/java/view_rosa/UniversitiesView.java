@@ -73,7 +73,6 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
                             final UniversitiesState currentstate = universitiesViewModel.getState();
 
                             universitiesController.execute(getSelectedRowData());
-                            System.out.println(getSelectedRowData());
                             {
                             }
                         }
@@ -145,9 +144,42 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
         for (Object[] rowData : data) {
             tableModel.addRow(rowData);
         }
-        // set column widths, scrolling, and look
-        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        // set column widths, scrolling, and look
+//        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+//        JScrollPane scrollPane = new JScrollPane(table);
+
+        //TESTING
+        // Enable column resizing
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        // Adjust column widths to fit the content
+        for (int i = 0; i < table.getColumnCount(); i++) {
+            TableColumn column = table.getColumnModel().getColumn(i);
+            int preferredWidth = 150; // Default width
+            for (int row = 0; row < table.getRowCount(); row++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, i);
+                Component comp = table.prepareRenderer(renderer, row, i);
+                preferredWidth = Math.max(comp.getPreferredSize().width + 10, preferredWidth); // Add some padding
+            }
+            column.setPreferredWidth(preferredWidth);
+        }
+
+        // Adjust row height to fit content
+        table.setRowHeight(25);
+        for (int row = 0; row < table.getRowCount(); row++) {
+            int rowHeight = table.getRowHeight();
+            for (int column = 0; column < table.getColumnCount(); column++) {
+                TableCellRenderer renderer = table.getCellRenderer(row, column);
+                Component comp = table.prepareRenderer(renderer, row, column);
+                rowHeight = Math.max(rowHeight, comp.getPreferredSize().height);
+            }
+            table.setRowHeight(row, rowHeight);
+        }
+
+        // Wrap table in scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setPreferredSize(new Dimension(800, 400)); // Adjust viewport size
+        //END OF TEST
 
 
         // sorting by university names alphabetically
@@ -166,9 +198,15 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
         header.setBackground(new Color(173, 216, 230));
         header.setOpaque(true);
         header.setFont(header.getFont().deriveFont(Font.BOLD));
-        // set rest of the table colour to light pink
-        table.setBackground(new Color(255, 240, 245));
+        // set rest of the table colour to white
+        table.setBackground(Color.WHITE);
         table.setOpaque(true);
+
+        // Customize the button appearance
+        selectButton.setBackground(new Color(128, 0, 128)); // Purple background
+        selectButton.setForeground(Color.WHITE); // White text
+        selectButton.setFocusPainted(false); // Remove focus border for a cleaner look
+        selectButton.setFont(new Font("Arial", Font.BOLD, 14)); // Bold font for better visibility
 
 
         // add table and buttons to panel

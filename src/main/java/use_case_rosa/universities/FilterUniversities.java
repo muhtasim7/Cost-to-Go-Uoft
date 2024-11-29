@@ -17,11 +17,11 @@ import java.util.List;
  */
 
 public class FilterUniversities {
-    private CommonUser current_user;
-    String gpa;
-    String degree;
-    String program;
-    String language;
+//    private CommonUser current_user;
+//    String gpa;
+//    String degree;
+//    String program;
+//    String language;
 
     public List<Object[]> filterUniversities(User user) {
         String gpa = user.getGpa();
@@ -48,7 +48,7 @@ public class FilterUniversities {
 //            String country = (String) university[0];
 //            String city = (String) university[1];
 //            String universityName = (String) university[2];
-//            String studyLanguage = (String) university[3];
+            String studyLanguage = (String) university[3];
 //            String tuition = (String) university[4];
 //            String award = (String) university[5];
 //            String minGPA = (String) university[6];
