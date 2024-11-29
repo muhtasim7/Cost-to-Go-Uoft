@@ -1,5 +1,3 @@
----
-
 # **Cost-to-Go-UofT**
 
 ## **Summary**
