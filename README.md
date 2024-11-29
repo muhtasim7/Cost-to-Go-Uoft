@@ -1,12 +1,18 @@
 # Cost-to-Go-UofT
 
-This Java application assists users in planning their study abroad experience by connecting them to tailored university programs, flights, and accommodations. By creating an account and filling out personal information, users can discover study abroad options that match their preferences and make informed decisions about studying overseas. The program provides a seamless process from program selection to flight and accommodation booking and allows users to receive their final itinerary via email.
+## Summary
+
+Cost-to-Go-UofT is a comprehensive tool designed to assist users in planning their study abroad experience. The tool not only helps users find a suitable university program but also provides recommendations for flights and accommodations. Users can receive a final itinerary summarizing all the relevant information to simplify their study abroad journey.
+
+The idea for this application originated from feedback regarding the University of Toronto's study abroad page, which many users found condensed and unhelpful. It failed to provide a complete picture, such as details about rental and flight costs. Cost-to-Go-UofT addresses these gaps by offering an end-to-end solution.
+
+---
 
 ## Group Members
 
+- **Muhtasim Khan** ([muhtasim7](https://github.com/muhtasim7))
 - **Alisa Iskakova** ([alisa-isk](https://github.com/alisa-isk))
 - **Ariuntuya Ganbold** ([ambutsa](https://github.com/ambutsa))
-- **Muhtasim Khan** ([muhtasim7](https://github.com/muhtasim7))
 - **Sanyukta Negi** ([sanyuktanegi](https://github.com/sanyuktanegi))
 - **Rosa Martinez** ([rosamartinezz](https://github.com/rosamartinezz))
 
@@ -25,12 +31,14 @@ This Java application assists users in planning their study abroad experience by
 
 ## Features
 
-- **User Account Management**: Users create an account to store their preferences and personal details.
-- **Program Filtering**: Based on provided details, the program filters and presents suitable study abroad options.
-- **Sorting by Cost**: Users can sort study abroad programs by cost to find options within their budget.
-- **University Selection**: After selecting a program, users are guided to resources for flights and accommodations in the university's city.
-- **Flight and Accommodation Booking**: The app recommends flights and Airbnb accommodations based on user preferences.
-- **Itinerary Summary and Email Option**: Users receive a comprehensive summary of their chosen university, flight, and accommodation and can choose to email the itinerary to themselves.
+- **User Account Management**: Users can create an account to store preferences and personal details.
+  ![Signup page](docs/images/signup_page.png)
+  ![Signup page](docs/images/login_page.png)
+- **University Selection**: Provides resources for flights and accommodations in the university's city.
+- **Flight**: Recommends flights tailored to the user's preferences
+- **Accommodation Booking**:  Airbnb accommodations tailored to the user's preferences.
+  ![Airbnb page](docs/images/airbnb_page.png)
+- **Itinerary Summary**: Generates a comprehensive itinerary.
 
 ---
 
@@ -42,10 +50,9 @@ This Java application assists users in planning their study abroad experience by
 2. **API Keys**: Obtain the following:
    - Airbnb API Key
    - Google Flights API Key
-   - Google Mail API Key
-
+   - Ninja API Key for Airport Codes
 3. **Dependencies**:
-   - Libraries for JSON parsing and API calls.
+   - Libraries for JSON parsing, API calls, and HTTP requests.
 
 ### Installation
 
@@ -58,8 +65,18 @@ This Java application assists users in planning their study abroad experience by
 2. Configure API keys:
    - Add your keys to the `config.properties` file located in the `resources` folder.
 
-3. Update file paths:
-   - In `src/main/java/usecases/AuthService.java`, change the file path to match the location of your `users.csv` file.
+3. Update file paths (if on Windows):
+   - Modify the file path in `app.MainWithFile` (line 64):
+     ```java
+     final FileUserDataAccessObject userDataAccessObject = 
+         new FileUserDataAccessObject("C:\\Users\\YourUsername\\path\\to\\users.csv");
+     ```
+   - Modify the file path in `data_access.airbnb` (line 20):
+     ```java
+     private static final String FILE_PATH = 
+         "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
+     ```
+   Add screenshots illustrating this step. (See instructions below on adding images.)
 
 4. Run the program:
    - Open the project in an IDE (e.g., IntelliJ IDEA).
@@ -69,35 +86,53 @@ This Java application assists users in planning their study abroad experience by
 
 ## API Integrations
 
-1. **Airbnb API**  
+1. **Airbnb API**
    - Retrieves accommodation options based on user preferences.
    - **Endpoint**: `/locations/search`
    - **Method**: GET
 
-2. **Google Flights API**  
+2. **Google Flights API**
    - Provides flight options for selected destinations.
    - **Endpoint**: `/search`
    - **Method**: GET
 
-3. **Google Mail API**  
-   - Sends a summary of the user's itinerary.
-   - **Endpoint**: `/send`
-   - **Method**: POST
+3**AirportCode API**
+   - Serves as a helper function for the Google Flights API by retrieving airport codes (IATA) for a given city name.
+   - **Endpoint**: `/airports?name=<city>`
+   - **Method**: GET
+   - **Implementation**:
+      - This feature ensures that users can search for flights using the correct IATA airport codes, enhancing the reliability of the flight recommendation process.
 
-> All API configurations can be updated in their respective service classes (`AirbnbService.java`, `GoogleFlightsService.java`, `GoogleMailService.java`).
+> All API configurations can be updated in their respective service classes (`AIRBNB.java`, `FLIGHT.java`, `AirportCode.java`).
 
 ---
 
 ## Usage
 
 1. **Create an Account**:
-   - Run the program and register an account.
+   - Register and provide personal details.
+   ![Signup page](docs/images/signup_page.png)
+   ![Signup page](docs/images/login_page.png)
 2. **Select Programs**:
-   - Browse filtered programs and sort by cost.
+   - Browse filtered programs and sort them by cost.
 3. **View Accommodations and Flights**:
-   - Choose options from recommended accommodations and flights.
-4. **Email Itinerary**:
-   - Generate and email the final itinerary for future reference.
+   - Choose accommodations 
+4. **Flights from the recommended options:**:
+   - Choose flights
+   ![Airbnb page](docs/images/airbnb_page.png)
+5. **Itinerary**:
+   - Generate the final itinerary.
+
+---
+
+## Technical Details
+
+- **Java Version**: Requires JDK 11 or higher.
+- **Required Packages**:
+   - OkHttp for HTTP requests.
+   - JSON libraries for parsing API responses.
+- **Platform-Specific Instructions**:
+   - Update file paths if running on Windows as detailed in the [Getting Started](#getting-started) section.
 
 ---
 
@@ -106,7 +141,6 @@ This Java application assists users in planning their study abroad experience by
 ### Feedback
 
 - Submit feedback via [GitHub Discussions](https://github.com/yourusername/study-abroad-program-finder/discussions).
-- Include detailed suggestions or bug reports.
 
 ### Contributions
 
@@ -127,4 +161,6 @@ This Java application assists users in planning their study abroad experience by
 
 ## License
 
-This project was developed as part of a course at the University of Toronto and is licensed under the MIT License. Redistribution or commercial use is not permitted without permission.
+This project is licensed under the MIT License.
+
+---
