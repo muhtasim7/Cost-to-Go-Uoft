@@ -3,6 +3,8 @@ package view;
 import entities.CommonProperty;
 import entities.Property;
 import interface_adapters.property.PropertyController;
+import interface_adapters.property.PropertySelectedCallback;
+
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import usecases.property.PropertyUtils;
@@ -18,15 +20,14 @@ public class PropertyView extends JPanel {
     private final DefaultTableModel tableModel;
     private final PropertyController controller;
     private final PropertyViewModel viewModel;
+    private final PropertySelectedCallback callback;
 
-    public PropertyView(PropertyController controller, PropertyViewModel viewModel, String city) {
+    public PropertyView(PropertyController controller, PropertyViewModel viewModel, String city, PropertySelectedCallback callback) {
         this.controller = controller;
         this.viewModel = viewModel;
+        this.callback = callback;
 
         setLayout(new BorderLayout());
-
-        // Create and configure the table
-        // This Part of the code is thanks to chatgpt as I did not know how to create a table to display the information
         String[] columnNames = {"Name", "Rating", "Discounted Price", "Original Price", "Room Type", "Select"};
         tableModel = new DefaultTableModel(columnNames, 0);
         propertyTable = new JTable(tableModel) {
@@ -78,16 +79,41 @@ public class PropertyView extends JPanel {
             });
         }
     }
+    private class ButtonEditor extends DefaultCellEditor {
+        private final JButton button;
+        private int row;
+
+        public ButtonEditor() {
+            super(new JCheckBox());
+            button = new JButton("Select");
+            button.addActionListener(e -> {
+
+                // Fetch the property details directly from the propertyTable
+                String name = (String) tableModel.getValueAt(row, 0);
+                String rating = (String) tableModel.getValueAt(row, 1);
+                String discountedPrice = (String) tableModel.getValueAt(row, 2);
+                String originalPrice = (String) tableModel.getValueAt(row, 3);
+                String roomType = (String) tableModel.getValueAt(row, 4);
+
+                Property property = new CommonProperty(name, rating, discountedPrice, originalPrice, roomType);
+
+                // Notify parent component of the selected property
+                if (callback != null) {
+                    callback.onPropertySelected(property);
+                }
 
 
-    private void displayPropertyDetails(Property property) {
-        String message = "Name: " + property.getName() + "\nRating: " + property.getRating() + "\nDiscount Price: " + property.getDiscountedPrice() + "\nOriginal Price: " + property.getOriginalPrice() + "\nRoom Type: " + property.getRoomType();
-        JOptionPane.showMessageDialog(this, message, "Selected Property", JOptionPane.INFORMATION_MESSAGE);
-        System.out.println("Selected Property Details:");
-        System.out.println(message);
+                controller.switchToDashboardView();
+            });
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+            this.row = row;
+            return button;
+        }
     }
 
-    // Renderer for the "Select" column buttons
     private static class ButtonRenderer extends JButton implements TableCellRenderer {
         public ButtonRenderer() {
             setText("Select");
@@ -97,43 +123,6 @@ public class PropertyView extends JPanel {
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                                                        boolean hasFocus, int row, int column) {
             return this;
-        }
-    }
-
-    // Editor for the "Select" column buttons
-    // This part of the code is thanks to chatgpt as creating a select button that will return a list is complicated was not taught in course
-    private class ButtonEditor extends DefaultCellEditor {
-        private final JButton button;
-        private int row;
-        PropertyState state;
-
-        public ButtonEditor() {
-            super(new JCheckBox());
-            button = new JButton("Select");
-            button.addActionListener(e -> {
-                // Fetch the property details directly from the propertyTable
-                String name = (String) tableModel.getValueAt(row, 0);
-                String rating = (String) tableModel.getValueAt(row, 1);
-                String discountedPrice = (String) tableModel.getValueAt(row, 2);
-                String originalPrice = (String) tableModel.getValueAt(row, 3);
-                String roomType = (String) tableModel.getValueAt(row, 4);
-
-                // Use CommonProperty (or another concrete class) to display details
-                Property property = new CommonProperty(name, rating, discountedPrice, originalPrice, roomType);
-                PropertyState state = viewModel.getState();
-                state.setSelectedProperty(property);
-                viewModel.setState(state);
-
-                System.out.println("Selected Property Saved: " + state.getSelectedProperty());
-
-                controller.switchToDashboardView();
-            });
-        }
-
-        @Override
-        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-            this.row = row; // Save the selected row index
-            return button;
         }
     }
 }
