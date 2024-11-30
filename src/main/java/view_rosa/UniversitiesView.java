@@ -12,6 +12,7 @@ import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.signup.SignupViewModel;
 import jdk.dynalink.beans.StaticClass;
 import use_case_rosa.universities.FilterUniversities;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 import interface_adapters.logged_in.LoggedInViewModel;
 
 
@@ -34,7 +35,7 @@ import java.util.Vector;
 public class UniversitiesView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "StudyAbroadOptions";
     private final UniversitiesViewModel universitiesViewModel;
-    private final LoggedInState loggedInState; // Reference to the logged-in state
+    private final UniversitiesUserDataAccessInterface userDataAccessInterface; //access user data through this interface
 
     // UI components
     private JTable table;
@@ -48,12 +49,12 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
     // path to the user data file
 //    private final String USER_DATA_FILE = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv";
 
-    public UniversitiesView(UniversitiesController controller, UniversitiesViewModel universitiesViewModel, LoggedInState loggedInState) {
+    public UniversitiesView(UniversitiesController controller, UniversitiesViewModel universitiesViewModel, UniversitiesUserDataAccessInterface userDataAccessInterface) {
         this.universitiesController = controller; // controller
         this.universitiesViewModel = universitiesViewModel;
         this.universitiesViewModel.addPropertyChangeListener(this);
         // initialize the current user
-        this.loggedInState = loggedInState; // Store the logged-in state
+        this.userDataAccessInterface = userDataAccessInterface;
         // initialize the user
         currentUserHelper();
 
@@ -96,15 +97,8 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
 
     // helper to get the current user and initialize it
     private void currentUserHelper() {
-        this.user = new CommonUser(
-                loggedInState.getUsername(),
-                loggedInState.getPassword(),
-                loggedInState.getGpa(),
-                loggedInState.getDegree(),
-                loggedInState.getProgram(),
-                loggedInState.getLanguage(),
-                loggedInState.getEmail()
-        );
+        String currentUsername = userDataAccessInterface.getCurrentUser();
+        this.user = userDataAccessInterface.get(currentUsername);
     }
 
     public String getViewName() {

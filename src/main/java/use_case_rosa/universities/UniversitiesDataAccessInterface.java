@@ -11,7 +11,6 @@ import java.util.List;
 public interface UniversitiesDataAccessInterface {
 
     /**
-     * Checks for the eligible study abroad options depending on user input.
+     * Reads the universities list.
      */
-    public List<Object[]> readUniversities();
 }

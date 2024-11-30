@@ -17,7 +17,7 @@ import java.util.List;
  */
 
 public class FilterUniversities {
-//    private CommonUser current_user;
+    private CommonUser current_user;
 //    String gpa;
 //    String degree;
 //    String program;
@@ -82,6 +82,7 @@ public class FilterUniversities {
             }
         }
         // Return the filtered list
+        System.out.println(user.getName() + user.getGpa() + "checking for null in filter universities");
         return filteredUniversities;
     }
 }

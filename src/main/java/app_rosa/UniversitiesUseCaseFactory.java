@@ -9,7 +9,7 @@ import interface_adapters.login.LoginController;
 import use_case_rosa.universities.*;
 import usecases.login.LoginUserDataAccessInterface;
 import view_rosa.UniversitiesView;
-import interface_adapters.logged_in.LoggedInState;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 
 /**
  * Factory for creating the Universities use case and view.
@@ -26,26 +26,23 @@ public final class UniversitiesUseCaseFactory {
             ViewManagerModel viewManagerModel,
             UniversitiesViewModel universitiesViewModel,
             UniversitiesDataAccessInterface universitiesDataAccessObject,
+            UniversitiesUserDataAccessInterface universitiesUserDataAccessObject, // added for user data access
             LoggedInViewModel loggedInViewModel,
             LoginUserDataAccessInterface userDataAccessObject) {
 
-        final UniversitiesController universitiesController = createUniversitiesUseCase(viewManagerModel, universitiesViewModel,universitiesDataAccessObject, loggedInViewModel, userDataAccessObject);
+        final UniversitiesController universitiesController = createUniversitiesUseCase(viewManagerModel, universitiesViewModel,universitiesDataAccessObject);
 
-        return new UniversitiesView(universitiesController,universitiesViewModel, loggedInViewModel.getState());
+        return new UniversitiesView(universitiesController,universitiesViewModel, universitiesUserDataAccessObject);
     }
 
-    private static UniversitiesController createUniversitiesUseCase(
+    public static UniversitiesController createUniversitiesUseCase(
             ViewManagerModel viewManagerModel,
             UniversitiesViewModel universitiesViewModel,
-            UniversitiesDataAccessInterface universitiesDataAccessObject,
-            LoggedInViewModel loggedInViewModel,
-            LoginUserDataAccessInterface userDataAccessInterface) {
+            UniversitiesDataAccessInterface universitiesDataAccessObject) {
 
     // pass this methods parameter to the presenter?
         final UniversitiesOutputBoundary universitiesOutputBoundary = new UniversitiesPresenter(viewManagerModel, universitiesViewModel);
-
         final UniversitiesInputBoundary universitiesInteractor = new UniversitiesInteractor(universitiesDataAccessObject, universitiesOutputBoundary);
-
         return new UniversitiesController(universitiesInteractor);
     }
 }

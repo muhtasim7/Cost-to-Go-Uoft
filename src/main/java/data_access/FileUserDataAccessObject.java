@@ -14,6 +14,8 @@ import java.util.Map;
 import entities.Property;
 import entities.User;
 import entities.UserFactory;
+import use_case_rosa.universities.UniversitiesDataAccessInterface;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 import usecases.change_password.ChangePasswordUserDataAccessInterface;
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.login.LoginUserDataAccessInterface;
@@ -24,13 +26,14 @@ import usecases.signup.SignupUserDataAccessInterface;
  */
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         LoginUserDataAccessInterface,
-        ChangePasswordUserDataAccessInterface, ItineraryDataAccessInterface {
+        ChangePasswordUserDataAccessInterface, ItineraryDataAccessInterface, UniversitiesUserDataAccessInterface {
 
     private static final String HEADER = "username,password,gpa,degree,program,language,email";
 
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
+    private String currentUsername; // rosa
 
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
 
@@ -107,14 +110,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
-    public void setCurrentUser(String name) {
-
-    }
+    public void setCurrentUser(String name) {this.currentUsername = name;} // rosa
 
     @Override
     public String getCurrentUser() {
-        return "";
-    }
+        return this.currentUsername;} // rosa
 
     @Override
     public boolean existsByName(String identifier) {
