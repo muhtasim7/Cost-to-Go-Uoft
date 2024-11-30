@@ -8,11 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import entities.Property;
 import entities.User;
 import entities.UserFactory;
 import usecases.change_password.ChangePasswordUserDataAccessInterface;
+import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.login.LoginUserDataAccessInterface;
 import usecases.signup.SignupUserDataAccessInterface;
 
@@ -21,7 +24,7 @@ import usecases.signup.SignupUserDataAccessInterface;
  */
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         LoginUserDataAccessInterface,
-        ChangePasswordUserDataAccessInterface {
+        ChangePasswordUserDataAccessInterface, ItineraryDataAccessInterface {
 
     private static final String HEADER = "username,password,gpa,degree,program,language,email";
 
@@ -123,5 +126,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         // Replace the User object in the map
         accounts.put(user.getName(), user);
         save();
+    }
+
+    @Override
+    public List<Property> getPropertiesForItinerary(String city) throws Exception {
+        return List.of();
     }
 }

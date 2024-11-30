@@ -8,8 +8,8 @@ Requirements: "2.0 GPA"
 }
 {
 Listing Name: "Hilton In London"
-Discounted Price: "1200"
-Original Price: "1300"
+Discounted Price: "1500"
+Original Price: "2000"
 Star Rating: "4"
 Bedroom Type: "Private"
 }

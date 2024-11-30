@@ -1,21 +1,23 @@
 package app;
 
-import app_rosa.UniversitiesUseCaseFactory;
 import data_access.FileUserDataAccessObject;
-import data_access_rosa.FileUniversitiesDataAccessObject;
+import data_access.AIRBNB;
+import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
-import interface_adapters.logged_in.LoggedInState;
+import interface_adapters.itinerary.ItineraryController;
+import interface_adapters.itinerary.ItineraryPresenter;
+import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.property.PropertyState;
+import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
-import view.LoggedInView;
-import view.LoginView;
-import view.SignupView;
-import view.ViewManager;
-import view.DashboardView;
-import view_rosa.UniversitiesView;
+import usecases.itinerary.ItineraryInputBoundary;
+import usecases.itinerary.ItineraryInteractor;
+import usecases.itinerary.ItineraryOutputBoundary;
+import usecases.property.PropertyUserDataAccessInterface;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,7 +37,7 @@ public class MainWithFile {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        final JFrame application = new JFrame("Login Example");
+        final JFrame application = new JFrame("Cost-to-Go UofT");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         final CardLayout cardLayout = new CardLayout();
@@ -55,17 +57,28 @@ public class MainWithFile {
         final LoginViewModel loginViewModel = new LoginViewModel();
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
-
+        final PropertyViewModel propertyViewModel = new PropertyViewModel();
+        final PropertyState propertyState = new PropertyState();
+        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\Rosit\\IdeaProjects\\Cost-to-Go-Uoft\\src\\main\\java\\data_access_rosa\\users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
+                new CommonUserFactory());
+        final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
+
+
+
+
+        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
+                "Toronto", propertyState);
+        views.add(propertyView, "propertyView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
-        final DashboardView dashboardView = new DashboardView(viewManagerModel);
+        final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
+                userDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
-
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject);
@@ -74,16 +87,12 @@ public class MainWithFile {
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
                 loggedInViewModel, userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
+//
+//        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,
+//                userDataAccessObject);
+//        views.add(itineraryView, itineraryView.getViewName());
 
-        // rosa
-        final FileUniversitiesDataAccessObject universitiesDataAccessObject = new FileUniversitiesDataAccessObject();
-
-        // rosa: add universities view
-        final UniversitiesViewModel universitiesViewModel = new UniversitiesViewModel();
-        LoggedInState loggedInState = new LoggedInState(); //NOTE: this might not work
-        final UniversitiesView universitiesView = UniversitiesUseCaseFactory.create(viewManagerModel, universitiesViewModel, universitiesDataAccessObject, loggedInViewModel, userDataAccessObject);
-        views.add(universitiesView, universitiesView.getViewName());
-
+        // Set the initial view to be the signup view (this is the view that's visible when the application starts)
         viewManagerModel.setState(signupView.getViewName());
         viewManagerModel.firePropertyChanged();
 
