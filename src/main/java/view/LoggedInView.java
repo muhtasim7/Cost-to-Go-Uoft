@@ -3,6 +3,7 @@ package view;
 import interface_adapters.logged_in.ChangePasswordController;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
+import interface_adapters.signup.SignupState;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -30,8 +31,8 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
     private final JTextField passwordInputField = new JTextField(15);
     private final JTextField gpaInputField = new JTextField(15);
-    private final JTextField degreeInputField = new JTextField(15);
-    private final JTextField programInputField = new JTextField(15);
+    private final JComboBox<String> degreeInputField = new JComboBox<>();
+    private final JComboBox<String> programInputField = new JComboBox<>();
     private final JTextField languageInputField = new JTextField(15);
     private final JTextField emailInputField = new JTextField(15);
     private final JButton changePassword;
@@ -49,7 +50,31 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         final LabelTextPanel gpaInfo = new LabelTextPanel(
                 new JLabel("GPA"), gpaInputField);
         final LabelTextPanel degreeInfo = new LabelTextPanel(new JLabel("Degree"), degreeInputField);
+        degreeInputField.addItem("Select degree");
+        degreeInputField.addItem("Undergrad");
+        degreeInputField.addItem("Graduate");
         final LabelTextPanel programInfo = new LabelTextPanel(new JLabel("Program"), programInputField);
+        String[] faculties = {
+                "Select your faculty",
+                "Applied Science and Engineering",
+                "Arts and Science (St. George)",
+                "Arts and Science (UTM)",
+                "Arts and Science (UTSC)",
+                "Faculty of Information",
+                "Faculty of Law",
+                "Faculty of Music",
+                "John H. Daniels Faculty of Architecture, Landscape and Design",
+                "Kinesiology and Physical Education",
+                "Leslie Dan Faculty of Pharmacy",
+                "Ontario Institute for Studies in Education",
+                "Rotman Commerce",
+                "School of Graduate Studies"
+
+        };
+
+        for (String faculty : faculties) {
+            programInputField.addItem(faculty);
+        }
         final LabelTextPanel languageInfo = new LabelTextPanel(new JLabel("Language"), languageInputField);
         final LabelTextPanel emailInfo = new LabelTextPanel(new JLabel("Email"), emailInputField);
 
@@ -104,10 +129,10 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
 
             private void documentListenerHelper() {
                 final LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setGpa(gpaInputField.getText());
-                loggedInViewModel.setState(currentState);
-            }
+                    currentState.setGpa(gpaInputField.getText());
+                    loggedInViewModel.setState(currentState);
 
+            }
             @Override
             public void insertUpdate(DocumentEvent e) {
                 documentListenerHelper();
@@ -123,52 +148,20 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 documentListenerHelper();
             }
         });
-        degreeInputField.getDocument().addDocumentListener(new DocumentListener() {
 
-            private void documentListenerHelper() {
+            degreeInputField.addActionListener(e -> {
+                // Get the currently selected item from the combo box
                 final LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setDegree(degreeInputField.getText());
+                currentState.setDegree(degreeInputField.getSelectedItem().toString());
                 loggedInViewModel.setState(currentState);
-            }
+            });
 
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-        programInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper() {
+            programInputField.addActionListener(e -> {
+                // Get the currently selected item from the combo box
                 final LoggedInState currentState = loggedInViewModel.getState();
-                currentState.setProgram(programInputField.getText());
+                currentState.setProgram(programInputField.getSelectedItem().toString());
                 loggedInViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
+            });
         languageInputField.getDocument().addDocumentListener(new DocumentListener() {
 
             private void documentListenerHelper() {
