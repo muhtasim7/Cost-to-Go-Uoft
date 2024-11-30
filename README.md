@@ -4,7 +4,7 @@
 
 **Cost-to-Go-UofT** is a comprehensive tool designed to assist users in planning their study abroad experience. This tool goes beyond merely helping users find a suitable university program—it also provides personalized recommendations for flights and accommodations. Users receive a final itinerary summarizing all the relevant information, making it easier to organize their study abroad plans.
 
-This application was inspired by feedback regarding the University of Toronto's study abroad page, which users often found overwhelming and insufficient. The original page lacked detailed information, such as rental and flight costs, leaving users without a clear picture of the full experience. **Cost-to-Go-UofT** fills these gaps by offering an all-in-one solution.
+This application was inspired by our own challenges using the University of Toronto's study abroad page to search for opportunities. The page didn't allow filtering by requirements, so we had to scroll through all the programs and compare them to our GPA and language skills. We wanted to make it easier to filter by these criteria. Cost-to-Go-UofT not only simplifies the search process with better filters but also helps students by automatically finding flights and rentals, providing a comprehensive, all-in-one solution for planning their study abroad experience.
 
 ---
 
