@@ -1,11 +1,19 @@
 package view;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -15,6 +23,7 @@ import interface_adapters.signup.SignupViewModel;
 /**
  * The View for the Signup Use Case.
  */
+
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "sign up";
 
@@ -35,7 +44,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JButton toLogin;
 
     public SignupView(SignupController controller, SignupViewModel signupViewModel) {
-
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
