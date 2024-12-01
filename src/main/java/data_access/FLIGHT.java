@@ -23,12 +23,18 @@ public class FLIGHT implements FlightUserDataAccessInterface {
         this.flightFactory = flightfactory;
     }
 
+    /**
+     * Method for searching flights using API with given information.
+     * @param destination place to get flights for
+     * @return list of flight options
+     * @throws Exception when API call fails
+     */
     public List<Flight> searchFlights(String destination)throws Exception {
-        String apiKey = "04b7d118caa4499d7035c0ac8f127349ffe7726a103e88159c191a8fe3876a39";
+        final String apiKey = "04b7d118caa4499d7035c0ac8f127349ffe7726a103e88159c191a8fe3876a39";
 
-        AirportCode airportCodeFetcher = new AirportCode();
+        final AirportCode airportCodeFetcher = new AirportCode();
 
-        List<String> airportDetails = airportCodeFetcher.getAirportDetails("Vancouver");
+        final List<String> airportDetails = airportCodeFetcher.getAirportDetails("Vancouver");
         String arrivalAirportCode = "";
         for (String airportDetail : airportDetails) {
             arrivalAirportCode = airportDetail;
@@ -37,7 +43,7 @@ public class FLIGHT implements FlightUserDataAccessInterface {
             }
         }
 
-        Map<String, String> parameters = Map.of(
+        final Map<String, String> parameters = Map.of(
                 "engine", "google_flights",
                 "departure_id", "YYZ",
                 "arrival_id", arrivalAirportCode,
@@ -49,23 +55,23 @@ public class FLIGHT implements FlightUserDataAccessInterface {
         );
 
         // Build the URL with query parameters
-        String baseUrl = "https://serpapi.com/search.json";
-        String url = baseUrl + "?" + getParamsString(parameters);
+        final String baseUrl = "https://serpapi.com/search.json";
+        final String url = baseUrl + "?" + getParamsString(parameters);
 
         // Create HttpClient instance
-        HttpClient client = HttpClient.newHttpClient();
+        final HttpClient client = HttpClient.newHttpClient();
 
         // Build the GET request
-        HttpRequest request = HttpRequest.newBuilder()
+        final HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
                 .GET()
                 .build();
 
         try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            final HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 // Print the successful response
-                List<Flight> flights;
+                final List<Flight> flights;
                 flights = parseFlights(response.body());
                 return flights;
             }
@@ -83,32 +89,32 @@ public class FLIGHT implements FlightUserDataAccessInterface {
     }
 
     private static List<Flight> parseFlights(String jsonResponse) {
-        JSONObject response = new JSONObject(jsonResponse);
-        List<Flight> flightList = new ArrayList<>();
+        final JSONObject response = new JSONObject(jsonResponse);
+        final List<Flight> flightList = new ArrayList<>();
 
-        JSONArray hold = response.getJSONArray("best_flights");
+        final JSONArray hold = response.getJSONArray("best_flights");
         for (int i = 0; i < hold.length(); i++) {
-            JSONObject first = hold.getJSONObject(i);
-            String duration = String.valueOf(first.getInt("total_duration"));
+            final JSONObject first = hold.getJSONObject(i);
+            final String duration = String.valueOf(first.getInt("total_duration"));
 
-            String price = String.valueOf(first.getInt("price"));
+            final String price = String.valueOf(first.getInt("price"));
 
-            JSONArray flights = first.getJSONArray("flights");
+            final JSONArray flights = first.getJSONArray("flights");
             for (int j = 0; j < flights.length(); j++) {
-                JSONObject index1 = flights.getJSONObject(j);
+                // final JSONObject index1 = flights.getJSONObject(j);
             }
 
-            JSONObject index = flights.getJSONObject(flights.length() - 1);
+            final JSONObject index = flights.getJSONObject(flights.length() - 1);
 
-            JSONObject departure_airport = flights.getJSONObject(0).getJSONObject("departure_airport");
-            String departurename = departure_airport.getString("name");
-            String departuretime = departure_airport.getString("time");
+            final JSONObject departureairport = flights.getJSONObject(0).getJSONObject("departure_airport");
+            final String departurename = departureairport.getString("name");
+            final String departuretime = departureairport.getString("time");
 
-            JSONObject arrival_airport = index.getJSONObject("arrival_airport");
-            String arrivalname = arrival_airport.getString("name");
-            String arrivaltime = arrival_airport.getString("time");
+            final JSONObject arrivalairport = index.getJSONObject("arrival_airport");
+            final String arrivalname = arrivalairport.getString("name");
+            final String arrivaltime = arrivalairport.getString("time");
 
-            Flight flight = flightFactory.create(departuretime, arrivaltime, departurename, arrivalname,
+            final Flight flight = flightFactory.create(departuretime, arrivaltime, departurename, arrivalname,
                     duration, price);
             flightList.add(flight);
 
@@ -119,7 +125,7 @@ public class FLIGHT implements FlightUserDataAccessInterface {
 
     // Helper method to convert Map<String, String> to a URL query string
     private static String getParamsString(Map<String, String> parameters) {
-        StringBuilder result = new StringBuilder();
+        final StringBuilder result = new StringBuilder();
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
             try {
                 result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));

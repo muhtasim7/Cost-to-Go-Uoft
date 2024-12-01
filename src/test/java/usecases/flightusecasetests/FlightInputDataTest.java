@@ -1,4 +1,4 @@
-package flightusecasetests;
+package usecases.flightusecasetests;
 
 import org.junit.After;
 import org.junit.Before;

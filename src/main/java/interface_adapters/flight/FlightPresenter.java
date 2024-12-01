@@ -3,7 +3,6 @@ package interface_adapters.flight;
 import interface_adapters.ViewManagerModel;
 import usecases.flight.FlightOutputBoundary;
 import usecases.flight.FlightOutputData;
-import view.ViewManager;
 
 /**
  * The Presenter for the Flight Use Case.
@@ -23,7 +22,6 @@ public class FlightPresenter implements FlightOutputBoundary {
         flightViewModel.getState().setFlights(data.getFlights());
         flightViewModel.firePropertyChanged();
     }
-
 
     @Override
     public void switchToDashboardView() {

@@ -1,9 +1,9 @@
 package usecases.flight;
 
-import entities.Flight;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.Flight;
 
 public class FlightUtils {
 
@@ -19,7 +19,8 @@ public class FlightUtils {
         }
         try {
             return Double.parseDouble(priceStr.replace("$", "").replace(",", ""));
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException exception) {
             return 0.0;
         }
     }
@@ -42,7 +43,7 @@ public class FlightUtils {
      * @return a filtered and sorted list of flights
      */
     public static List<Flight> filterAndSortFlights(List<Flight> flights, boolean ascending) {
-        List<Flight> filteredFlights = new ArrayList<>();
+        final List<Flight> filteredFlights = new ArrayList<>();
 
         // Filter flights with non-zero prices
         for (Flight flight : flights) {
@@ -54,12 +55,12 @@ public class FlightUtils {
         // Sort the filtered list using bubble sort
         for (int i = 0; i < filteredFlights.size() - 1; i++) {
             for (int j = 0; j < filteredFlights.size() - i - 1; j++) {
-                double price1 = getPriceForSorting(filteredFlights.get(j));
-                double price2 = getPriceForSorting(filteredFlights.get(j + 1));
+                final double price1 = getPriceForSorting(filteredFlights.get(j));
+                final double price2 = getPriceForSorting(filteredFlights.get(j + 1));
 
-                if ((ascending && price1 > price2) || (!ascending && price1 < price2)) {
+                if (ascending && price1 > price2 || !ascending && price1 < price2) {
                     // Swap flights
-                    Flight temp = filteredFlights.get(j);
+                    final Flight temp = filteredFlights.get(j);
                     filteredFlights.set(j, filteredFlights.get(j + 1));
                     filteredFlights.set(j + 1, temp);
                 }

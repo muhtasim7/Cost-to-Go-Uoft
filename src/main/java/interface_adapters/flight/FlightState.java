@@ -1,15 +1,16 @@
 package interface_adapters.flight;
 
-import entities.Flight;
 import java.util.ArrayList;
 import java.util.List;
+
+import entities.Flight;
 
 /**
  * The state for the Flight View Model.
  */
 public class FlightState {
     private List<Flight> flights = new ArrayList<>();
-    private Flight selectedFlight; // New field to store the selected flight
+    private Flight selectedFlight;
 
     public List<Flight> getFlights() {
         return flights;
