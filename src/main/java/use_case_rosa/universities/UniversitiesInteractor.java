@@ -7,20 +7,15 @@ import java.util.List;
  */
 
 public class UniversitiesInteractor implements UniversitiesInputBoundary {
-    private final UniversitiesDataAccessInterface universitiesDataAccessObject;
     private final UniversitiesOutputBoundary universitiesPresenter;
 
-    public UniversitiesInteractor(UniversitiesDataAccessInterface universitiesDataAccessInterface,
-                                  UniversitiesOutputBoundary universitiesOutputBoundary) {
-        this.universitiesDataAccessObject = universitiesDataAccessInterface;
+    public UniversitiesInteractor(UniversitiesOutputBoundary universitiesOutputBoundary) {
         this.universitiesPresenter = universitiesOutputBoundary;
     }
     @Override
     public void execute(UniversitiesInputData universitiesInputData) {
-        // implement
         final List<Object> universityrowdata = universitiesInputData.getSelecteduniversityinfo();
         final UniversitiesOutputData universitiesOutputData = new UniversitiesOutputData(universityrowdata, false);
         universitiesPresenter.prepareSuccessView(universitiesOutputData);
-        // TODO: add a line
     }
 }

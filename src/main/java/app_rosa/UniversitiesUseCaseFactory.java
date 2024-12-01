@@ -42,7 +42,7 @@ public final class UniversitiesUseCaseFactory {
 
     // pass this methods parameter to the presenter?
         final UniversitiesOutputBoundary universitiesOutputBoundary = new UniversitiesPresenter(viewManagerModel, universitiesViewModel);
-        final UniversitiesInputBoundary universitiesInteractor = new UniversitiesInteractor(universitiesDataAccessObject, universitiesOutputBoundary);
+        final UniversitiesInputBoundary universitiesInteractor = new UniversitiesInteractor(universitiesOutputBoundary);
         return new UniversitiesController(universitiesInteractor);
     }
 }
