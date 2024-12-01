@@ -1,8 +1,11 @@
 package app;
 
+import entities.Flight;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightController;
 import interface_adapters.flight.FlightPresenter;
+import interface_adapters.flight.FlightSelectedCallback;
+import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
 import usecases.flight.FlightInputBoundary;
 import usecases.flight.FlightInteractor;
@@ -26,18 +29,25 @@ public final class FlightUseCaseFactory {
      * @param flightViewModel the FlightViewModel to inject into the FlightView
      * @param flightUserDataAccess the FlightUserDataAccessInterface to inject into the FlightInteractor
      * @param destination the destination to search flights for
+     * @param state to store chosen flight
      * @return the FlightView created for the provided input classes
      */
     public static FlightView create(
             ViewManagerModel viewManagerModel,
             FlightViewModel flightViewModel,
             FlightUserDataAccessInterface flightUserDataAccess,
-            String destination) {
+            String destination, FlightState state) {
 
         final FlightController flightController = createFlightUseCase(
                 viewManagerModel, flightViewModel, flightUserDataAccess);
 
-        return new FlightView(flightController, flightViewModel, destination);
+        //Anonymous new FlightSelectedCallback() can be replaced with lambda
+        //Anonymous new FlightSelectedCallback() can be replaced with method reference
+        //Make this anonymous inner class a lambda
+        //As IntelliJ recommended
+        FlightSelectedCallback callback = selectedFlight -> state.setSelectedFlight(selectedFlight);
+
+        return new FlightView(flightController, flightViewModel, destination, callback);
     }
 
     /**
@@ -52,14 +62,11 @@ public final class FlightUseCaseFactory {
             FlightViewModel flightViewModel,
             FlightUserDataAccessInterface flightUserDataAccess) {
 
-        // Create Presenter with ViewManagerModel and ViewModel
         final FlightOutputBoundary flightPresenter = new FlightPresenter(flightViewModel, viewManagerModel);
 
-        // Create Interactor with data access object and presenter
         final FlightInputBoundary flightInteractor =
                 new FlightInteractor(flightUserDataAccess, flightPresenter);
 
-        // Return Controller
         return new FlightController(flightInteractor);
     }
 }

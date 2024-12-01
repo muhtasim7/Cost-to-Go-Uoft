@@ -20,20 +20,13 @@ public class FlightPresenter implements FlightOutputBoundary {
 
     @Override
     public void present(FlightOutputData data) {
-        // Update the ViewModel with flight data
         flightViewModel.getState().setFlights(data.getFlights());
         flightViewModel.firePropertyChanged();
     }
 
-    @Override
-    public void handleError(String error) {
-        // Handle errors if needed
-        System.out.println("Error: " + error);
-    }
 
     @Override
     public void switchToDashboardView() {
-        // Switch to the dashboard using ViewManagerModel
         viewManagerModel.setState("dashboardView");
         viewManagerModel.firePropertyChanged();
     }

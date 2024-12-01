@@ -1,5 +1,9 @@
 package entities;
 
+/**
+ * Shows flight with time of departure and arrival, the arrival and departure airports and duration and price of flight
+ * Implementation of Flight interface
+ */
 public class CommonFlight implements Flight {
     private final String departureTime;
     private final String arrivalTime;
@@ -8,6 +12,15 @@ public class CommonFlight implements Flight {
     private final String flightDuration;
     private final String price;
 
+    /**
+     * Makes a new CommonFlight object with the specified details
+     * @param departureTime is the time of departure of the flight
+     * @param arrivalTime is the time the flight arrives at destination
+     * @param departureAirport is the airport from which the plane departs
+     * @param arrivalAirport is the airport at which the airport arrives
+     * @param flightDuration is the total duration of the flight
+     * @param price is the price of the flight
+     */
     public CommonFlight(String departureTime, String arrivalTime, String departureAirport,
                         String arrivalAirport, String flightDuration, String price) {
         this.departureTime = departureTime;
@@ -17,6 +30,7 @@ public class CommonFlight implements Flight {
         this.flightDuration = flightDuration;
         this.price = price;
     }
+
 
     @Override
     public String getDepartureTime() {

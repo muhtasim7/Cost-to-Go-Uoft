@@ -68,9 +68,7 @@ public class FLIGHT implements FlightUserDataAccessInterface { // Class name cha
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() == 200) {
                 // Print the successful response
-               // System.out.println("Response: " + response.body());
                 List<Flight> flights;
-                //System.out.println(response.body());
                 flights = parseFlights(response.body());
                 return flights;
             } else {

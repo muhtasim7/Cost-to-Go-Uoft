@@ -7,6 +7,7 @@ import entities.CommonFlightFactory;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
 import interface_adapters.ViewManagerModel;
+import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
@@ -56,15 +57,16 @@ public class MainWithFile {
         final SignupViewModel signupViewModel = new SignupViewModel();
         final PropertyViewModel propertyViewModel = new PropertyViewModel();
         final FlightViewModel flightViewModel = new FlightViewModel();
+        final FlightState flightState = new FlightState();
 
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\Sanyukta\\IdeaProjects\\Cost-to-Go-Uoft\\Data\\users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("/Users/sanyuktanegi/IdeaProjects/Cost-to-Go-Uoft/Data/users.csv", new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         final FLIGHT flight_flight = new FLIGHT(new CommonFlightFactory());
 
         final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel,propertyViewModel, airbnb, "Toronto");
         views.add(propertyView, "propertyView");
 
-        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver");
+        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
         views.add(flightView, "flightView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,

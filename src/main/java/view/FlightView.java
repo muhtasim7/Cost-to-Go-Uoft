@@ -3,6 +3,7 @@ package view;
 import entities.CommonFlight;
 import entities.Flight;
 import interface_adapters.flight.FlightController;
+import interface_adapters.flight.FlightSelectedCallback;
 import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
 import usecases.flight.FlightUtils;
@@ -19,7 +20,7 @@ public class FlightView extends JPanel {
     private final FlightController flightcontroller;
     private final FlightViewModel viewModel;
 
-    public FlightView(FlightController controller, FlightViewModel viewModel, String city) {
+    public FlightView(FlightController controller, FlightViewModel viewModel, String city, FlightSelectedCallback callback) {
         this.flightcontroller = controller;
         this.viewModel = viewModel;
 
