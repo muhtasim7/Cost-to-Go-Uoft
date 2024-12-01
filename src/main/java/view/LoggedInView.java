@@ -51,7 +51,7 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
                 new JLabel("GPA"), gpaInputField);
         final LabelTextPanel degreeInfo = new LabelTextPanel(new JLabel("Degree"), degreeInputField);
         degreeInputField.addItem("Select degree");
-        degreeInputField.addItem("Undergrad");
+        degreeInputField.addItem("Undergraduate");
         degreeInputField.addItem("Graduate");
         final LabelTextPanel programInfo = new LabelTextPanel(new JLabel("Program"), programInputField);
         String[] faculties = {
