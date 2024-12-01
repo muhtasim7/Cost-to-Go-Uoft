@@ -29,4 +29,8 @@ public class ChangePasswordController {
     public void switchToDashboardView() {
         userChangePasswordUseCaseInteractor.switchToDashboardView();
     }
+    public void switchToLogInView() {
+        userChangePasswordUseCaseInteractor.switchToLogInView();
+    }
+
 }

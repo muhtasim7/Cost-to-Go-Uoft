@@ -93,7 +93,11 @@ public class LoggedInView extends JPanel implements ActionListener, PropertyChan
         buttons.add(goBackButton);
 
 
-        logOut.addActionListener(this);
+        logOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                changePasswordController.switchToLogInView();
+            }
+        });
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
