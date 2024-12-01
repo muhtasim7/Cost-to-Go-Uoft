@@ -81,18 +81,14 @@ public class MainWithFile {
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
         final PropertyViewModel propertyViewModel = new PropertyViewModel();
+        final PropertyState propertyState = new PropertyState();
         final FlightViewModel flightViewModel = new FlightViewModel();
         final FlightState flightState = new FlightState();
-        final PropertyState propertyState = new PropertyState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
 
         final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("/Users/sanyuktanegi/IdeaProjects/Cost-to-Go-Uoft/Data/users.csv", new CommonUserFactory());
-//        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv",
-//                new CommonUserFactory());
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
-                new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
-        final FLIGHT flight_flight = new FLIGHT(new CommonFlightFactory());
+        final FLIGHT flight = new FLIGHT(new CommonFlightFactory());
         // rosa
         final UniversitiesViewModel universitiesViewModel = new UniversitiesViewModel();
         final UniversitiesDataAccessInterface universitiesData = new FileUniversitiesDataAccessObject();
@@ -104,16 +100,16 @@ public class MainWithFile {
 //        views.add(propertyView, "propertyView");
 
 
-
-        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
-        views.add(flightView, "flightView");
+//comment out flgiht stuff
+//        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
+//        views.add(flightView, "flightView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, airbnb, propertyViewModel, propertyState,
+                userDataAccessObject, airbnb, propertyViewModel, propertyState, flight, flightViewModel, flightState,
                 universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
