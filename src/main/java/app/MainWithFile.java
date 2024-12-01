@@ -67,17 +67,17 @@ public class MainWithFile {
 
 
 
-
-        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
-                "Toronto", propertyState);
-        views.add(propertyView, "propertyView");
+//
+//        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
+//                "Toronto", propertyState);
+//        views.add(propertyView, "propertyView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject);
+                userDataAccessObject, airbnb, propertyViewModel, propertyState);
         views.add(dashboardView, dashboardView.getViewName());
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
