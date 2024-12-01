@@ -1,5 +1,6 @@
 package app;
 
+import data_access.FLIGHT;
 import java.awt.CardLayout;
 import java.io.IOException;
 
@@ -10,12 +11,15 @@ import javax.swing.WindowConstants;
 import app_rosa.UniversitiesUseCaseFactory;
 import data_access.FileUserDataAccessObject;
 import data_access.AIRBNB;
+import entities.CommonFlightFactory;
 import data_access_rosa.FileUniversitiesDataAccessObject;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
 import entities.User;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
+import interface_adapters.flight.FlightState;
+import interface_adapters.flight.FlightViewModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryPresenter;
 import interface_adapters.itinerary.ItineraryViewModel;
@@ -25,6 +29,7 @@ import interface_adapters.login.LoginViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
+import usecases.flight.FlightUserDataAccessInterface;
 import view.DashboardView;
 import view.LoggedInView;
 import view.LoginView;
@@ -77,13 +82,13 @@ public class MainWithFile {
         final SignupViewModel signupViewModel = new SignupViewModel();
         final PropertyViewModel propertyViewModel = new PropertyViewModel();
         final PropertyState propertyState = new PropertyState();
+        final FlightViewModel flightViewModel = new FlightViewModel();
+        final FlightState flightState = new FlightState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
 
-//        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv",
-//                new CommonUserFactory());
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
-                new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("/Users/sanyuktanegi/IdeaProjects/Cost-to-Go-Uoft/Data/users.csv", new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
+        final FLIGHT flight = new FLIGHT(new CommonFlightFactory());
         // rosa
         final UniversitiesViewModel universitiesViewModel = new UniversitiesViewModel();
         final UniversitiesDataAccessInterface universitiesData = new FileUniversitiesDataAccessObject();
@@ -95,13 +100,16 @@ public class MainWithFile {
 //        views.add(propertyView, "propertyView");
 
 
+//comment out flgiht stuff
+//        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
+//        views.add(flightView, "flightView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, airbnb, propertyViewModel, propertyState,
+                userDataAccessObject, airbnb, propertyViewModel, propertyState, flight, flightViewModel, flightState,
                 universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
