@@ -102,15 +102,6 @@ public class MainWithFile {
 //                userDataAccessObject);
 //        views.add(itineraryView, itineraryView.getViewName());
 
-        // rosa
-//        final FileUniversitiesDataAccessObject universitiesDataAccessObject = new FileUniversitiesDataAccessObject();
-
-        // rosa: add universities view
-//        final UniversitiesViewModel universitiesViewModel = new UniversitiesViewModel();
-//        LoggedInState loggedInState = new LoggedInState(); //NOTE: this might not work
-//        final UniversitiesView universitiesView = UniversitiesUseCaseFactory.create(viewManagerModel, universitiesViewModel, universitiesDataAccessObject, loggedInViewModel, userDataAccessObject);
-//        views.add(universitiesView, universitiesView.getViewName());
-
         // Set the initial view to be the signup view (this is the view that's visible when the application starts)
         viewManagerModel.setState(signupView.getViewName());
         viewManagerModel.firePropertyChanged();

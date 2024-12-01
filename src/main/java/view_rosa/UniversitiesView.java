@@ -1,19 +1,10 @@
 package view_rosa;
-import com.sun.jdi.connect.Connector;
-import data_access.FileUserDataAccessObject;
-import entities.CommonUser;
-import entities.CommonUserFactory;
 import interface_adapter_rosa.universities.UniversitiesController;
 import interface_adapter_rosa.universities.UniversitiesState;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
 import entities.User;
-import interface_adapters.logged_in.LoggedInState;
-import interface_adapters.logged_in.LoggedInViewModel;
-import interface_adapters.signup.SignupViewModel;
-import jdk.dynalink.beans.StaticClass;
 import use_case_rosa.universities.FilterUniversities;
 import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
-import interface_adapters.logged_in.LoggedInViewModel;
 
 
 import javax.swing.*;
@@ -23,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.security.PublicKey;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
@@ -43,11 +33,6 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
     private UniversitiesController universitiesController; //connect controller later
     private User user; // the current user of the program
 
-    // to track selected row index
-    private int selectedRow = -1;
-
-    // path to the user data file
-//    private final String USER_DATA_FILE = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv";
 
     public UniversitiesView(UniversitiesController controller, UniversitiesViewModel universitiesViewModel, UniversitiesUserDataAccessInterface userDataAccessInterface) {
         this.universitiesController = controller; // controller
@@ -138,11 +123,7 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
         for (Object[] rowData : data) {
             tableModel.addRow(rowData);
         }
-//        // set column widths, scrolling, and look
-//        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-//        JScrollPane scrollPane = new JScrollPane(table);
 
-        //TESTING
         // Enable column resizing
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -173,7 +154,6 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
         // Wrap table in scroll pane
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(800, 400)); // Adjust viewport size
-        //END OF TEST
 
 
         // sorting by university names alphabetically
@@ -202,57 +182,22 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
         selectButton.setFocusPainted(false); // Remove focus border for a cleaner look
         selectButton.setFont(new Font("Arial", Font.BOLD, 14)); // Bold font for better visibility
 
-
         // add table and buttons to panel
         setLayout(new BorderLayout());
         add(scrollPane, BorderLayout.CENTER);
         add(selectButton, BorderLayout.SOUTH);
-
     }
 
     // get the user
     public User getUser() {
         return this.user;
     }
-    // set controller
-//    public void setUniversitiesController(UniversitiesController universitiesController) {
-//        this.universitiesController = universitiesController;
-//    }
 
     // Get selected row's data
     private List<Object> getSelectedRowData() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         Vector<?> rowVector = model.getDataVector().elementAt(table.convertRowIndexToModel(table.getSelectedRow()));
         return new ArrayList<>(rowVector);
-
-
-
-//        public static void main(String[] args) {
-//            // sample data
-//            List<Object[]> data = List.of(
-//                    new Object[]{"Country A", "City A", "University A", "French", "Paid to uni", "Award: whatever", "3.0"},
-//                    new Object[]{"Country A", "City A", "University A", "French", "Paid to uni", "Award: whatever", "3.0"},
-//                    new Object[]{"Country A", "City A", "University A", "French", "Paid to uni", "Award: whatever", "3.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"},
-//                    new Object[]{"Country B", "City B", "University B", "Spanish, English", "Paid to uni", "Award: whatever", "4.0"}
-//
-//            );
-
-        // Create the view model and pass it to the view
-//            UniversitiesViewModel viewModel = new UniversitiesViewModel();
-//            UniversitiesView view = new UniversitiesView(viewModel);
-//            view.createTable(data); // Pass data to the table once
-//
-//            // Set up frame
-//            JFrame frame = new JFrame("Study Abroad Options");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.add(view);
-//            frame.setSize(500, 500);
-//            frame.setVisible(true);
     }
 }
 

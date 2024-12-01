@@ -72,7 +72,7 @@ public class DashboardView extends JPanel {
                 JPanel parentPanel = (JPanel) parent;
                 CardLayout layout = (CardLayout) parentPanel.getLayout();
                 // Add UniversitiesView to the parent panel
-                String universitiesViewName = "universitiesView"; // Unique identifier for UniversitiesView
+                String universitiesViewName = universitiesView.getViewName(); // Unique identifier for UniversitiesView
                 parentPanel.add(universitiesView, universitiesViewName);
 
                 // Switch to UniversitiesView
