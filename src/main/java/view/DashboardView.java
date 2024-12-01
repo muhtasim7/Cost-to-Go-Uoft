@@ -6,6 +6,13 @@ import interface_adapter_rosa.universities.UniversitiesController;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapter_rosa.universities.UniversitiesController;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
+import java.awt.Component;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryViewModel;
@@ -22,6 +29,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+/**
+ * The View for when the user is logged in and in the dashboard.
+ */
 
 public class DashboardView extends JPanel {
     private final JButton updateInfoButton;
@@ -59,7 +69,7 @@ public class DashboardView extends JPanel {
         //
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
+        final JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         updateInfoButton = new JButton("Update Information");
@@ -68,14 +78,14 @@ public class DashboardView extends JPanel {
         itineraryButton = new JButton("Overview");
 
         // Action listener for "Update Information"
-        updateInfoButton.addActionListener(e -> {
+        updateInfoButton.addActionListener(event -> {
             // Navigate to the Change Password view (or another update view)
             viewManagerModel.setState("logged in");
             viewManagerModel.firePropertyChanged();
         });
 
         // Action listener for "Find Program"
-        findProgramButton.addActionListener(e -> {
+        findProgramButton.addActionListener(event -> {
             // Navigate to the program search view or implement the search logic
 //            viewManagerModel.setState("StudyAbroadOptions"); // rosa
 //            viewManagerModel.firePropertyChanged(); // rosa

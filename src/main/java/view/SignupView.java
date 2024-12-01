@@ -1,11 +1,19 @@
 package view;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -15,6 +23,7 @@ import interface_adapters.signup.SignupViewModel;
 /**
  * The View for the Signup Use Case.
  */
+
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "sign up";
 
@@ -32,11 +41,9 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
     private final JTextField emailInputField = new JTextField(20);
 
     private final JButton signUp;
-    private final JButton cancel;
     private final JButton toLogin;
 
     public SignupView(SignupController controller, SignupViewModel signupViewModel) {
-
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
@@ -57,7 +64,7 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         final LabelTextPanel degreeTypeInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.DEGREE_LABEL), degreeInputField);
         degreeInputField.addItem("Select degree");
-        degreeInputField.addItem("Undergrad");
+        degreeInputField.addItem("Undergraduate");
         degreeInputField.addItem("Graduate");
         final LabelTextPanel programInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.PROGRAM_LABAEL), programInputField);
@@ -93,8 +100,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(toLogin);
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
         buttons.add(signUp);
-        cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
-        buttons.add(cancel);
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -126,7 +131,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        cancel.addActionListener(this);
 
         addUsernameListener();
         addPasswordListener();

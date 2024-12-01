@@ -8,8 +8,11 @@ import entities.User;
 public interface ChangePasswordUserDataAccessInterface {
 
     /**
-     * Updates the system to record this user's password.
-     * @param user the user whose password is to be updated
+     * Updates the system to record this user's updated information.
+     *
+     * @param user the user whose information is to be updated
      */
-    void changePassword(User user);
+
+    void changeInformation(User user);
+
 }
