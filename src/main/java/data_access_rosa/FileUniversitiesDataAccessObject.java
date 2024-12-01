@@ -32,7 +32,7 @@ public class FileUniversitiesDataAccessObject implements UniversitiesDataAccessI
                     String[] row = splitCSVLine(line);
                     if (row.length == 8) {
                         // Add row data to the list
-                        data.add(new Object[] {
+                        data.add(new Object[]{
                                 row[0].trim(), // Country
                                 row[1].trim(), // City
                                 row[2].trim(), // University Name
@@ -82,30 +82,4 @@ public class FileUniversitiesDataAccessObject implements UniversitiesDataAccessI
         // Return the array of split values
         return values.toArray(new String[0]);
     }
-
-
-//        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-//            String line;
-//            reader.readLine(); // skip the header row
-//            while ((line = reader.readLine()) != null) {
-//                String[] row = line.split(",");
-//                if (row.length == 8) {
-//                    // Add the data to the list in the desired format
-//                    data.add(new Object[] {
-//                            row[0].trim(), // country
-//                            row[1].trim(), // city
-//                            row[2].trim(), // university name
-//                            row[3].trim(), // language of study
-//                            row[4].trim(), // tuition
-//                            row[5].trim(), // award
-//                            row[7].trim()  // min gpa
-//                    });
-//                } else {
-//                    System.err.println("Malformed row: " + line);
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return data;
-    }
+}
