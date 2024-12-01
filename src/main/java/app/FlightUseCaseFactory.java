@@ -1,6 +1,5 @@
 package app;
 
-import entities.Flight;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightController;
 import interface_adapters.flight.FlightPresenter;
@@ -41,11 +40,12 @@ public final class FlightUseCaseFactory {
         final FlightController flightController = createFlightUseCase(
                 viewManagerModel, flightViewModel, flightUserDataAccess);
 
-        //Anonymous new FlightSelectedCallback() can be replaced with lambda
-        //Anonymous new FlightSelectedCallback() can be replaced with method reference
-        //Make this anonymous inner class a lambda
-        //As IntelliJ recommended
-        FlightSelectedCallback callback = selectedFlight -> state.setSelectedFlight(selectedFlight);
+        // Anonymous new FlightSelectedCallback() can be replaced with lambda
+        // Anonymous new FlightSelectedCallback() can be replaced with method reference
+        // Make this anonymous inner class a lambda
+        // Replace this lambda with method reference 'state::setSelectedFlight'.
+        // As IntelliJ recommended
+        FlightSelectedCallback callback = state::setSelectedFlight;
 
         return new FlightView(flightController, flightViewModel, destination, callback);
     }
