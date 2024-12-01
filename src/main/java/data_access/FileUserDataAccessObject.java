@@ -8,12 +8,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import entities.Property;
 import entities.User;
 import entities.UserFactory;
+import use_case_rosa.universities.UniversitiesDataAccessInterface;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 import usecases.change_password.ChangePasswordUserDataAccessInterface;
+import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.login.LoginUserDataAccessInterface;
 import usecases.signup.SignupUserDataAccessInterface;
 
@@ -22,7 +27,7 @@ import usecases.signup.SignupUserDataAccessInterface;
  */
 public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         LoginUserDataAccessInterface,
-        ChangePasswordUserDataAccessInterface {
+        ChangePasswordUserDataAccessInterface, ItineraryDataAccessInterface, UniversitiesUserDataAccessInterface {
 
     private static final String HEADER = "username,password,gpa,degree,program,language,email";
 
@@ -33,6 +38,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     private final int index4 = 4;
     private final int index5 = 5;
     private final int index6 = 6;
+    private String currentUsername; // rosa
 
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
 
@@ -101,6 +107,7 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         }
     }
 
+
     @Override
     public void save(User user) {
         accounts.put(user.getName(), user);
@@ -113,14 +120,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
-    public void setCurrentUser(String name) {
-
-    }
+    public void setCurrentUser(String name) {this.currentUsername = name;} // rosa
 
     @Override
-    public User getCurrentUser(String name) {
-        return accounts.get(name);
-    }
+    public String getCurrentUser() {
+        return this.currentUsername;} // rosa
 
     @Override
     public boolean existsByName(String identifier) {
@@ -132,6 +136,11 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         // Replace the User object in the map
         accounts.put(user.getName(), user);
         save();
+    }
+
+    @Override
+    public List<Property> getPropertiesForItinerary(String city) throws Exception {
+        return List.of();
     }
 
 }

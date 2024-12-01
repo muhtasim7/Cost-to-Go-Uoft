@@ -37,6 +37,12 @@ public class LoggedInPresenter implements ChangePasswordOutputBoundary {
     }
 
     @Override
+    public void switchToItineraryView() {
+        viewManagerModel.setState("itinerary view");
+        viewManagerModel.firePropertyChanged();
+    }
+
+    @Override
     public void switchToLogInView() {
         viewManagerModel.setState("log in");
         viewManagerModel.firePropertyChanged();

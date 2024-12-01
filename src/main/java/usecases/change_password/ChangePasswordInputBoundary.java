@@ -15,6 +15,7 @@ public interface ChangePasswordInputBoundary {
      */
 
     void switchToDashboardView();
+    void switchToItineraryView();
     /**
      * Switch to the LogIn View Use Case.
      */

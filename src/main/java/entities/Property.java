@@ -1,35 +1,44 @@
 package entities;
 
-public class Property {
-    private final String listingName;
-    private final String avgRatingLocalized;
-    private final String discountedPrice;
-    private final String originalPrice;
-    private final String roomType;
+/**
+ * Represents a generic property with attributes such as name, rating, prices, and room type.
+ * This interface defines the contract for accessing property details.
+ */
+public interface Property {
 
+    /**
+     * Gets the name of the property.
+     *
+     * @return the name of the property
+     */
+    String getName();
 
-    public Property(String listingName, String avgRatingLocalized, String discountedPrice, String originalPrice, String RoomType) {
-        this.listingName = listingName;
-        this.avgRatingLocalized = avgRatingLocalized;
-        this.discountedPrice = discountedPrice;
-        this.originalPrice = originalPrice;
-        this.roomType = RoomType;
-    }
+    /**
+     * Gets the rating of the property.
+     *
+     * @return the rating of the property
+     */
+    String getRating();
 
-    // Getters
-    public String getListingName() { return listingName; }
-    public String getAvgRatingLocalized() { return avgRatingLocalized; }
-    public String getDiscountedPrice() {
-        if (discountedPrice.equals("N/A")) {
-            return "0.0";
-        }
-        return discountedPrice;
-    }
-    public String getOriginalPrice() {
-        if (originalPrice.equals("N/A")) {
-            return "0.0";
-        }
-        return originalPrice;
-    }
-    public String getRoomTye() { return  roomType; }
+    /**
+     * Gets the discounted price of the property.
+     *
+     * @return the discounted price of the property, or "N/A" if not available
+     */
+    String getDiscountedPrice();
+
+    /**
+     * Gets the original price of the property.
+     *
+     * @return the original price of the property, or "N/A" if not available
+     */
+    String getOriginalPrice();
+
+    /**
+     * Gets the type of room associated with the property.
+     * Examples include "Entire Place", "Shared Room", etc.
+     *
+     * @return the room type of the property
+     */
+    String getRoomType();
 }

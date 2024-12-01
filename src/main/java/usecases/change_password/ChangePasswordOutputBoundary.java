@@ -20,6 +20,7 @@ public interface ChangePasswordOutputBoundary {
      */
 
     void switchToDashboardView();
+    void switchToItineraryView();
     /**
      * Swith to the Login View Use Case.
      */
