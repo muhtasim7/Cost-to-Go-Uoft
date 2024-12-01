@@ -1,5 +1,6 @@
 package app;
 
+import entities.Property;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.property.PropertyController;
 import interface_adapters.property.PropertyPresenter;
@@ -38,7 +39,8 @@ public final class PropertyUseCaseFactory {
 
         final PropertyController propertyController = createPropertyUseCase(
                 viewManagerModel, propertyViewModel, propertyUserDataAccess);
-        // Create the callback to update the shared PropertyState
+
+        //IntelJ recommended: "Anonymous new PropertySelectedCallback() can be replaced with referenced"
         PropertySelectedCallback callback = state::setSelectedProperty;
 
         return new PropertyView(propertyController, propertyViewModel, city, callback);
@@ -56,14 +58,11 @@ public final class PropertyUseCaseFactory {
             PropertyViewModel propertyViewModel,
             PropertyUserDataAccessInterface propertyUserDataAccess) {
 
-        // Create the Presenter with the ViewManagerModel and ViewModel
         final PropertyOutputBoundary propertyPresenter = new PropertyPresenter(propertyViewModel, viewManagerModel);
 
-        // Create the Interactor with the data access object and the presenter
         final PropertyInputBoundary propertyInteractor =
                 new PropertyInteractor(propertyUserDataAccess, propertyPresenter);
 
-        // Return the Controller
         return new PropertyController(propertyInteractor);
     }
 }

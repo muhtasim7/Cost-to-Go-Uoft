@@ -5,6 +5,9 @@ import entities.Property;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Utility class for property-related operations, including filtering and sorting properties.
+ */
 public class PropertyUtils {
 
     /**
@@ -51,21 +54,18 @@ public class PropertyUtils {
     public static List<Property> filterAndSortProperties(List<Property> properties, boolean ascending) {
         List<Property> filteredProperties = new ArrayList<>();
 
-        // Filter properties with non-zero prices
         for (Property property : properties) {
             if (getPriceAsDouble(property.getDiscountedPrice()) != 0.0 || getPriceAsDouble(property.getOriginalPrice()) != 0.0) {
                 filteredProperties.add(property);
             }
         }
 
-        // Sort the filtered list using bubble sort
         for (int i = 0; i < filteredProperties.size() - 1; i++) {
             for (int j = 0; j < filteredProperties.size() - i - 1; j++) {
                 double price1 = getPriceForSorting(filteredProperties.get(j));
                 double price2 = getPriceForSorting(filteredProperties.get(j + 1));
 
                 if ((ascending && price1 > price2) || (!ascending && price1 < price2)) {
-                    // Swap properties
                     Property temp = filteredProperties.get(j);
                     filteredProperties.set(j, filteredProperties.get(j + 1));
                     filteredProperties.set(j + 1, temp);

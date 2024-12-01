@@ -69,7 +69,7 @@ public class MainWithFile {
         final PropertyState propertyState = new PropertyState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv",
                 new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         // rosa
