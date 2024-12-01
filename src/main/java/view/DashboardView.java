@@ -1,12 +1,17 @@
 package view;
 
 import entities.Property;
+import interface_adapter_rosa.universities.UniversitiesController;
+import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryViewModel;
+import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.property.PropertySelectedCallback;
 import interface_adapters.property.PropertyState;
 import usecases.itinerary.ItineraryDataAccessInterface;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // rosa import added
+import view_rosa.UniversitiesView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,12 +27,22 @@ public class DashboardView extends JPanel {
     private final ItineraryController itineraryController;
     private final ItineraryViewModel itineraryViewModel;
     private final ItineraryDataAccessInterface userDataAccessObject;
+    private final UniversitiesController universitiesController; //rosa
+    private final UniversitiesViewModel universitiesViewModel; //rosa
+    private final LoggedInState loggedInState; //rosa
+    private final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject; // rosa
 
-    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject) {
+    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject, UniversitiesController universitiesController, UniversitiesViewModel universitiesViewModel, LoggedInState loggedInState, UniversitiesUserDataAccessInterface universitiesUserDataAccessObject) {
         this.viewManagerModel = viewManagerModel;
         this.itineraryController = itineraryController;
         this.itineraryViewModel = itineraryViewModel;
         this.userDataAccessObject = userDataAccessObject;
+        // rosa
+        this.universitiesController = universitiesController;
+        this.universitiesViewModel = universitiesViewModel;
+        this.loggedInState = loggedInState;
+        this.universitiesUserDataAccessObject = universitiesUserDataAccessObject; // Initialize
+        //
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
@@ -48,7 +63,22 @@ public class DashboardView extends JPanel {
         // Action listener for "Find Program"
         findProgramButton.addActionListener(e -> {
             // Navigate to the program search view or implement the search logic
-            System.out.println("Find Program button clicked");
+//            viewManagerModel.setState("StudyAbroadOptions"); // rosa
+//            viewManagerModel.firePropertyChanged(); // rosa
+            // create and display the UniversitiesView when the button is called
+            UniversitiesView universitiesView = new UniversitiesView(universitiesController, universitiesViewModel, universitiesUserDataAccessObject);
+            Container parent = this.getParent();
+            if (parent instanceof JPanel) {
+                JPanel parentPanel = (JPanel) parent;
+                CardLayout layout = (CardLayout) parentPanel.getLayout();
+                // Add UniversitiesView to the parent panel
+                String universitiesViewName = universitiesView.getViewName(); // Unique identifier for UniversitiesView
+                parentPanel.add(universitiesView, universitiesViewName);
+
+                // Switch to UniversitiesView
+                layout.show(parentPanel, universitiesViewName);
+            }
+
         });
 
         // Action listener for "Rent Search"
