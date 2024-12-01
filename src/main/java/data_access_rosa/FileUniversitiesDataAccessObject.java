@@ -1,6 +1,5 @@
 package data_access_rosa;
 
-import entity_rosa.University;
 import use_case_rosa.universities.UniversitiesDataAccessInterface;
 
 import java.io.BufferedReader;
