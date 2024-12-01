@@ -122,10 +122,6 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     @Override
     public void setCurrentUser(String name) {this.currentUsername = name;} // rosa
 
-    @Override
-    public User getCurrentUser(String name) {
-        return null;
-    }
 
     @Override
     public String getCurrentUser() {
