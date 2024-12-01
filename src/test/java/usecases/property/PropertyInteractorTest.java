@@ -1,5 +1,6 @@
 package usecases.property;
 
+import entities.CommonProperty;
 import entities.Property;
 import org.junit.After;
 import org.junit.Before;
@@ -13,77 +14,76 @@ import static org.junit.Assert.*;
 public class PropertyInteractorTest {
 
     private PropertyInteractor interactor;
-    private MockUserDataAccess mockUserDataAccess;
-    private MockOutputBoundary mockPresenter;
+    private TestPropertyUserDataAccess dataAccess;
+    private TestPropertyOutputBoundary outputBoundary;
 
     @Before
     public void setUp() {
-        mockUserDataAccess = new MockUserDataAccess();
-        mockPresenter = new MockOutputBoundary();
-        interactor = new PropertyInteractor(mockUserDataAccess, mockPresenter);
+        dataAccess = new TestPropertyUserDataAccess();
+        outputBoundary = new TestPropertyOutputBoundary();
+        interactor = new PropertyInteractor(dataAccess, outputBoundary);
     }
 
     @After
     public void tearDown() {
         interactor = null;
-        mockUserDataAccess = null;
-        mockPresenter = null;
+        dataAccess = null;
+        outputBoundary = null;
     }
 
     @Test
-    public void testHandle_shouldCallPresenterWithFetchedProperties() throws Exception {
+    public void testHandle_validCity() throws Exception {
         // Arrange
-        mockUserDataAccess.setMockProperties(List.of(new MockProperty("TestProperty")));
+        dataAccess.setMockProperties(List.of(new CommonProperty("TestName", "5 Stars", "$90", "$150", "Entire Place")));
 
         // Act
         interactor.handle(new PropertyInputData("Toronto"));
 
         // Assert
-        assertTrue("Presenter's present method should have been called.", mockPresenter.wasPresentCalled);
-        assertNotNull("Presenter should have received properties.", mockPresenter.receivedOutputData);
-        assertEquals("Expected 1 property.", 1, mockPresenter.receivedOutputData.getProperties().size());
-        assertEquals("TestProperty", mockPresenter.receivedOutputData.getProperties().get(0).getName());
+        assertTrue("Output boundary's present method should have been called.", outputBoundary.wasPresentCalled);
+        assertNotNull("Output data should not be null.", outputBoundary.receivedOutputData);
+        assertEquals("Expected 1 property.", 1, outputBoundary.receivedOutputData.getProperties().size());
+        assertEquals("TestName", outputBoundary.receivedOutputData.getProperties().get(0).getName());
     }
 
     @Test
-    public void testHandle_shouldHandleEmptyResult() throws Exception {
+    public void testHandle_emptyCity() throws Exception {
         // Arrange
-        mockUserDataAccess.setMockProperties(new ArrayList<>()); // No properties
+        dataAccess.setMockProperties(new ArrayList<>()); // Empty properties list
 
         // Act
         interactor.handle(new PropertyInputData("EmptyCity"));
 
         // Assert
-        assertTrue("Presenter's present method should have been called.", mockPresenter.wasPresentCalled);
-        assertNotNull("Presenter should have received output data.", mockPresenter.receivedOutputData);
-        assertTrue("Expected no properties in output.", mockPresenter.receivedOutputData.getProperties().isEmpty());
+        assertTrue("Output boundary's present method should have been called.", outputBoundary.wasPresentCalled);
+        assertNotNull("Output data should not be null.", outputBoundary.receivedOutputData);
+        assertTrue("Expected no properties in the output data.", outputBoundary.receivedOutputData.getProperties().isEmpty());
     }
 
     @Test
-    public void testHandle_shouldThrowExceptionForInvalidCity() {
+    public void testHandle_invalidCityThrowsException() {
         // Arrange
-        mockUserDataAccess.throwExceptionOnSearch = true;
+        dataAccess.throwExceptionOnSearch = true;
 
         // Act & Assert
-        assertThrows("Exception should be thrown for invalid city.",
+        assertThrows("An exception should be thrown for an invalid city.",
                 Exception.class,
                 () -> interactor.handle(new PropertyInputData("InvalidCity")));
 
-        assertFalse("Presenter's present method should not have been called.", mockPresenter.wasPresentCalled);
+        assertFalse("Output boundary's present method should not be called when an exception occurs.", outputBoundary.wasPresentCalled);
     }
 
     @Test
-    public void testSwitchToDashboardView_shouldCallPresenter() {
+    public void testSwitchToDashboardView() {
         // Act
         interactor.switchToDashboardView();
 
         // Assert
-        assertTrue("Presenter's switchToDashboardView method should have been called.",
-                mockPresenter.wasSwitchToDashboardViewCalled);
+        assertTrue("Output boundary's switchToDashboardView method should have been called.", outputBoundary.wasSwitchToDashboardViewCalled);
     }
 
-    // Mock implementation of PropertyUserDataAccessInterface
-    private static class MockUserDataAccess implements PropertyUserDataAccessInterface {
+    // Test implementation for PropertyUserDataAccessInterface
+    private static class TestPropertyUserDataAccess implements PropertyUserDataAccessInterface {
         private List<Property> mockProperties = new ArrayList<>();
         boolean throwExceptionOnSearch = false;
 
@@ -94,14 +94,14 @@ public class PropertyInteractorTest {
         @Override
         public List<Property> searchProperties(String city) throws Exception {
             if (throwExceptionOnSearch) {
-                throw new Exception("Mock Exception");
+                throw new Exception("Test exception for invalid city.");
             }
             return mockProperties;
         }
     }
 
-    // Mock implementation of PropertyOutputBoundary
-    private static class MockOutputBoundary implements PropertyOutputBoundary {
+    // Test implementation for PropertyOutputBoundary
+    private static class TestPropertyOutputBoundary implements PropertyOutputBoundary {
         boolean wasPresentCalled = false;
         boolean wasSwitchToDashboardViewCalled = false;
         PropertyOutputData receivedOutputData;
@@ -113,47 +113,8 @@ public class PropertyInteractorTest {
         }
 
         @Override
-        public void handleError(String error) {
-            // Not used in this test
-        }
-
-        @Override
         public void switchToDashboardView() {
             wasSwitchToDashboardViewCalled = true;
-        }
-    }
-
-    // Mock implementation of Property for testing
-    private static class MockProperty implements Property {
-        private final String name;
-
-        MockProperty(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String getName() {
-            return name;
-        }
-
-        @Override
-        public String getRating() {
-            return null;
-        }
-
-        @Override
-        public String getDiscountedPrice() {
-            return null;
-        }
-
-        @Override
-        public String getOriginalPrice() {
-            return null;
-        }
-
-        @Override
-        public String getRoomType() {
-            return null;
         }
     }
 }

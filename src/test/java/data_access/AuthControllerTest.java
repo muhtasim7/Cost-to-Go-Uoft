@@ -1,8 +1,9 @@
-//package interface_adapters;
+//package controller;
 //
+//import interface_adapters_sim.AuthController;
 //import org.junit.Before;
 //import org.junit.Test;
-//import usecases.AuthService;
+//import service.AuthService;
 //
 //import static org.junit.Assert.*;
 //

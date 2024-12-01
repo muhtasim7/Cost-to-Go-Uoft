@@ -26,12 +26,6 @@ public class PropertyPresenter implements PropertyOutputBoundary {
     }
 
     @Override
-    public void handleError(String error) {
-        // Handle errors if needed
-        System.out.println("Error: " + error);
-    }
-
-    @Override
     public void switchToDashboardView() {
         // Switch to the dashboard using ViewManagerModel
         viewManagerModel.setState("dashboardView");
