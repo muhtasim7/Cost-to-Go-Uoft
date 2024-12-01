@@ -58,6 +58,8 @@ public class UniversitiesView extends JPanel implements ActionListener, Property
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(selectButton)) {
                             final UniversitiesState currentstate = universitiesViewModel.getState();
+                            UniversitiesState.getInstance().setSelectedUniversityData(getSelectedRowData()); //ROSA TEST
+
 
                             universitiesController.execute(getSelectedRowData());
                             {

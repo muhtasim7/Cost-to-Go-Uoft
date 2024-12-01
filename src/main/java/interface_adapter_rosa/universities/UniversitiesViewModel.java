@@ -1,5 +1,7 @@
 package interface_adapter_rosa.universities;
 
+import entity_rosa.University;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -10,6 +12,7 @@ public class UniversitiesViewModel extends ViewModel<UniversitiesState>{
         super("StudyAbroadOptions");
         setState(new UniversitiesState());
     }
+
     // Add listener to observe changes
 //    public void addPropertyChangeListener(PropertyChangeListener listener) {
 //        support.addPropertyChangeListener(listener);
