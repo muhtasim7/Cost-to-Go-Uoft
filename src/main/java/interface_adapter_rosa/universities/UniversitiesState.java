@@ -1,5 +1,7 @@
 package interface_adapter_rosa.universities;
 
+import entity_rosa.University;
+
 import java.util.List;
 
 /**
@@ -7,16 +9,16 @@ import java.util.List;
  */
 public class UniversitiesState {
     // Variable to hold the selected university data
-    private List<Object> selectedUniversityData;
+    private University selectedUniversityData;
     private String universitesError;
 
     // Setter for the selected university
-    public void setSelectedUniversityData(List<Object> selectedUniversity) {
+    public void setSelectedUniversityData(University selectedUniversity) {
         this.selectedUniversityData = selectedUniversity;
     }
 
     // Getter for the selected university
-    public List<Object> getSelectedUniversityData() {
+    public University getSelectedUniversityData() {
         return selectedUniversityData;
     }
 

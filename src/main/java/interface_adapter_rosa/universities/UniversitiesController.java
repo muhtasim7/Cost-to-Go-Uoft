@@ -1,5 +1,6 @@
 package interface_adapter_rosa.universities;
 
+import entity_rosa.University;
 import use_case_rosa.universities.UniversitiesInputBoundary;
 import use_case_rosa.universities.UniversitiesInputData;
 
@@ -19,7 +20,7 @@ public class UniversitiesController {
      * Executes the Universities Use Case
      * @param universityrowdata a list of the data from the selected row from the jtable.
      */
-    public void execute(List<Object> universityrowdata) {
+    public void execute(University universityrowdata) {
         final UniversitiesInputData universitiesInputData = new UniversitiesInputData(universityrowdata);
 
         universitiesUseCaseInteractor.execute(universitiesInputData);

@@ -1,5 +1,7 @@
 package use_case_rosa.universities;
 
+import entity_rosa.University;
+
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public class UniversitiesInteractor implements UniversitiesInputBoundary {
     }
     @Override
     public void execute(UniversitiesInputData universitiesInputData) {
-        final List<Object> universityrowdata = universitiesInputData.getSelecteduniversityinfo();
+        final University universityrowdata = universitiesInputData.getSelecteduniversityinfo();
         final UniversitiesOutputData universitiesOutputData = new UniversitiesOutputData(universityrowdata, false);
         universitiesPresenter.prepareSuccessView(universitiesOutputData);
     }

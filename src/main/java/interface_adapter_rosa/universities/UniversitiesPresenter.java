@@ -1,5 +1,6 @@
 package interface_adapter_rosa.universities;
 
+import entity_rosa.University;
 import interface_adapters.ViewManagerModel;
 import use_case_rosa.universities.UniversitiesOutputBoundary;
 import use_case_rosa.universities.UniversitiesOutputData;
@@ -22,7 +23,7 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
         // add in the next view model
     }
     public void prepareSuccessView(UniversitiesOutputData response) {
-        List<Object> selecteduniversitydata = response.getSelecteduniversity();
+        University selecteduniversitydata = response.getSelecteduniversity();
 
         // updates the universitiesstate
         final UniversitiesState universitiesState = universitiesViewModel.getState();
@@ -31,7 +32,7 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
         this.universitiesViewModel.firePropertyChanged();
 
         // TEST: checking if the university is saved
-        System.out.println(universitiesState.getSelectedUniversityData() + "in the unipresenter file");
+//        System.out.println(universitiesState.getSelectedUniversityData().getCountry() + "in the unipresenter file");
 
         this.universitiesViewModel.setState(universitiesState);
 //        //notify the view model of the update
