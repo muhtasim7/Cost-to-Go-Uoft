@@ -3,8 +3,8 @@ package view;
 import app.FlightUseCaseFactory;
 import app.PropertyUseCaseFactory;
 import entities.Property;
-import interface_adapter_rosa.universities.UniversitiesController;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
+import entity_rosa.University;
+import interface_adapter_rosa.universities.*;
 import interface_adapter_rosa.universities.UniversitiesController;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
 import java.awt.Component;
@@ -28,11 +28,12 @@ import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.property.PropertyUserDataAccessInterface;
 import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // rosa import added
 import view_rosa.UniversitiesView;
-
+import entity_rosa.University;
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.List;
 
 import static javax.swing.JOptionPane.QUESTION_MESSAGE;
 
@@ -148,6 +149,10 @@ public class DashboardView extends JPanel {
         });
 
         itineraryButton.addActionListener(e -> {
+            // ROSA
+            itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
+//            System.out.println(itineraryViewModel.getSelectedUniversities().getCountry() + "in dashboard");
+
             // Create and display the ItineraryView when the button is clicked
             ItineraryView itineraryView = new ItineraryView(itineraryController, itineraryViewModel);
             JFrame itineraryFrame = new JFrame("Itinerary Overview");

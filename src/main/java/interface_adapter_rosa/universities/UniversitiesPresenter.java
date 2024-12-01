@@ -28,6 +28,7 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
         // updates the universitiesstate
         final UniversitiesState universitiesState = universitiesViewModel.getState();
         universitiesState.setSelectedUniversityData(selecteduniversitydata);
+//        universitiesState.addSelectedUniversity(selecteduniversitydata);
         this.universitiesViewModel.setState(universitiesState);
         this.universitiesViewModel.firePropertyChanged();
 
@@ -44,7 +45,7 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
 
     public void prepareFailView(String error) {
         final UniversitiesState universitiesState = universitiesViewModel.getState();
-        universitiesState.setUniversitiesError(error);
+//        universitiesState.setUniversitiesError(error);
         universitiesViewModel.firePropertyChanged();
     }
 }
