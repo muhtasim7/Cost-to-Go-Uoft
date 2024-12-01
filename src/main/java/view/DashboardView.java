@@ -1,15 +1,27 @@
 package view;
 
+import app.PropertyUseCaseFactory;
 import entities.Property;
 import interface_adapter_rosa.universities.UniversitiesController;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
+import interface_adapter_rosa.universities.UniversitiesController;
+import interface_adapter_rosa.universities.UniversitiesViewModel;
+import java.awt.Component;
+
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
 import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.property.PropertySelectedCallback;
 import interface_adapters.property.PropertyState;
+import interface_adapters.property.PropertyViewModel;
 import usecases.itinerary.ItineraryDataAccessInterface;
+import usecases.property.PropertyUserDataAccessInterface;
 import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // rosa import added
 import view_rosa.UniversitiesView;
 
@@ -17,6 +29,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+/**
+ * The View for when the user is logged in and in the dashboard.
+ */
 
 public class DashboardView extends JPanel {
     private final JButton updateInfoButton;
@@ -27,16 +42,25 @@ public class DashboardView extends JPanel {
     private final ItineraryController itineraryController;
     private final ItineraryViewModel itineraryViewModel;
     private final ItineraryDataAccessInterface userDataAccessObject;
+    private final PropertyViewModel propertyViewModel;
+    private final PropertyUserDataAccessInterface airbnb;
+    private final PropertyState propertyState;
     private final UniversitiesController universitiesController; //rosa
     private final UniversitiesViewModel universitiesViewModel; //rosa
     private final LoggedInState loggedInState; //rosa
     private final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject; // rosa
 
-    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject, UniversitiesController universitiesController, UniversitiesViewModel universitiesViewModel, LoggedInState loggedInState, UniversitiesUserDataAccessInterface universitiesUserDataAccessObject) {
+    public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject,
+                         UniversitiesController universitiesController, UniversitiesViewModel universitiesViewModel, LoggedInState loggedInState, UniversitiesUserDataAccessInterface universitiesUserDataAccessObject,
+                PropertyUserDataAccessInterface airbnb,
+                PropertyViewModel propertyViewModel, PropertyState propertyState) {
         this.viewManagerModel = viewManagerModel;
         this.itineraryController = itineraryController;
         this.itineraryViewModel = itineraryViewModel;
         this.userDataAccessObject = userDataAccessObject;
+        this.airbnb = airbnb;
+        this.propertyViewModel = propertyViewModel;
+        this.propertyState = propertyState;
         // rosa
         this.universitiesController = universitiesController;
         this.universitiesViewModel = universitiesViewModel;
@@ -45,7 +69,7 @@ public class DashboardView extends JPanel {
         //
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
+        final JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
         titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         updateInfoButton = new JButton("Update Information");
@@ -54,14 +78,14 @@ public class DashboardView extends JPanel {
         itineraryButton = new JButton("Overview");
 
         // Action listener for "Update Information"
-        updateInfoButton.addActionListener(e -> {
+        updateInfoButton.addActionListener(event -> {
             // Navigate to the Change Password view (or another update view)
             viewManagerModel.setState("logged in");
             viewManagerModel.firePropertyChanged();
         });
 
         // Action listener for "Find Program"
-        findProgramButton.addActionListener(e -> {
+        findProgramButton.addActionListener(event -> {
             // Navigate to the program search view or implement the search logic
 //            viewManagerModel.setState("StudyAbroadOptions"); // rosa
 //            viewManagerModel.firePropertyChanged(); // rosa
@@ -83,8 +107,29 @@ public class DashboardView extends JPanel {
 
         // Action listener for "Rent Search"
         rentSearchButton.addActionListener(e -> {
-            viewManagerModel.setState("propertyView");
-            viewManagerModel.firePropertyChanged();
+            String city = JOptionPane.showInputDialog(this, "Enter city for Airbnb search:", "Rent Search", JOptionPane.QUESTION_MESSAGE);
+
+            if (city != null && !city.trim().isEmpty()) {
+                // Dynamically create PropertyView
+                PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb, city, propertyState);
+
+                // Add PropertyView to the parent container
+                Container parent = this.getParent();
+                if (parent instanceof JPanel) {
+                    JPanel parentPanel = (JPanel) parent;
+                    CardLayout layout = (CardLayout) parentPanel.getLayout();
+
+                    // Add PropertyView dynamically (if not already added)
+                    String propertyViewName = "propertyView"; // Unique identifier
+                    parentPanel.add(propertyView, propertyViewName);
+
+                    // Switch to PropertyView
+                    layout.show(parentPanel, propertyViewName);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "City is required for Rent Search.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         });
 
         itineraryButton.addActionListener(e -> {

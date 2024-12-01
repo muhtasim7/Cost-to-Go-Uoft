@@ -14,7 +14,8 @@ public class SignupInputData {
     private final String program;
     private final String language;
 
-    public SignupInputData(String username, String password, String repeatPassword, String gpa, String degree, String program, String language, String email) {
+    public SignupInputData(String username, String password, String repeatPassword, String gpa, String degree,
+                           String program, String language, String email) {
         this.username = username;
         this.password = password;
         this.repeatPassword = repeatPassword;
@@ -36,9 +37,24 @@ public class SignupInputData {
     public String getRepeatPassword() {
         return repeatPassword;
     }
-    public String getEmail() {return email;}
-    public String getGpa() {return gpa;}
-    public String getDegree() {return degree;}
-    public String getProgram() {return program;}
-    public String getLanguage() {return language;}
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getGpa() {
+        return gpa;
+    }
+
+    public String getDegree() {
+        return degree;
+    }
+
+    public String getProgram() {
+        return program;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
 }

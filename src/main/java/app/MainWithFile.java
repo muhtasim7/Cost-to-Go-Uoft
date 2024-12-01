@@ -1,5 +1,12 @@
 package app;
 
+import java.awt.CardLayout;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
 import app_rosa.UniversitiesUseCaseFactory;
 import data_access.FileUserDataAccessObject;
 import data_access.AIRBNB;
@@ -18,6 +25,11 @@ import interface_adapters.login.LoginViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
+import view.DashboardView;
+import view.LoggedInView;
+import view.LoginView;
+import view.SignupView;
+import view.ViewManager;
 import use_case_rosa.universities.UniversitiesDataAccessInterface;
 import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // Import added
 import usecases.itinerary.ItineraryInputBoundary;
@@ -27,9 +39,6 @@ import usecases.property.PropertyUserDataAccessInterface;
 import view.*;
 import view_rosa.UniversitiesView;
 
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
 
 /**
  * The version of Main with an external database used to persist user data.
@@ -39,6 +48,7 @@ public class MainWithFile {
     /**
      * The main method for starting the program with an external database used to persist user data.
      * @param args input to main
+     * @throws IOException if an I/O error occurs while reading the file
      */
     public static void main(String[] args) throws IOException {
         // Build the main program window, the main panel containing the
@@ -68,8 +78,10 @@ public class MainWithFile {
         final PropertyViewModel propertyViewModel = new PropertyViewModel();
         final PropertyState propertyState = new PropertyState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
-        // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("Data/users.csv",
+
+//        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv",
+//                new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
                 new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         // rosa
@@ -77,21 +89,24 @@ public class MainWithFile {
         final UniversitiesDataAccessInterface universitiesData = new FileUniversitiesDataAccessObject();
         final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject = userDataAccessObject;
 
+//
+//        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
+//                "Toronto", propertyState);
+//        views.add(propertyView, "propertyView");
 
-        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
-                "Toronto", propertyState);
-        views.add(propertyView, "propertyView");
+
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
+                userDataAccessObject, airbnb, propertyViewModel, propertyState,
+                universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
-                loggedInViewModel, userDataAccessObject);
+                loggedInViewModel, userDataAccessObject, signupViewModel);
         views.add(loginView, loginView.getViewName());
 
         final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
