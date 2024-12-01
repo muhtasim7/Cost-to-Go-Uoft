@@ -15,7 +15,7 @@ import java.util.List;
  */
 
 public class FileUniversitiesDataAccessObject implements UniversitiesDataAccessInterface {
-    String file = "src/main/java/data_access_rosa/Cleaned_University_Data.csv";
+    String file = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\src\\main\\java\\data_access_rosa\\Cleaned_University_Data.csv";
 
     public List<Object[]> readUniversities() {
         List<Object[]> data = new ArrayList<>();

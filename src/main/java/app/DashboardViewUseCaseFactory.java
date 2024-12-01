@@ -8,6 +8,8 @@ import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryPresenter;
 import interface_adapters.itinerary.ItineraryViewModel;
+import interface_adapters.property.PropertyState;
+import interface_adapters.property.PropertyViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import use_case_rosa.universities.UniversitiesDataAccessInterface;
@@ -18,22 +20,28 @@ import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // Import
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.itinerary.ItineraryInteractor;
 import usecases.itinerary.ItineraryOutputBoundary;
+import usecases.property.PropertyUserDataAccessInterface;
 import usecases.login.LoginUserDataAccessInterface;
 import view.DashboardView;
 import view_rosa.UniversitiesView;
 
+import static app.ItineraryUseCaseFactory.createItineraryUseCase;
+import static app_rosa.UniversitiesUseCaseFactory.createUniversitiesUseCase;
+
 public final class DashboardViewUseCaseFactory {
 
-    private DashboardViewUseCaseFactory() {
-    }
+    private DashboardViewUseCaseFactory() {}
 
     public static DashboardView create(
             ViewManagerModel viewManagerModel,
             ItineraryViewModel itineraryViewModel,
             ItineraryDataAccessInterface userDataAccessObject,
+            PropertyUserDataAccessInterface airbnb,
+            PropertyViewModel propertyViewModel,
+            PropertyState propertyState,
             UniversitiesViewModel universitiesViewModel,
             UniversitiesDataAccessInterface uniDataAccessObject,
-            UniversitiesUserDataAccessInterface universitiesUserDataAccessObject) {
+            UniversitiesUserDataAccessInterface universitiesUserDataAccessObject){
 
         final ItineraryController itineraryController =
                 createItineraryUseCase(viewManagerModel, itineraryViewModel, userDataAccessObject);
@@ -43,7 +51,7 @@ public final class DashboardViewUseCaseFactory {
                 createUniversitiesUseCase(viewManagerModel,universitiesViewModel, uniDataAccessObject);
 
         // Pass the callback to the DashboardView
-        return new DashboardView(viewManagerModel, itineraryController, itineraryViewModel, userDataAccessObject, universitiesController, universitiesViewModel, new LoggedInState(), universitiesUserDataAccessObject);
+        return new DashboardView(viewManagerModel, itineraryController, itineraryViewModel, userDataAccessObject, universitiesController, universitiesViewModel, new LoggedInState(), universitiesUserDataAccessObject, airbnb, propertyViewModel, propertyState);
     }
 
     private static ItineraryController createItineraryUseCase(

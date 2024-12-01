@@ -11,14 +11,6 @@ public class ItineraryState {
     public ItineraryState(List<Property> properties) {
         this.properties = properties;
     }
-    public ItineraryState() {this.properties = new ArrayList<>();}
 
-    public List<Property> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(List<Property> properties) {
-        this.properties = properties;
-    }
 }
 

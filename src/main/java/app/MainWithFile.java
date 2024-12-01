@@ -69,7 +69,7 @@ public class MainWithFile {
         final PropertyState propertyState = new PropertyState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
         // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("Data/users.csv",
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\users.csv",
                 new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         // rosa
@@ -77,17 +77,18 @@ public class MainWithFile {
         final UniversitiesDataAccessInterface universitiesData = new FileUniversitiesDataAccessObject();
         final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject = userDataAccessObject;
 
-
-        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
-                "Toronto", propertyState);
-        views.add(propertyView, "propertyView");
+//
+//        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
+//                "Toronto", propertyState);
+//        views.add(propertyView, "propertyView");
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
+                userDataAccessObject, airbnb, propertyViewModel, propertyState,
+                universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
