@@ -13,7 +13,7 @@ import java.util.List;
 
 public class AIRBNB implements PropertyRepository {
     //private static final String API_KEY = "f980612bd5msh4536668cad5f89bp1c7ddejsn36d7c9d6b0be";  // Replace with your actual API key
-    private static final String FILE_PATH = "C:\\Users\\muhta\\OneDrive\\Desktop\\UofT\\csc20\\Uoft-to-go\\Cost-to-Go-Uoft\\Data\\jsonformatter.txt";
+    private static final String FILE_PATH = "./Data/jsonformatter.txt";
 
     @Override
     public List<Property> searchProperties(String city) throws Exception {

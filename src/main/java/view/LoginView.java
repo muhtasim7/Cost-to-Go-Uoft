@@ -3,6 +3,8 @@ package view;
 import interface_adapters.login.LoginController;
 import interface_adapters.login.LoginState;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.signup.SignupState;
+import interface_adapters.signup.SignupViewModel;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -66,7 +68,12 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 }
         );
 
-        cancel.addActionListener(this);
+        cancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                loginController.switchToLoginView();
+            }
+        }
+        );
 
         usernameInputField.getDocument().addDocumentListener(new DocumentListener() {
 

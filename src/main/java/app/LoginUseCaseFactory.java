@@ -5,6 +5,7 @@ import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginController;
 import interface_adapters.login.LoginPresenter;
 import interface_adapters.login.LoginViewModel;
+import interface_adapters.signup.SignupViewModel;
 import usecases.login.LoginInputBoundary;
 import usecases.login.LoginInteractor;
 import usecases.login.LoginOutputBoundary;
@@ -33,10 +34,10 @@ public final class LoginUseCaseFactory {
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) {
+            LoginUserDataAccessInterface userDataAccessObject, SignupViewModel signupViewModel) {
 
         final LoginController loginController = createLoginUseCase(viewManagerModel, loginViewModel,
-                                                                   loggedInViewModel, userDataAccessObject);
+                                                                   loggedInViewModel, userDataAccessObject,signupViewModel );
         return new LoginView(loginViewModel, loginController);
 
     }
@@ -45,11 +46,11 @@ public final class LoginUseCaseFactory {
             ViewManagerModel viewManagerModel,
             LoginViewModel loginViewModel,
             LoggedInViewModel loggedInViewModel,
-            LoginUserDataAccessInterface userDataAccessObject) {
+            LoginUserDataAccessInterface userDataAccessObject, SignupViewModel signupViewModel) {
 
         // Notice how we pass this method's parameters to the Presenter.
         final LoginOutputBoundary loginOutputBoundary = new LoginPresenter(viewManagerModel,
-                                                                           loggedInViewModel, loginViewModel);
+                                                                           loggedInViewModel, loginViewModel, signupViewModel);
         final LoginInputBoundary loginInteractor = new LoginInteractor(
                 userDataAccessObject, loginOutputBoundary);
 

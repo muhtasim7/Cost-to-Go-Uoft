@@ -1,5 +1,5 @@
 package interface_adapters;
-
+//
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
