@@ -39,7 +39,7 @@ This application was inspired by our own challenges using the University of Toro
 - **University Selection**: Provides resources for flights and accommodations in the university's city.
 
 - **Flight Recommendations**: Suggests flights tailored to the user's preferences 
-   ![Flight Page](docs/images/flight.png)
+   ![Flight Page](docs/images/flightoptions.png)
 
 - **Accommodation Recommendations**: Provides tailored Airbnb accommodation options.  
   ![Airbnb Page](docs/images/airbnb_page.png)
@@ -142,7 +142,7 @@ This application was inspired by our own challenges using the University of Toro
       ![Airbnb Page](docs/images/airbnb_page.png)
    
     - Select flights.
-      ![Flight Page](docs/images/flight.png)
+      ![Flight Page](docs/images/flightoptions.png)
 
 4. **Generate Itinerary**:  
    Get the final itinerary summarizing your study abroad plans.
