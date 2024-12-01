@@ -13,8 +13,8 @@ public class ChangePasswordInputData {
     private final String language;
     private final String email;
 
-
-    public ChangePasswordInputData(String password, String username, String gpa, String degree, String program, String language, String email) {
+    public ChangePasswordInputData(String password, String username, String gpa, String degree, String program,
+                                   String language, String email) {
         this.password = password;
         this.username = username;
         this.gpa = gpa;
@@ -32,10 +32,24 @@ public class ChangePasswordInputData {
         return username;
     }
 
-    String getGpa() {return gpa;}
-    String getDegree() {return degree;}
-    String getProgram() {return program;}
-    String getLanguage() {return language;}
-    String getEmail() {return email;}
+    String getGpa() {
+        return gpa;
+    }
+
+    String getDegree() {
+        return degree;
+    }
+
+    String getProgram() {
+        return program;
+    }
+
+    String getLanguage() {
+        return language;
+    }
+
+    String getEmail() {
+        return email;
+    }
 
 }

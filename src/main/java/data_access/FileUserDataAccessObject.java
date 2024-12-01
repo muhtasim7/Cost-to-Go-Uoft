@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import entities.User;
 import entities.UserFactory;
@@ -28,6 +29,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     private final File csvFile;
     private final Map<String, Integer> headers = new LinkedHashMap<>();
     private final Map<String, User> accounts = new HashMap<>();
+    private final int index3 = 3;
+    private final int index4 = 4;
+    private final int index5 = 5;
+    private final int index6 = 6;
 
     public FileUserDataAccessObject(String csvPath, UserFactory userFactory) throws IOException {
 
@@ -35,10 +40,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
         headers.put("username", 0);
         headers.put("password", 1);
         headers.put("gpa", 2);
-        headers.put("degree", 3);
-        headers.put("program", 4);
-        headers.put("language", 5);
-        headers.put("email", 6);
+        headers.put("degree", index3);
+        headers.put("program", index4);
+        headers.put("language", index5);
+        headers.put("email", index6);
 
         if (csvFile.length() == 0) {
             save();
@@ -62,11 +67,15 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
                     final String program = String.valueOf(col[headers.get("program")]);
                     final String language = String.valueOf(col[headers.get("language")]);
                     final String email = String.valueOf(col[headers.get("email")]);
-                    final User user = userFactory.create(username, password, gpa, degree, program,language, email);
+                    final User user = userFactory.create(username, password, gpa, degree, program, language, email);
                     accounts.put(username, user);
                 }
             }
         }
+    }
+
+    private String safeString(String value) {
+        return Objects.requireNonNullElse(value, "");
     }
 
     private void save() {
@@ -75,22 +84,22 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
             writer.newLine();
 
             for (User user : accounts.values()) {
-                String line = String.format("%s,%s,%s,%s,%s,%s,%s",
+                final String line = String.format("%s,%s,%s,%s,%s,%s,%s",
                         user.getName(),
                         user.getPassword(),
-                        user.getGpa() != null ? user.getGpa() : "",
-                        user.getDegreeType() != null ? user.getDegreeType() : "",
-                        user.getProgram() != null ? user.getProgram() : "",
-                        user.getLanguage() != null ? user.getLanguage() : "",
-                        user.getEmail());
+                        safeString(user.getGpa()),
+                        safeString(user.getDegreeType()),
+                        safeString(user.getProgram()),
+                        safeString(user.getLanguage()),
+                        safeString(user.getEmail()));
                 writer.write(line);
                 writer.newLine();
             }
-        } catch (IOException ex) {
+        }
+        catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
-
 
     @Override
     public void save(User user) {
@@ -109,8 +118,8 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
-    public String getCurrentUser() {
-        return "";
+    public User getCurrentUser(String name) {
+        return accounts.get(name);
     }
 
     @Override
@@ -119,9 +128,10 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
     }
 
     @Override
-    public void changePassword(User user) {
+    public void changeInformation(User user) {
         // Replace the User object in the map
         accounts.put(user.getName(), user);
         save();
     }
+
 }

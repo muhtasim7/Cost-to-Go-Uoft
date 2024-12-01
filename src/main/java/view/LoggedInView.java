@@ -15,7 +15,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- * The View for when the user is logged into the program.
+ * The View for when the user is updating their information.
  */
 public class LoggedInView extends JPanel implements ActionListener, PropertyChangeListener {
 

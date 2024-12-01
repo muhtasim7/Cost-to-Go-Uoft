@@ -10,7 +10,15 @@ public interface ChangePasswordInputBoundary {
      * @param changePasswordInputData the input data for this use case
      */
     void execute(ChangePasswordInputData changePasswordInputData);
+    /**
+     * Switch to Dashboard View Use Case.
+     */
+
     void switchToDashboardView();
+    /**
+     * Switch to the LogIn View Use Case.
+     */
+
     void switchToLogInView();
 
 }

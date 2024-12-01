@@ -25,6 +25,9 @@ public class LoginController {
 
         loginUseCaseInteractor.execute(loginInputData);
     }
+    /**
+     * Executes the "switch to LoginView" Use Case.
+     */
 
     public void switchToLoginView() {
         loginUseCaseInteractor.switchToLoginView();

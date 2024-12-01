@@ -1,20 +1,23 @@
 package app;
 
+import java.awt.CardLayout;
+import java.io.IOException;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.WindowConstants;
+
 import data_access.FileUserDataAccessObject;
 import entities.CommonUserFactory;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
 import interface_adapters.signup.SignupViewModel;
+import view.DashboardView;
 import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
-import view.DashboardView;
-
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
 
 /**
  * The version of Main with an external database used to persist user data.
@@ -24,6 +27,7 @@ public class MainWithFile {
     /**
      * The main method for starting the program with an external database used to persist user data.
      * @param args input to main
+     * @throws IOException if an I/O error occurs while reading the file
      */
     public static void main(String[] args) throws IOException {
         // Build the main program window, the main panel containing the
@@ -51,8 +55,8 @@ public class MainWithFile {
         final LoggedInViewModel loggedInViewModel = new LoggedInViewModel();
         final SignupViewModel signupViewModel = new SignupViewModel();
 
-        // TODO Task 1.1 in a copy of this file, change this line to use the in-memory DAO.
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("./Data/users.csv",
+                new CommonUserFactory());
 
         final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
                 signupViewModel, userDataAccessObject);
@@ -60,7 +64,6 @@ public class MainWithFile {
 
         final DashboardView dashboardView = new DashboardView(viewManagerModel);
         views.add(dashboardView, dashboardView.getViewName());
-
 
         final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
                 loggedInViewModel, userDataAccessObject, signupViewModel);
