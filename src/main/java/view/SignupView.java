@@ -1,11 +1,19 @@
 package view;
+
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.swing.*;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.BoxLayout;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -15,6 +23,7 @@ import interface_adapters.signup.SignupViewModel;
 /**
  * The View for the Signup Use Case.
  */
+
 public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
     private final String viewName = "sign up";
 
@@ -26,17 +35,15 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
 
     // New fields
     private final JTextField gpaInputField = new JTextField(5);
-    private final JTextField programInputField = new JTextField(20);
-    private final JTextField degreeInputField = new JTextField(15);
+    private final JComboBox<String> programInputField = new JComboBox<>();
+    private final JComboBox<String> degreeInputField = new JComboBox<>();
     private final JTextField languageInputField = new JTextField(20);
     private final JTextField emailInputField = new JTextField(20);
 
     private final JButton signUp;
-    private final JButton cancel;
     private final JButton toLogin;
 
     public SignupView(SignupController controller, SignupViewModel signupViewModel) {
-
         this.signupController = controller;
         this.signupViewModel = signupViewModel;
         signupViewModel.addPropertyChangeListener(this);
@@ -56,8 +63,33 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 new JLabel(SignupViewModel.GPA_LABEL), gpaInputField);
         final LabelTextPanel degreeTypeInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.DEGREE_LABEL), degreeInputField);
+        degreeInputField.addItem("Select degree");
+        degreeInputField.addItem("Undergraduate");
+        degreeInputField.addItem("Graduate");
         final LabelTextPanel programInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.PROGRAM_LABAEL), programInputField);
+        String[] faculties = {
+                "Select faculty",
+                "Applied Science and Engineering",
+                "Arts and Science (St. George)",
+                "Arts and Science (UTM)",
+                "Arts and Science (UTSC)",
+                "Faculty of Information",
+                "Faculty of Law",
+                "Faculty of Music",
+                "John H. Daniels Faculty of Architecture, Landscape and Design",
+                "Kinesiology and Physical Education",
+                "Leslie Dan Faculty of Pharmacy",
+                "Ontario Institute for Studies in Education",
+                "Rotman Commerce",
+                "School of Graduate Studies"
+
+        };
+
+        for (String faculty : faculties) {
+            programInputField.addItem(faculty);
+        }
+
         final LabelTextPanel languageInfo = new LabelTextPanel(
                 new JLabel(SignupViewModel.LANGUAGE_LABEL), languageInputField);
         final LabelTextPanel emailInfo = new LabelTextPanel(
@@ -68,8 +100,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         buttons.add(toLogin);
         signUp = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
         buttons.add(signUp);
-        cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
-        buttons.add(cancel);
 
         signUp.addActionListener(
                 // This creates an anonymous subclass of ActionListener and instantiates it.
@@ -101,7 +131,6 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
                 }
         );
 
-        cancel.addActionListener(this);
 
         addUsernameListener();
         addPasswordListener();
@@ -205,55 +234,19 @@ public class SignupView extends JPanel implements ActionListener, PropertyChange
         });
     }
     private void addDegreeTypeListener() {
-        degreeInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
-                currentState.setDegree(degreeInputField.getText());
-                signupViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-    }
+        degreeInputField.addActionListener(e -> {
+            // Get the currently selected item from the combo box
+            final SignupState currentState = signupViewModel.getState();
+            currentState.setDegree(degreeInputField.getSelectedItem().toString());
+            signupViewModel.setState(currentState);
+        });}
     private void addProgramListener() {
-        programInputField.getDocument().addDocumentListener(new DocumentListener() {
-
-            private void documentListenerHelper() {
-                final SignupState currentState = signupViewModel.getState();
-                currentState.setProgram(programInputField.getText());
-                signupViewModel.setState(currentState);
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                documentListenerHelper();
-            }
-        });
-    }
+        programInputField.addActionListener(e -> {
+            // Get the currently selected item from the combo box
+            final SignupState currentState = signupViewModel.getState();
+            currentState.setProgram(programInputField.getSelectedItem().toString());
+            signupViewModel.setState(currentState);
+        });}
 
     private void addUsernameListener() {
         usernameInputField.getDocument().addDocumentListener(new DocumentListener() {

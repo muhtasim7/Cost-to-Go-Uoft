@@ -10,4 +10,9 @@ public interface LoginInputBoundary {
      * @param loginInputData the input data
      */
     void execute(LoginInputData loginInputData);
+    /**
+     * Switch to the LogIn View Use Case.
+     */
+
+    void switchToLoginView();
 }

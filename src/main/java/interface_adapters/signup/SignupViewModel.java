@@ -11,7 +11,7 @@ public class SignupViewModel extends ViewModel<SignupState> {
     public static final String USERNAME_LABEL = "Choose username";
     public static final String PASSWORD_LABEL = "Choose password";
     public static final String REPEAT_PASSWORD_LABEL = "Enter password again";
-    public static final String PROGRAM_LABAEL = "Write down your program";
+    public static final String PROGRAM_LABAEL = "Choose your program";
     public static final String GPA_LABEL = "Enter your GPA";
     public static final String DEGREE_LABEL = "Choose degree";
     public static final String LANGUAGE_LABEL = "Choose language";

@@ -11,5 +11,7 @@ public class LoggedInViewModel extends ViewModel<LoggedInState> {
         super("logged in");
         setState(new LoggedInState());
     }
-
+//    public LoggedInState getState() { // rosa added this
+//        return (LoggedInState) super.getState();
+//    }
 }

@@ -13,7 +13,8 @@ public class CommonUser implements User {
     private final String gpa;
     private final String language;
 
-    public CommonUser(String name, String password, String gpa, String degree, String program, String langauge, String email) {
+    public CommonUser(String name, String password, String gpa, String degree, String program, String langauge,
+                      String email) {
         this.name = name;
         this.password = password;
 
@@ -53,9 +54,9 @@ public class CommonUser implements User {
     public String getProgram() {
         return this.program;
     }
+
     @Override
-    public String getLanguage(){
+    public String getLanguage() {
         return this.language;
     }
-
 }
