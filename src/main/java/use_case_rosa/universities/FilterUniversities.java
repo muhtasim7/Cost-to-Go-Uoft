@@ -58,10 +58,10 @@ public class FilterUniversities {
 //                isEligible = false;
 //            }
 //
-//            // Check if the user's language matches the university's language of study
-//            if (studyLanguage != null && !studyLanguage.equalsIgnoreCase(language)) {
-//                isEligible = false;
-//            }
+            // Check if the user's language matches the university's language of study
+            if (studyLanguage != null && !studyLanguage.equalsIgnoreCase(language)) {
+                isEligible = false;
+            }
 //
 //            // Check if the user's GPA meets the minimum requirement of the university
 ////            if (minGPA != null) {
@@ -76,14 +76,14 @@ public class FilterUniversities {
 ////                }
 ////            }
 
-            // If all conditions are met, add the university to the filtered list
-            if (isEligible) {
-                filteredUniversities.add(university);
+                // If all conditions are met, add the university to the filtered list
+                if (isEligible) {
+                    filteredUniversities.add(university);
+                }
             }
+            // Return the filtered list
+            System.out.println(user.getName() + user.getGpa() + "checking for null in filter universities");
+            return filteredUniversities;
         }
-        // Return the filtered list
-        System.out.println(user.getName() + user.getGpa() + "checking for null in filter universities");
-        return filteredUniversities;
     }
-}
 

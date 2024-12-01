@@ -67,11 +67,17 @@ public class DashboardView extends JPanel {
 //            viewManagerModel.firePropertyChanged(); // rosa
             // create and display the UniversitiesView when the button is called
             UniversitiesView universitiesView = new UniversitiesView(universitiesController, universitiesViewModel, universitiesUserDataAccessObject);
-            JFrame universitiesFrame = new JFrame();
-            universitiesFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            universitiesFrame.add(universitiesView);
-            universitiesFrame.pack();
-            universitiesFrame.setVisible(true);
+            Container parent = this.getParent();
+            if (parent instanceof JPanel) {
+                JPanel parentPanel = (JPanel) parent;
+                CardLayout layout = (CardLayout) parentPanel.getLayout();
+                // Add UniversitiesView to the parent panel
+                String universitiesViewName = "universitiesView"; // Unique identifier for UniversitiesView
+                parentPanel.add(universitiesView, universitiesViewName);
+
+                // Switch to UniversitiesView
+                layout.show(parentPanel, universitiesViewName);
+            }
 
         });
 

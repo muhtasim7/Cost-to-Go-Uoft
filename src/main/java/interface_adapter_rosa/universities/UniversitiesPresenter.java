@@ -4,6 +4,7 @@ import interface_adapters.ViewManagerModel;
 import use_case_rosa.universities.UniversitiesOutputBoundary;
 import use_case_rosa.universities.UniversitiesOutputData;
 
+import java.awt.*;
 import java.util.List;
 
 /**
@@ -26,18 +27,20 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
         // updates the universitiesstate
         final UniversitiesState universitiesState = universitiesViewModel.getState();
         universitiesState.setSelectedUniversityData(selecteduniversitydata);
+        this.universitiesViewModel.setState(universitiesState);
+        this.universitiesViewModel.firePropertyChanged();
 
         // TEST: checking if the university is saved
         System.out.println(universitiesState.getSelectedUniversityData() + "in the unipresenter file");
 
         this.universitiesViewModel.setState(universitiesState);
-        //notify the view model of the update
-        this.universitiesViewModel.firePropertyChanged();
+//        //notify the view model of the update
+        universitiesViewModel.firePropertyChanged();
         // TODO: On success, switch to the dashboard view.
         this.viewManagerModel.setState("dashboardView");
         this.viewManagerModel.firePropertyChanged();
-
     }
+
     public void prepareFailView(String error) {
         final UniversitiesState universitiesState = universitiesViewModel.getState();
         universitiesState.setUniversitiesError(error);
