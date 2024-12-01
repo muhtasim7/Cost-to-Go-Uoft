@@ -24,7 +24,7 @@ public final class ItineraryUseCaseFactory {
         return new ItineraryView(itineraryController, itineraryViewModel);
     }
 
-    private static ItineraryController createItineraryUseCase(
+    static ItineraryController createItineraryUseCase(
             ViewManagerModel viewManagerModel,
             ItineraryViewModel itineraryViewModel,
             ItineraryDataAccessInterface userDataAccessObject) {

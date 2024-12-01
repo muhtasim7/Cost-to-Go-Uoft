@@ -2,14 +2,21 @@ package view;
 
 import app.PropertyUseCaseFactory;
 import entities.Property;
+import interface_adapter_rosa.universities.UniversitiesController;
+import interface_adapter_rosa.universities.UniversitiesViewModel;
+import interface_adapter_rosa.universities.UniversitiesController;
+import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.itinerary.ItineraryController;
 import interface_adapters.itinerary.ItineraryViewModel;
+import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.property.PropertySelectedCallback;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.property.PropertyUserDataAccessInterface;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // rosa import added
+import view_rosa.UniversitiesView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,10 +35,15 @@ public class DashboardView extends JPanel {
     private final PropertyViewModel propertyViewModel;
     private final PropertyUserDataAccessInterface airbnb;
     private final PropertyState propertyState;
+    private final UniversitiesController universitiesController; //rosa
+    private final UniversitiesViewModel universitiesViewModel; //rosa
+    private final LoggedInState loggedInState; //rosa
+    private final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject; // rosa
 
     public DashboardView(ViewManagerModel viewManagerModel, ItineraryController itineraryController, ItineraryViewModel itineraryViewModel, ItineraryDataAccessInterface userDataAccessObject,
-                         PropertyUserDataAccessInterface airbnb,
-                         PropertyViewModel propertyViewModel, PropertyState propertyState) {
+                         UniversitiesController universitiesController, UniversitiesViewModel universitiesViewModel, LoggedInState loggedInState, UniversitiesUserDataAccessInterface universitiesUserDataAccessObject,
+                PropertyUserDataAccessInterface airbnb,
+                PropertyViewModel propertyViewModel, PropertyState propertyState) {
         this.viewManagerModel = viewManagerModel;
         this.itineraryController = itineraryController;
         this.itineraryViewModel = itineraryViewModel;
@@ -39,6 +51,12 @@ public class DashboardView extends JPanel {
         this.airbnb = airbnb;
         this.propertyViewModel = propertyViewModel;
         this.propertyState = propertyState;
+        // rosa
+        this.universitiesController = universitiesController;
+        this.universitiesViewModel = universitiesViewModel;
+        this.loggedInState = loggedInState;
+        this.universitiesUserDataAccessObject = universitiesUserDataAccessObject; // Initialize
+        //
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JLabel titleLabel = new JLabel("Welcome to Your Dashboard");
@@ -59,7 +77,22 @@ public class DashboardView extends JPanel {
         // Action listener for "Find Program"
         findProgramButton.addActionListener(e -> {
             // Navigate to the program search view or implement the search logic
-            System.out.println("Find Program button clicked");
+//            viewManagerModel.setState("StudyAbroadOptions"); // rosa
+//            viewManagerModel.firePropertyChanged(); // rosa
+            // create and display the UniversitiesView when the button is called
+            UniversitiesView universitiesView = new UniversitiesView(universitiesController, universitiesViewModel, universitiesUserDataAccessObject);
+            Container parent = this.getParent();
+            if (parent instanceof JPanel) {
+                JPanel parentPanel = (JPanel) parent;
+                CardLayout layout = (CardLayout) parentPanel.getLayout();
+                // Add UniversitiesView to the parent panel
+                String universitiesViewName = universitiesView.getViewName(); // Unique identifier for UniversitiesView
+                parentPanel.add(universitiesView, universitiesViewName);
+
+                // Switch to UniversitiesView
+                layout.show(parentPanel, universitiesViewName);
+            }
+
         });
 
         // Action listener for "Rent Search"
