@@ -1,5 +1,6 @@
 package app;
 
+import entities.Property;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.property.PropertyController;
 import interface_adapters.property.PropertyPresenter;
@@ -38,8 +39,13 @@ public final class PropertyUseCaseFactory {
 
         final PropertyController propertyController = createPropertyUseCase(
                 viewManagerModel, propertyViewModel, propertyUserDataAccess);
-        // Create the callback to update the shared PropertyState
-        PropertySelectedCallback callback = state::setSelectedProperty;
+
+        PropertySelectedCallback callback = new PropertySelectedCallback() {
+            @Override
+            public void onPropertySelected(Property selectedProperty) {
+                state.setSelectedProperty(selectedProperty);
+            }
+        };
 
         return new PropertyView(propertyController, propertyViewModel, city, callback);
     }
