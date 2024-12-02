@@ -1,4 +1,4 @@
-package flightusecasetests;
+package usecases.flightusecasetests;
 
 import entities.CommonFlight;
 import entities.Flight;
@@ -42,7 +42,7 @@ public class FlightInteractorTest {
         assertTrue("Output boundary's present method should have been called.", flightOutputBoundary.wasPresentCalled);
         assertNotNull("Output data should not be null.", flightOutputBoundary.receivedOutputData.getFlights());
         assertEquals("Expected 1 flight.", 1, flightOutputBoundary.receivedOutputData.getFlights().size());
-        assertEquals("departureTime", flightOutputBoundary.receivedOutputData.getFlights().get(0).getDepartureTime());
+        assertEquals("2025-01-01 08:30", flightOutputBoundary.receivedOutputData.getFlights().get(0).getDepartureTime());
     }
 
     @Test

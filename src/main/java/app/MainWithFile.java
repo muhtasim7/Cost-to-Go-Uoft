@@ -84,7 +84,7 @@ public class MainWithFile {
         final PropertyState propertyState = new PropertyState();
         final FlightViewModel flightViewModel = new FlightViewModel();
         final FlightState flightState = new FlightState();
-        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
+        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState, flightState);
 
         final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("Data/users.csv", new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
@@ -100,7 +100,6 @@ public class MainWithFile {
 //        views.add(propertyView, "propertyView");
 
 
-//comment out flgiht stuff
 //        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
 //        views.add(flightView, "flightView");
 

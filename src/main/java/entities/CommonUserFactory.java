@@ -10,4 +10,5 @@ public class CommonUserFactory implements UserFactory {
                        String email) {
         return new CommonUser(name, password, gpa, degree, program, language, email);
     }
+
 }
