@@ -7,7 +7,6 @@ import java.awt.GridLayout;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-import javax.rmi.ssl.SslRMIClientSocketFactory;
 import javax.swing.*;
 
 import entities.Flight;
@@ -26,9 +25,8 @@ import interface_adapters.property.PropertyState;
  * university details, and flight details in a scrollable panel.
  * The view is updated whenever there is a change in the itinerary's state, reflecting the selected property,
  * university, and flight details through panels that show relevant information.
- * <p>The view listens to changes in the {@code PropertyState} from the model via the {@link PropertyChangeListener}
- * interface and reflects these changes in the UI.</p>
- *
+ * The view listens to changes in the {@code PropertyState} from the model via the {@link PropertyChangeListener}
+ * interface and reflects these changes in the UI.
  */
 public class ItineraryView extends JPanel implements PropertyChangeListener {
 
@@ -41,13 +39,20 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
 
     private final Font regularFont = new Font("Apple LiGothic", Font.PLAIN, 20);
     private final Font boldFont = new Font("Apple LiGothic", Font.BOLD, 30);
+    private final Color yellowColor = new Color(255, 191, 71);
+    private final Color blueColor = new Color(159, 224, 229);
+    private final Color pinkColor = new Color(235, 194, 235);
+    private final Color greenColor = new Color(190, 211, 115);
+    private final GridLayout propertyGridLayout = new GridLayout(6, 1);
+    private final GridLayout universityGridLayout = new GridLayout(7, 1);
+    private final GridLayout flightGridLayout = new GridLayout(6, 1);
 
     /**
      * Constructs an {@code ItineraryView} with the given {@code ItineraryController} and {@code ItineraryViewModel}.
      * Sets up the layout and initializes the view components such as the title and property details panels.
      *
      * @param itineraryController the controller that handles the interaction between the view and the model
-     * @param viewModel the model that holds the current state of the itinerary
+     * @param viewModel           the model that holds the current state of the itinerary
      */
     public ItineraryView(ItineraryController itineraryController, ItineraryViewModel viewModel) {
         this.itineraryController = itineraryController;
@@ -58,7 +63,7 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         // Title panel setup
         final JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BorderLayout());
-        titlePanel.setBackground(new Color(255, 191, 71));
+        titlePanel.setBackground(yellowColor);
 
         final JLabel titleLabel = new JLabel("Your Itinerary");
         titleLabel.setFont(boldFont);
@@ -75,6 +80,17 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
     }
 
     /**
+     * Retrieves the value from the given object, or returns a default value if the object is null.
+     * This method is useful for handling null values gracefully and ensuring that a fallback value is provided.
+     *
+     * @param value        the object to retrieve the value from
+     * @return the value of the object if it's not null, otherwise returns the default value
+     */
+    public String getValueOrDefault(String value) {
+        return value != null ? value : "n/a";
+    }
+
+    /**
      * Creates a panel that displays the details of a given property.
      *
      * @param property the property whose details are to be displayed
@@ -82,14 +98,14 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
      */
     private JPanel createPropertyPanel(Property property) {
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1));
-        panel.setBackground(new Color(159, 224, 229));
+        panel.setLayout(propertyGridLayout);
+        panel.setBackground(blueColor);
 
-        final String name = property.getName() != null ? property.getName() : "n/a";
-        final String discountPrice = property.getDiscountedPrice() != null ? property.getDiscountedPrice() : "n/a";
-        final String originalPrice = property.getOriginalPrice() != null ? property.getOriginalPrice() : "n/a";
-        final String rating = property.getRating() != null ? property.getRating() : "n/a";
-        final String roomType = property.getRoomType() != null ? property.getRoomType() : "n/a";
+        final String name = getValueOrDefault(property.getName());
+        final String discountPrice = getValueOrDefault(property.getDiscountedPrice());
+        final String originalPrice = getValueOrDefault(property.getOriginalPrice());
+        final String rating = getValueOrDefault(property.getRating());
+        final String roomType = getValueOrDefault(property.getRoomType());
 
         final JLabel rentalLabel = new JLabel("Rental Details:");
         rentalLabel.setFont(boldFont);
@@ -127,15 +143,15 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
      */
     private JPanel createUniversityDetailsPanel(University university) {
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(7, 1));
-        panel.setBackground(new Color(235, 194, 235));
+        panel.setLayout(universityGridLayout);
+        panel.setBackground(pinkColor);
 
-        final String country = university.getCountry() != null ? university.getCountry() : "n/a";
-        final String city = university.getCity() != null ? university.getCity() : "n/a";
-        final String name = university.getUniversityName() != null ? university.getUniversityName() : "n/a";
-        final String language = university.getLanguage_of_study() != null ? university.getLanguage_of_study() : "n/a";
-        final String programFee = university.getTuition() != null ? university.getTuition() : "n/a";
-        final String minimumGpa = university.getMinimum_gpa() != null ? university.getMinimum_gpa() : "n/a";
+        final String country = getValueOrDefault(university.getCountry());
+        final String city = getValueOrDefault(university.getCity());
+        final String name = getValueOrDefault(university.getUniversityName());
+        final String language = getValueOrDefault(university.getLanguage_of_study());
+        final String programFee = getValueOrDefault(university.getTuition());
+        final String minimumGpa = getValueOrDefault(university.getMinimum_gpa());
 
         final JLabel universityLabel = new JLabel("University Details:");
         universityLabel.setFont(boldFont);
@@ -178,14 +194,14 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
      */
     private JPanel createFlightDetailsPanel(Flight flight) {
         final JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(6, 1));
-        panel.setBackground(new Color(190, 211, 115));
+        panel.setLayout(flightGridLayout);
+        panel.setBackground(greenColor);
 
-        final String departureTime = flight.getDepartureTime() != null ? flight.getDepartureTime() : "n/a";
-        final String arrivalTime = flight.getArrivalTime() != null ? flight.getArrivalTime() : "n/a";
-        final String arrivalAirport = flight.getArrivalAirport() != null ? flight.getArrivalAirport() : "n/a";
-        final String flightDuration = flight.getFlightDuration() != null ? flight.getFlightDuration() : "n/a";
-        final String price = flight.getPrice() != null ? flight.getPrice() : "n/a";
+        final String departureTime = getValueOrDefault(flight.getDepartureTime());
+        final String arrivalTime = getValueOrDefault(flight.getArrivalTime());
+        final String arrivalAirport = getValueOrDefault(flight.getArrivalAirport());
+        final String flightDuration = getValueOrDefault(flight.getFlightDuration());
+        final String price = getValueOrDefault(flight.getPrice());
 
         final JLabel flightLabel = new JLabel("Flight Details:");
         flightLabel.setFont(boldFont);
@@ -214,17 +230,26 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
 
         return panel;
     }
+
     /**
      * Updates the itinerary by setting up property, university, and flight details in the view.
+     * This method updates the `propertiesPanel` with selected property, flight, and university information
+     * based on the provided state objects. It will remove all existing components from the panel before
+     * adding the updated details.
      *
-     * @param propertyState the current state of the property
-       ADD BACK UNIVERSITY AFTER !!!!!!!!
+     * @param propertyState      the current state of the property, used to retrieve the selected property
+     * @param itineraryViewModel the model holding itinerary data, used to update university details
+     * @param flightstate        the current state of the flight, used to retrieve the selected flight
      */
-    private void updateItinerary(PropertyState propertyState, ItineraryViewModel itineraryViewModel, FlightState flightstate) {
+
+    private void updateItinerary(PropertyState propertyState, ItineraryViewModel itineraryViewModel,
+                                 FlightState flightstate) {
         propertiesPanel.removeAll();
 
-        Property selectedProperty = viewModel.getSelectedProperty();
-        Flight selectedFlight = viewModel.getSelectedFlight();
+        final Property selectedProperty = viewModel.getSelectedProperty();
+        final Flight selectedFlight = viewModel.getSelectedFlight();
+        itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
+        final University selectedUniversity = itineraryViewModel.getSelectedUniversities();
 
         if (selectedProperty != null) {
             propertiesPanel.add(createPropertyPanel(selectedProperty));
@@ -232,11 +257,6 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
         if (selectedFlight != null) {
             propertiesPanel.add(createFlightDetailsPanel(selectedFlight));
         }
-        if (selectedProperty == null) {
-            System.out.print("Hello sim");
-        }
-        itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
-        University selectedUniversity = itineraryViewModel.getSelectedUniversities();
         if (selectedUniversity != null) {
             propertiesPanel.add(createUniversityDetailsPanel(selectedUniversity));
         }
@@ -246,16 +266,8 @@ public class ItineraryView extends JPanel implements PropertyChangeListener {
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//        if ("state".equals(evt.getPropertyName())) {
-//            propertyState = (PropertyState) evt.getNewValue();
-////        } else if ("selectedUniversity".equals(evt.getPropertyName())) {
-////            universitiesState = (UniversitiesState) evt.getNewValue();
-//        } else if ("selectedFlight".equals(evt.getPropertyName())) {
-//            flightState = (FlightState) evt.getNewValue();
-//        }
         if ("state".equals(evt.getPropertyName())) {
             updateItinerary(propertyState, viewModel, flightState);
         }
-
     }
 }

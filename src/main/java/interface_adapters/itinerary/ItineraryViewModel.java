@@ -1,18 +1,16 @@
 package interface_adapters.itinerary;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import entities.Flight;
-import entities.Itinerary;
 import entities.Property;
 import entity_rosa.University;
 import interface_adapter_rosa.universities.UniversitiesState;
-import entity_rosa.University;
+import interface_adapters.flight.FlightState;
 import interface_adapters.property.PropertyState;
 import usecases.itinerary.ItineraryOutputData;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.util.List;
 
-import interface_adapters.flight.FlightState;
 /**
  * ViewModel for managing and updating the itinerary state.
  * This class acts as an intermediary between the UI and the underlying data model.
@@ -20,15 +18,16 @@ import interface_adapters.flight.FlightState;
 public class ItineraryViewModel {
     private ItineraryOutputData state;
     private final PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-    private PropertyState propertyState;
+    private final PropertyState propertyState;
     private University selectedUniversity;
     private UniversitiesState universitiesState;
-    private FlightState flightState;
+    private final FlightState flightState;
 
     /**
-     * Constructs an ItineraryViewModel with the given PropertyState.
+     * Constructs an ItineraryViewModel with the given PropertyState and FlightState.
      *
      * @param propertyState the initial state of the properties
+     * @param flightState the initial state of the flights
      */
     public ItineraryViewModel(PropertyState propertyState, FlightState flightState) {
         this.propertyState = propertyState;
@@ -88,17 +87,34 @@ public class ItineraryViewModel {
      * @param listener the PropertyChangeListener to be removed
      */
     public void removePropertyChangeListener(PropertyChangeListener listener) {
-
+        pcs.removePropertyChangeListener(listener);
     }
 
+    /**
+     * Sets the selected university for the itinerary.
+     *
+     * @param selectedUniversity the selected university
+     */
     public void setSelectedUniversities(University selectedUniversity) {
         this.selectedUniversity = selectedUniversity;
     }
+
+    /**
+     * Gets the currently selected university.
+     *
+     * @return the selected university
+     */
     public University getSelectedUniversities() {
         return selectedUniversity;
     }
-//Javadocs
+
+    /**
+     * Gets the currently selected flight from the FlightState.
+     *
+     * @return the selected flight
+     */
     public Flight getSelectedFlight() {
         return flightState.getSelectedFlight();
     }
 }
+
