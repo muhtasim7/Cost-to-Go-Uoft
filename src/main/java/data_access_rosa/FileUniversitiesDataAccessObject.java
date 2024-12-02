@@ -16,6 +16,7 @@ import java.util.List;
  */
 
 public class FileUniversitiesDataAccessObject implements UniversitiesDataAccessInterface {
+
     String file = "./Data/Cleaned_University_Data.csv";
 
     public List<University> readUniversities() {
