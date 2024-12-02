@@ -86,7 +86,7 @@ public class MainWithFile {
         final FlightState flightState = new FlightState();
         final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState);
 
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("/Users/sanyuktanegi/IdeaProjects/Cost-to-Go-Uoft/Data/users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("Data/users.csv", new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         final FLIGHT flight = new FLIGHT(new CommonFlightFactory());
         // rosa
