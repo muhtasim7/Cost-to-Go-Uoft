@@ -1,13 +1,11 @@
 package interface_adapters.itinerary;
 
-import entities.Itinerary;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 import interface_adapters.property.PropertyState;
 import usecases.itinerary.ItineraryOutputData;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.util.List;
 
 public class ItineraryViewModel {
     private ItineraryOutputData state;

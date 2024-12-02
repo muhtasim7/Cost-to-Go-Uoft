@@ -1,10 +1,9 @@
-package data_access_rosa;
+package data_access;
 
-import entity_rosa.University;
-import use_case_rosa.universities.UniversitiesDataAccessInterface;
+import entities.University;
+import usecases.universities.UniversitiesDataAccessInterface;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;

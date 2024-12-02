@@ -1,12 +1,9 @@
-package interface_adapter_rosa.universities;
+package interface_adapters.universities;
 
-import entity_rosa.University;
+import entities.University;
 import interface_adapters.ViewManagerModel;
-import use_case_rosa.universities.UniversitiesOutputBoundary;
-import use_case_rosa.universities.UniversitiesOutputData;
-
-import java.awt.*;
-import java.util.List;
+import usecases.universities.UniversitiesOutputBoundary;
+import usecases.universities.UniversitiesOutputData;
 
 /**
  * The Presenter for the Universities Use Case.

@@ -1,9 +1,7 @@
 package app;
 
-import app_rosa.UniversitiesUseCaseFactory;
-import interface_adapter_rosa.universities.UniversitiesController;
-import interface_adapter_rosa.universities.UniversitiesPresenter;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
+import interface_adapters.universities.UniversitiesController;
+import interface_adapters.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
@@ -13,23 +11,14 @@ import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.logged_in.LoggedInState;
-import interface_adapters.logged_in.LoggedInViewModel;
-import use_case_rosa.universities.UniversitiesDataAccessInterface;
-import use_case_rosa.universities.UniversitiesInputBoundary;
-import use_case_rosa.universities.UniversitiesInteractor;
-import use_case_rosa.universities.UniversitiesOutputBoundary;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // Import added
+import usecases.universities.UniversitiesDataAccessInterface;
+import usecases.universities.UniversitiesUserDataAccessInterface; // Import added
 import usecases.flight.FlightUserDataAccessInterface;
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.itinerary.ItineraryInteractor;
 import usecases.itinerary.ItineraryOutputBoundary;
 import usecases.property.PropertyUserDataAccessInterface;
-import usecases.login.LoginUserDataAccessInterface;
 import view.DashboardView;
-import view_rosa.UniversitiesView;
-
-import static app.ItineraryUseCaseFactory.createItineraryUseCase;
-import static app_rosa.UniversitiesUseCaseFactory.createUniversitiesUseCase;
 
 public final class DashboardViewUseCaseFactory {
 

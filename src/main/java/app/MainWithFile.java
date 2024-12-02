@@ -8,41 +8,29 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import app_rosa.UniversitiesUseCaseFactory;
 import data_access.FileUserDataAccessObject;
 import data_access.AIRBNB;
 import entities.CommonFlightFactory;
-import data_access_rosa.FileUniversitiesDataAccessObject;
+import data_access.FileUniversitiesDataAccessObject;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
-import entities.User;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
+import interface_adapters.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
-import interface_adapters.itinerary.ItineraryController;
-import interface_adapters.itinerary.ItineraryPresenter;
 import interface_adapters.itinerary.ItineraryViewModel;
-import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.logged_in.LoggedInViewModel;
 import interface_adapters.login.LoginViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
-import usecases.flight.FlightUserDataAccessInterface;
 import view.DashboardView;
 import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
-import use_case_rosa.universities.UniversitiesDataAccessInterface;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface; // Import added
-import usecases.itinerary.ItineraryInputBoundary;
-import usecases.itinerary.ItineraryInteractor;
-import usecases.itinerary.ItineraryOutputBoundary;
-import usecases.property.PropertyUserDataAccessInterface;
-import view.*;
-import view_rosa.UniversitiesView;
+import usecases.universities.UniversitiesDataAccessInterface;
+import usecases.universities.UniversitiesUserDataAccessInterface; // Import added
 
 
 /**

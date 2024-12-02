@@ -1,9 +1,6 @@
-package interface_adapter_rosa.universities;
+package interface_adapters.universities;
 
-import entity_rosa.University;
-
-import java.util.ArrayList;
-import java.util.List;
+import entities.University;
 
 /**
  * The state for the universities view model.

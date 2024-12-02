@@ -1,14 +1,11 @@
-package use_case_rosa.universities;
+package usecases.universities;
 
-import data_access_rosa.FileUniversitiesDataAccessObject;
-import entities.CommonUser;
+import data_access.FileUniversitiesDataAccessObject;
 import entities.User;
-import entity_rosa.University;
+import entities.University;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Implements the filtering logic for the universities based on the user info.
