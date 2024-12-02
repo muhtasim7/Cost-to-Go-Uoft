@@ -39,6 +39,7 @@ public class ItineraryPresenter implements ItineraryOutputBoundary {
      */
     @Override
     public void presentItinerary(ItineraryOutputData outputData) {
+        ItineraryState itineraryState = new ItineraryState(outputData.getProperties(), outputData.getUniversities(), outputData.getFlights());
         // Set the ItineraryState in the ViewModel
         viewManagerModel.setState(viewManagerModel.getState());
     }
