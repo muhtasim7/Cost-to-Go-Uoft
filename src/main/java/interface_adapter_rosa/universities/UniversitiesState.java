@@ -14,7 +14,7 @@ public class UniversitiesState {
     private String universitesError;
     private static UniversitiesState instance;
 
-    UniversitiesState() {
+    public UniversitiesState() {
     }
 
     public static synchronized UniversitiesState getInstance() {

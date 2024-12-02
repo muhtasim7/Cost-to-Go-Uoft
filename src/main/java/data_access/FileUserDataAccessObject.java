@@ -1,5 +1,7 @@
 package data_access;
 
+import entities.Flight;
+import entity_rosa.University;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,7 +17,6 @@ import java.util.Objects;
 import entities.Property;
 import entities.User;
 import entities.UserFactory;
-import use_case_rosa.universities.UniversitiesDataAccessInterface;
 import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 import usecases.change_password.ChangePasswordUserDataAccessInterface;
 import usecases.itinerary.ItineraryDataAccessInterface;
@@ -145,6 +146,16 @@ public class FileUserDataAccessObject implements SignupUserDataAccessInterface,
 
     @Override
     public List<Property> getPropertiesForItinerary(String city) throws Exception {
+        return List.of();
+    }
+
+    @Override
+    public List<University> getUniversitiesForItinerary(University universities) throws Exception {
+        return List.of();
+    }
+
+    @Override
+    public List<Flight> getFlightsForItinerary(Flight flight) throws Exception {
         return List.of();
     }
 

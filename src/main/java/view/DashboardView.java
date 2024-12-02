@@ -90,7 +90,7 @@ public class DashboardView extends JPanel {
         updateInfoButton = new JButton("Update Information");
         findProgramButton = new JButton("Find University");
         rentSearchButton = new JButton("Rent Search");
-        itineraryButton = new JButton("Overview");
+        itineraryButton = new JButton("Itinerary");
         flightSearchButton = new JButton("Flight Search");
 
         // Action listener for "Update Information"
@@ -151,7 +151,7 @@ public class DashboardView extends JPanel {
         itineraryButton.addActionListener(e -> {
             // ROSA
             itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
-//            System.out.println(itineraryViewModel.getSelectedUniversities().getCountry() + "in dashboard");
+            System.out.println(itineraryViewModel.getSelectedUniversities().getCountry() + "in dashboard");
 
             // Create and display the ItineraryView when the button is clicked
             ItineraryView itineraryView = new ItineraryView(itineraryController, itineraryViewModel);
