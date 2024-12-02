@@ -1,4 +1,4 @@
-package flightentitiestest;
+package entities.flightentitiestest;
 
 import entities.CommonFlight;
 import org.junit.After;

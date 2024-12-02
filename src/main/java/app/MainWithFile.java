@@ -100,7 +100,6 @@ public class MainWithFile {
 //        views.add(propertyView, "propertyView");
 
 
-//comment out flgiht stuff
 //        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
 //        views.add(flightView, "flightView");
 

@@ -1,4 +1,4 @@
-package flightusecasetests;
+package usecases.flightusecasetests;
 
 import entities.CommonFlight;
 import entities.Flight;
