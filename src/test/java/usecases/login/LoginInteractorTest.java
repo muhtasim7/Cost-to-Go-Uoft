@@ -4,7 +4,14 @@ import data_access.FileUserDataAccessObject;
 import entities.CommonUserFactory;
 import entities.User;
 import entities.UserFactory;
+import interface_adapters.ViewManagerModel;
+import interface_adapters.ViewModel;
+import interface_adapters.logged_in.LoggedInViewModel;
+import interface_adapters.login.LoginPresenter;
+import interface_adapters.login.LoginViewModel;
+import interface_adapters.signup.SignupViewModel;
 import org.junit.Test;
+
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -12,6 +19,11 @@ import java.time.LocalDateTime;
 import static org.junit.Assert.*;
 
 public class LoginInteractorTest {
+    private LoginInteractor interactor;
+    private LoginUserDataAccessInterface userRepository;
+    private LoginOutputBoundary presenter;
+    private ViewModel viewModel;
+
 
     @Test
     public void successTest() throws IOException {
@@ -38,9 +50,10 @@ public class LoginInteractorTest {
             }
 
             @Override
-            public void switchToLoginView() {
+            public void switchToSignUpView() {
 
             }
+
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
@@ -71,9 +84,10 @@ public class LoginInteractorTest {
             }
 
             @Override
-            public void switchToLoginView() {
+            public void switchToSignUpView() {
 
             }
+
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, successPresenter);
@@ -108,9 +122,11 @@ public class LoginInteractorTest {
             }
 
             @Override
-            public void switchToLoginView() {
+            public void switchToSignUpView() {
 
             }
+
+
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
@@ -140,11 +156,36 @@ public class LoginInteractorTest {
             }
 
             @Override
-            public void switchToLoginView() {
+            public void switchToSignUpView() {
 
             }
+
         };
 
         LoginInputBoundary interactor = new LoginInteractor(userRepository, failurePresenter);
         interactor.execute(inputData);
-    }}
+    }
+
+
+    @Test
+    public void testSwitchToSignUpView() throws IOException {
+        ViewManagerModel viewModelManager = new ViewManagerModel();
+        LoginViewModel login = new LoginViewModel();
+        SignupViewModel signup = new SignupViewModel();
+        LoggedInViewModel loggedIn = new LoggedInViewModel();
+        UserFactory factory = new CommonUserFactory();
+        String csv = "./Data/users.csv";
+        LoginUserDataAccessInterface userRepository = new FileUserDataAccessObject(csv, factory);
+
+        // Add Paul to the repo so that when we check later they already exist
+
+        // This creates a presenter that tests whether the test case is as we expect.
+        LoginPresenter presenter = new LoginPresenter(viewModelManager, loggedIn,login,signup);
+        LoginInteractor interactor = new LoginInteractor(userRepository, presenter);
+        interactor.switchToSignUpView();
+        assertEquals("sign up", viewModelManager.getState());
+
+}}
+
+
+

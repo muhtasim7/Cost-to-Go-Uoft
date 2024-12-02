@@ -4,7 +4,15 @@ import data_access.FileUserDataAccessObject;
 import entities.CommonUserFactory;
 import entities.User;
 import entities.UserFactory;
+import interface_adapters.ViewManagerModel;
+import interface_adapters.logged_in.LoggedInViewModel;
+import interface_adapters.login.LoginPresenter;
+import interface_adapters.login.LoginViewModel;
+import interface_adapters.signup.SignupPresenter;
+import interface_adapters.signup.SignupViewModel;
 import org.junit.Test;
+import usecases.login.LoginInteractor;
+import usecases.login.LoginUserDataAccessInterface;
 
 import java.io.IOException;
 
@@ -107,4 +115,22 @@ public class SignupInteractorTest {
         SignupInputBoundary interactor = new SignupInteractor(userRepository, failurePresenter, new CommonUserFactory());
         interactor.execute(inputData);
     }
-}
+    @Test
+    public void testSwitchToLoginView() throws IOException {
+        ViewManagerModel viewModelManager = new ViewManagerModel();
+        LoginViewModel login = new LoginViewModel();
+        SignupViewModel signup = new SignupViewModel();
+        LoggedInViewModel loggedIn = new LoggedInViewModel();
+        UserFactory factory = new CommonUserFactory();
+        String csv = "./Data/users.csv";
+        SignupUserDataAccessInterface userRepository = new FileUserDataAccessObject(csv, factory);
+
+        // Add Paul to the repo so that when we check later they already exist
+
+        // This creates a presenter that tests whether the test case is as we expect.
+        SignupPresenter presenter = new SignupPresenter(viewModelManager,signup, login);
+        SignupInteractor interactor = new SignupInteractor(userRepository, presenter, factory);
+        interactor.switchToLoginView();
+        assertEquals("log in", viewModelManager.getState());
+
+    }}
