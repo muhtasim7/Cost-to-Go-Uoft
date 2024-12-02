@@ -14,7 +14,7 @@ public class AirportCode {
     private static final String API_KEY = "r22OXsyZrlJCVrf8tkzSAA==387SPbE2IE8Suwr6"; // Replace with your actual API key
     private static final OkHttpClient client = new OkHttpClient();
 
-    public List<String> fetchAirportDetails(String city) throws Exception {
+    public List<String> getAirportDetails(String city) throws Exception {
         // Build the request
         String API_URL = "https://api.api-ninjas.com/v1/airports?name=" + city;
         Request request = new Request.Builder()
