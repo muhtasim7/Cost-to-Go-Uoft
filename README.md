@@ -33,9 +33,10 @@ This application was inspired by our own challenges using the University of Toro
 ## **Features**
 
 - **User Account Management**: Users can create an account to store preferences and personal details.  
-  ![Signup Page](docs/images/signup_page.png)  
-  ![Login Page](docs/images/login_page.png)
-
+  ![Signup Page](docs/images/signUp.png)  
+  ![Login Page](docs/images/logIn.png)
+- **User Account Update**: User can update their personal information
+  ![Change Page](docs/images/changeInfo.png)
 - **University Selection**: Provides resources for flights and accommodations in the university's city.
 
 - **Flight Recommendations**: Suggests flights tailored to the user's preferences 
@@ -131,20 +132,20 @@ This application was inspired by our own challenges using the University of Toro
 
 1. **Create an Account**:  
    Register and provide personal details.  
-   ![Signup Page](docs/images/signup_page.png)  
-   ![Login Page](docs/images/login_page.png)
-
-2. **Select Programs**:  
+   ![Signup Page](docs/images/signUp.png)  
+   ![Login Page](docs/images/logIn.png)
+2. **Update Information**:
+   Change personal details.
+   ![Login Page](docs/images/changeInfo.png)
+3. **Select Programs**:  
    Browse filtered programs and sort them by cost.
-
-3. **View Accommodations and Flights**:
+4. **View Accommodations and Flights**:
     - Choose accommodations. 
       ![Airbnb Page](docs/images/airbnb_page.png)
    
     - Select flights.
       ![Flight Page](docs/images/flightoptions.png)
-
-4. **Generate Itinerary**:  
+5. **Generate Itinerary**:  
    Get the final itinerary summarizing your study abroad plans.
 
 ---
