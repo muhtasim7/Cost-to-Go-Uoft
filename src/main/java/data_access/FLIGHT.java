@@ -34,7 +34,7 @@ public class FLIGHT implements FlightUserDataAccessInterface {
 
         final AirportCode airportCodeFetcher = new AirportCode();
 
-        final List<String> airportDetails = airportCodeFetcher.getAirportDetails("Vancouver");
+        final List<String> airportDetails = airportCodeFetcher.getAirportDetails(destination);
         String arrivalAirportCode = "";
         for (String airportDetail : airportDetails) {
             arrivalAirportCode = airportDetail;

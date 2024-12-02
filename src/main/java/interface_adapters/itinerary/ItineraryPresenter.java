@@ -17,13 +17,11 @@ public class ItineraryPresenter implements ItineraryOutputBoundary {
     @Override
     public void presentItinerary(ItineraryOutputData outputData) {
         // Create the ItineraryState object with the list of properties
-        ItineraryState itineraryState = new ItineraryState(outputData.getProperties());
+        ItineraryState itineraryState = new ItineraryState(outputData.getProperties(), outputData.getUniversities(), outputData.getFlights());
 
         // Set the ItineraryState in the ViewModel
         viewManagerModel.setState(viewManagerModel.getState());
 
-        // Optionally, you can perform other operations like logging
-        System.out.println("Itinerary presented with " + outputData.getProperties().size() + " properties.");
     }
 
     @Override

@@ -90,7 +90,7 @@ public class DashboardView extends JPanel {
         updateInfoButton = new JButton("Update Information");
         findProgramButton = new JButton("Find University");
         rentSearchButton = new JButton("Rent Search");
-        itineraryButton = new JButton("Overview");
+        itineraryButton = new JButton("Itinerary");
         flightSearchButton = new JButton("Flight Search");
 
         // Action listener for "Update Information"
@@ -123,7 +123,8 @@ public class DashboardView extends JPanel {
 
         // Action listener for "Rent Search"
         rentSearchButton.addActionListener(e -> {
-            String city = JOptionPane.showInputDialog(this, "Enter city for Airbnb search:", "Rent Search", QUESTION_MESSAGE);
+            itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
+            String city = itineraryViewModel.getSelectedUniversities().getCity();
 
             if (city != null && !city.trim().isEmpty()) {
                 // Dynamically create PropertyView
@@ -163,7 +164,8 @@ public class DashboardView extends JPanel {
         });
 
         flightSearchButton.addActionListener(e -> {
-            String destination = JOptionPane.showInputDialog(this, "Enter city for flight search:", "Flight Search", QUESTION_MESSAGE);
+            itineraryViewModel.setSelectedUniversities(UniversitiesState.getInstance().getSelectedUniversityData());
+            String destination = itineraryViewModel.getSelectedUniversities().getCity();
 
             if (destination != null && !destination.trim().isEmpty()) {
                 FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight, destination, flightState);
