@@ -25,11 +25,14 @@ public class FilterUniversities {
         List<University> filteredUniversities = new ArrayList<>();
         // Iterate over the university list
         for (University university : universityList) {
-            boolean isEligible = true;
+            boolean isEligible = meetsMinimumGPA(university.getMinimum_gpa(), user.getDegreeType(), user_gpa);
 
-            if (!meetsMinimumGPA(university.getMinimum_gpa(), user.getDegreeType(), user_gpa)) {
+            String user_language = user.getLanguage();
+            String university_language = university.getLanguage_of_study();
+            if (!language(user_language, university_language)) {
                 isEligible = false;
             }
+
             if (isEligible) {
                 filteredUniversities.add(university);
             }
@@ -83,6 +86,9 @@ public class FilterUniversities {
     public boolean meetsMinimumGPA(String gpaString, String programType, double userGPA) {
         double minimumGPA = extract_GPA(gpaString, programType);
         return userGPA >= minimumGPA;
+    }
+    public boolean language(String user_language, String school_language) {
+        return school_language.toLowerCase().contains(user_language.toLowerCase());
     }
 }
 
