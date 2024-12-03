@@ -24,5 +24,14 @@ public class University {
     public String getLanguage_of_study() {return Language_of_study;}
     public String getTuition() {return Tuition;}
     public String getAward() {return Award;}
-    public String getMinimum_gpa() {return Minimum_GPA;}
+    public String getMinimum_gpa() {return Minimum_GPA;
+    }
+
+    @Override
+    public String toString() {
+        return "University{" + "Country='" + Country + '\'' + ", City='" + City + '\'' + ", UniversityName='"
+                + UniversityName + '\'' + ", Language_of_study='" + Language_of_study + '\''
+                + ", Tuition='" + Tuition + '\'' + ", Award='" + Award + '\'' + ", Minimum_GPA='"
+                + Minimum_GPA + '\'' + '}';
+    }
 }

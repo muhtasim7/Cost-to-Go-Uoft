@@ -14,6 +14,7 @@ import data_access_rosa.FileUniversitiesDataAccessObject;
 import entities.CommonFlightFactory;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
+import interface_adapter_rosa.universities.UniversitiesState;
 import interface_adapter_rosa.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightState;
@@ -71,7 +72,8 @@ public class MainWithFile {
         final PropertyState propertyState = new PropertyState();
         final FlightViewModel flightViewModel = new FlightViewModel();
         final FlightState flightState = new FlightState();
-        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState, flightState);
+        final UniversitiesState universitiesState = new UniversitiesState();
+        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState, flightState, universitiesState);
 
         final FileUserDataAccessObject userDataAccessObject =
                 new FileUserDataAccessObject("Data/users.csv", new CommonUserFactory());

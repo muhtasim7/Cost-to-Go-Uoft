@@ -23,4 +23,8 @@ public class ItineraryController {
     public ItineraryController(ItineraryInputBoundary inputBoundary) {
         this.inputBoundary = inputBoundary;
     }
+
+    public ItineraryInputBoundary getInputBoundary() {
+        return inputBoundary;
+    }
 }
