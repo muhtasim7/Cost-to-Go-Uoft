@@ -7,12 +7,10 @@ import entities.University;
 import interface_adapters.universities.*;
 import interface_adapters.universities.UniversitiesController;
 import interface_adapters.universities.UniversitiesViewModel;
-import java.awt.Component;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import java.awt.*;
+
+import javax.swing.*;
 
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightState;
@@ -22,11 +20,11 @@ import interface_adapters.itinerary.ItineraryViewModel;
 import interface_adapters.logged_in.LoggedInState;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
+import usecases.universities.UniversitiesUserDataAccessInterface;
 import usecases.flight.FlightUserDataAccessInterface;
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.property.PropertyUserDataAccessInterface;
-import view_rosa.UniversitiesView;
+import view.UniversitiesView;
 
 /**
  * The View for when the user is logged in and in the dashboard.

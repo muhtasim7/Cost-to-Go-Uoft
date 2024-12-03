@@ -72,7 +72,7 @@ public class FilterUniversities {
             }
         } catch (Exception e) {
             // Catch any exception and return 3.0
-            System.out.println("Error: " + e.getMessage() + gpaString + "code breaks");
+//            System.out.println("Error: " + e.getMessage() + gpaString + "code breaks");
             return 3.0;
         }
     }
