@@ -1,4 +1,4 @@
-package flightentitiestest;
+package entities.flightentitiestest;
 
 import entities.CommonFlightFactory;
 import entities.Flight;
@@ -28,7 +28,7 @@ public class CommonFlightFactoryTest {
         assertNotNull("The created flight should not be null.", flight);
         assertEquals("2025-01-01 08:30", flight.getDepartureTime());
         assertEquals("2025-01-01 10:30", flight.getArrivalTime());
-        assertEquals("Toronto International Airport", flight.getDepartureAirport());
+        assertEquals("Toronto Pearson International Airport", flight.getDepartureAirport());
         assertEquals("Vancouver International Airport", flight.getArrivalAirport());
         assertEquals("300", flight.getFlightDuration());
         assertEquals("205", flight.getPrice());

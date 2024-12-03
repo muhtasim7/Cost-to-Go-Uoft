@@ -22,9 +22,10 @@ public class FlightController {
         try {
             final FlightInputData inputData = new FlightInputData(destination);
             flightInteractor.handle(inputData);
-        } catch (Exception e) {
+        }
+        catch (Exception exception) {
             // Display the error
-            System.out.println("Error occurred while searching flights: " + e.getMessage());
+            System.out.println("Error occurred while searching flights: " + exception.getMessage());
         }
     }
 

@@ -19,11 +19,12 @@ public class FlightView extends JPanel {
     private final DefaultTableModel tableModel;
     private final FlightController flightcontroller;
     private final FlightViewModel viewModel;
+    private final FlightSelectedCallback callback;
 
     public FlightView(FlightController controller, FlightViewModel viewModel, String city, FlightSelectedCallback callback) {
         this.flightcontroller = controller;
         this.viewModel = viewModel;
-
+        this.callback = callback;
         setLayout(new BorderLayout());
 
         // Create and configure the table, I referred to code for PropertyView to help me out with the following code
@@ -112,11 +113,14 @@ public class FlightView extends JPanel {
                 Flight flight = new CommonFlight(departureTime, arrivalTime, departureAirport, arrivalAirport,
                         flightDuration, price);
 
-                FlightState state = viewModel.getState();
-                state.setSelectedFlight(flight);
-                viewModel.setState(state);
-
-                System.out.println("Selected Flight Saved: " + state.getSelectedFlight());
+                if (callback != null){
+                    callback.onFlightSelected(flight);
+                }
+//                FlightState state = viewModel.getState();
+//                state.setSelectedFlight(flight);
+//                viewModel.setState(state);
+//
+//                System.out.println("Selected Flight Saved: " + state.getSelectedFlight());
 
                 flightcontroller.switchToDashboardView();
             });

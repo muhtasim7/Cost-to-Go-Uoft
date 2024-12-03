@@ -45,7 +45,7 @@ public final class FlightUseCaseFactory {
         // Make this anonymous inner class a lambda
         // Replace this lambda with method reference 'state::setSelectedFlight'.
         // As IntelliJ recommended
-        FlightSelectedCallback callback = state::setSelectedFlight;
+        final FlightSelectedCallback callback = state::setSelectedFlight;
 
         return new FlightView(flightController, flightViewModel, destination, callback);
     }

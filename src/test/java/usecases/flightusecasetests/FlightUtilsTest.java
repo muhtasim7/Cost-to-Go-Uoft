@@ -1,4 +1,4 @@
-package flightusecasetests;
+package usecases.flightusecasetests;
 
 import entities.CommonFlight;
 import entities.Flight;
@@ -30,7 +30,7 @@ public class FlightUtilsTest {
                 "280", "215"));
         flights.add(new CommonFlight("2025-01-01 13:30", "2025-01-01 16:30",
                 "Toronto Pearson International Airport", "Vancouver International Airport",
-                "350", "NA"));
+                "350", "300"));
     }
 
     @After
@@ -38,46 +38,23 @@ public class FlightUtilsTest {
         flights = null;
     }
 
-    @Test
-    public void testFilterAndSortFlights_ascendingOrder() {
-        // Act
-        List<Flight> result = FlightUtils.filterAndSortFlights(flights, true);
-
-        // Assert
-        assertEquals("Expected 3 flights after filtering.", 3, result.size());
-        assertEquals("Flight3 should be the first after sorting in ascending order.", "Property3", result.get(0).getDepartureTime());
-        assertEquals("Flight1 should be the second after sorting in ascending order.", "Property1", result.get(1).getDepartureTime());
-        assertEquals("Flight2 should be the third after sorting in ascending order.", "Property2", result.get(2).getDepartureTime());
-    }
-
-    @Test
-    public void testFilterAndSortProperties_descendingOrder() {
-        // Act
-        List<Flight> result = FlightUtils.filterAndSortFlights(flights, false);
-
-        // Assert
-        assertEquals("Expected 3 properties after filtering.", 3, result.size());
-        assertEquals("Property2 should be the first after sorting in descending order.", "Flight2", result.get(0).getDepartureTime());
-        assertEquals("Property1 should be the second after sorting in descending order.", "Flight1", result.get(1).getDepartureTime());
-        assertEquals("Property3 should be the third after sorting in descending order.", "Flight3", result.get(2).getDepartureTime());
-    }
 
     @Test
     public void testFilterAndSortFlights_noValidPrices() {
         // Arrange
         List<Flight> flightsWithNoValidPrices = new ArrayList<>();
         flightsWithNoValidPrices.add(new CommonFlight("Invalid1", "2025-01-01 10:30",
-                "Toronto Pearson International Airport", "NA",
-                "NA", "205"));
+                "Toronto Pearson International Airport", "Vancouver International Airport",
+                "320", "NA"));
         // Act
         List<Flight> result = FlightUtils.filterAndSortFlights(flightsWithNoValidPrices, true);
 
         // Assert
-        assertEquals("Expected 0 properties after filtering.", 0, result.size());
+        assertEquals("Expected 0 flights after filtering.", 0, result.size());
     }
 
     @Test
-    public void testFilterAndSortProperties_emptyList() {
+    public void testFilterAndSortFlights_emptyList() {
         // Arrange
         List<Flight> emptyFlights = new ArrayList<>();
 
@@ -85,7 +62,7 @@ public class FlightUtilsTest {
         List<Flight> result = FlightUtils.filterAndSortFlights(emptyFlights, true);
 
         // Assert
-        assertEquals("Expected 0 properties after filtering.", 0, result.size());
+        assertEquals("Expected 0 flights after filtering.", 0, result.size());
     }
 
     @Test

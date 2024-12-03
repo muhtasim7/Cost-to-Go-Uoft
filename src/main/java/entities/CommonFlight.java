@@ -1,7 +1,7 @@
 package entities;
 
 /**
- * Shows flight with time of departure and arrival, the arrival and departure airports and duration and price of flight
+ * Shows flight with time of departure and arrival, the arrival and departure airports and duration and price of flight.
  * Implementation of Flight interface
  */
 public class CommonFlight implements Flight {
@@ -13,7 +13,7 @@ public class CommonFlight implements Flight {
     private final String price;
 
     /**
-     * Makes a new CommonFlight object with the specified details
+     * Makes a new CommonFlight object with the specified details.
      * @param departureTime is the time of departure of the flight
      * @param arrivalTime is the time the flight arrives at destination
      * @param departureAirport is the airport from which the plane departs
@@ -30,7 +30,6 @@ public class CommonFlight implements Flight {
         this.flightDuration = flightDuration;
         this.price = price;
     }
-
 
     @Override
     public String getDepartureTime() {
@@ -57,19 +56,20 @@ public class CommonFlight implements Flight {
         return flightDuration;
     }
 
-
     @Override
-    public String getPrice() {return price;}
+    public String getPrice() {
+        return price;
+    }
 
     @Override
     public String toString() {
-        return "Flight{" +
-                "Departure Time ='" + departureTime + '\'' +
-                ", Arrival Time ='" + arrivalTime + '\'' +
-                ", Departure Airport ='" + departureAirport + '\'' +
-                ", Arrival Airport ='" + arrivalAirport + '\'' +
-                ", Flight Duration ='" + flightDuration + '\'' +
-                ", Price ='" + price + '\'' +
-                '}';
+        return "Flight{"
+                + "Departure Time ='" + departureTime + '\''
+                + ", Arrival Time ='" + arrivalTime + '\''
+                + ", Departure Airport ='" + departureAirport + '\''
+                + ", Arrival Airport ='" + arrivalAirport + '\''
+                + ", Flight Duration ='" + flightDuration + '\''
+                + ", Price ='" + price + '\''
+                + '}';
     }
 }

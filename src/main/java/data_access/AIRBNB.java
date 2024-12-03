@@ -17,7 +17,8 @@ import java.util.List;
 // import okhttp3.Response;
 
 public class AIRBNB implements PropertyUserDataAccessInterface {
-    private static final String FILE_PATH = "Data/jsonformatter.txt";
+
+    private static final String FILE_PATH = "./Data/jsonformatter.txt";
 
     private final CommonPropertyFactory propertyFactory;
 

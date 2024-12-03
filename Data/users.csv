@@ -1,5 +1,8 @@
 username,password,gpa,degree,program,language,email
-ambu,test,6,Graduate,stat,korean,test
-sanyukta,sanyukta,4.0,Bachelors,Computer Science,English, email
+san,san,4.0,Bachelors,Global Health,English,sanyukta@gmail.com
+ambu,test,6,grad,stat,korean,test
+test9,test7,4,Graduate,Faculty of Law,Korean,am
 sim,test,0.5,undergrad,computer science ,english,sim@gmail.com
-sim,test,9.0,goose,mate,pikachu,@sim.com
+test6,test6,4,Graduate,Applied Science and Engineering,Korean,am
+test7,test7,4,Undergraduate,Faculty of Law,eng,emal
+Paul,pwd,gpa,degree,program,language,email
