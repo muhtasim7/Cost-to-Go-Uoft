@@ -1,6 +1,5 @@
 package app;
 
-import data_access.FLIGHT;
 import java.awt.CardLayout;
 import java.io.IOException;
 
@@ -12,6 +11,10 @@ import data_access.FileUserDataAccessObject;
 import data_access.AIRBNB;
 import entities.CommonFlightFactory;
 import data_access.FileUniversitiesDataAccessObject;
+import data_access.FLIGHT;
+import data_access.FileUserDataAccessObject;
+import data_access_rosa.FileUniversitiesDataAccessObject;
+import entities.CommonFlightFactory;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
 import interface_adapters.universities.UniversitiesViewModel;
@@ -24,6 +27,8 @@ import interface_adapters.login.LoginViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
+import use_case_rosa.universities.UniversitiesDataAccessInterface;
+import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
 import view.DashboardView;
 import view.LoggedInView;
 import view.LoginView;
@@ -72,45 +77,33 @@ public class MainWithFile {
         final PropertyState propertyState = new PropertyState();
         final FlightViewModel flightViewModel = new FlightViewModel();
         final FlightState flightState = new FlightState();
-        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState, flightState);
+        final UniversitiesState universitiesState = new UniversitiesState();
+        final ItineraryViewModel itineraryViewModel = new ItineraryViewModel(propertyState, flightState, universitiesState);
 
-        final FileUserDataAccessObject userDataAccessObject = new FileUserDataAccessObject("Data/users.csv", new CommonUserFactory());
+        final FileUserDataAccessObject userDataAccessObject =
+                new FileUserDataAccessObject("Data/users.csv", new CommonUserFactory());
         final AIRBNB airbnb = new AIRBNB(new CommonPropertyFactory());
         final FLIGHT flight = new FLIGHT(new CommonFlightFactory());
-        // rosa
+
         final UniversitiesViewModel universitiesViewModel = new UniversitiesViewModel();
         final UniversitiesDataAccessInterface universitiesData = new FileUniversitiesDataAccessObject();
         final UniversitiesUserDataAccessInterface universitiesUserDataAccessObject = userDataAccessObject;
 
-//
-//        final PropertyView propertyView = PropertyUseCaseFactory.create(viewManagerModel, propertyViewModel, airbnb,
-//                "Toronto", propertyState);
-//        views.add(propertyView, "propertyView");
-
-
-//        final FlightView flightView = FlightUseCaseFactory.create(viewManagerModel, flightViewModel, flight_flight, "Vancouver", flightState);
-//        views.add(flightView, "flightView");
-
-        final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel,
-                signupViewModel, userDataAccessObject);
+        final SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel,
+                userDataAccessObject);
         views.add(signupView, signupView.getViewName());
 
         final DashboardView dashboardView = DashboardViewUseCaseFactory.create(viewManagerModel, itineraryViewModel,
-                userDataAccessObject, airbnb, propertyViewModel, propertyState, flight, flightViewModel, flightState,
-                universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
+                userDataAccessObject, airbnb, propertyViewModel, propertyState, flight, flightViewModel, flightState, universitiesViewModel, universitiesData, universitiesUserDataAccessObject);
         views.add(dashboardView, dashboardView.getViewName());
 
-        final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel,
-                loggedInViewModel, userDataAccessObject, signupViewModel);
+        final LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, loggedInViewModel,
+                userDataAccessObject, signupViewModel);
         views.add(loginView, loginView.getViewName());
 
-        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel,
-                loggedInViewModel, userDataAccessObject);
+        final LoggedInView loggedInView = ChangePasswordUseCaseFactory.create(viewManagerModel, loggedInViewModel,
+                userDataAccessObject);
         views.add(loggedInView, loggedInView.getViewName());
-//
-//        final ItineraryView itineraryView = ItineraryUseCaseFactory.create(viewManagerModel,itineraryViewModel,
-//                userDataAccessObject);
-//        views.add(itineraryView, itineraryView.getViewName());
 
         // Set the initial view to be the signup view (this is the view that's visible when the application starts)
         viewManagerModel.setState(signupView.getViewName());

@@ -86,5 +86,9 @@ public class ItineraryOutputData {
     public Flight getSelectedFlight() {
         return selectedFlight;
     }
+
+    public University getSelectedUniversity() {
+        return selectedUniversity;
+    }
 }
 

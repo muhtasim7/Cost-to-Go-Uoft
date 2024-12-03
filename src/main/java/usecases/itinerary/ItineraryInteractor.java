@@ -37,24 +37,18 @@ public class ItineraryInteractor implements ItineraryInputBoundary {
      * @param flight the selected flight related to the itinerary
      */
     @Override
-    public void handleforItinerary(Property property, University university, Flight flight) {
-        try {
-            // Fetch properties, universities, and flights for the itinerary
-            final List<Property> properties = dataAccess.getPropertiesForItinerary(university.getCity());
-            final List<University> universities = dataAccess.getUniversitiesForItinerary(university);
-            final List<Flight> flights = dataAccess.getFlightsForItinerary(flight);
+    public void handleforItinerary(Property property, University university, Flight flight) throws Exception {
+        // Fetch properties, universities, and flights for the itinerary
+        final List<Property> properties = dataAccess.getPropertiesForItinerary(university.getCity());
+        final List<University> universities = dataAccess.getUniversitiesForItinerary(university);
+        final List<Flight> flights = dataAccess.getFlightsForItinerary(flight);
 
-            // Prepare output data to pass to the output boundary
-            final ItineraryOutputData outputData = new ItineraryOutputData(properties, property, universities,
+        // Prepare output data to pass to the output boundary
+        final ItineraryOutputData outputData = new ItineraryOutputData(properties, property, universities,
                     university, flights, flight);
 
-            // Pass the data to the output boundary for presentation
-            outputBoundary.presentItinerary(outputData);
-        }
-        catch (Exception e) {
-            // Handle any exceptions during data processing
-            e.printStackTrace();
-        }
+        // Pass the data to the output boundary for presentation
+        outputBoundary.presentItinerary(outputData);
     }
 
     /**

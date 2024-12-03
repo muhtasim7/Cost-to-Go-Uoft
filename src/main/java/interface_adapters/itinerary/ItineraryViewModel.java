@@ -24,14 +24,16 @@ public class ItineraryViewModel {
     private final FlightState flightState;
 
     /**
-     * Constructs an ItineraryViewModel with the given PropertyState and FlightState.
+     * Constructs an ItineraryViewModel with the given PropertyState, FlightState, and UniversitiesState.
      *
      * @param propertyState the initial state of the properties
      * @param flightState the initial state of the flights
+     * @param universitiesState the initial state of the universities
      */
-    public ItineraryViewModel(PropertyState propertyState, FlightState flightState) {
+    public ItineraryViewModel(PropertyState propertyState, FlightState flightState, UniversitiesState universitiesState){
         this.propertyState = propertyState;
         this.flightState = flightState;
+        this.universitiesState = universitiesState;
     }
 
     /**
@@ -82,15 +84,6 @@ public class ItineraryViewModel {
     }
 
     /**
-     * Removes a PropertyChangeListener from the listener list.
-     *
-     * @param listener the PropertyChangeListener to be removed
-     */
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        pcs.removePropertyChangeListener(listener);
-    }
-
-    /**
      * Sets the selected university for the itinerary.
      *
      * @param selectedUniversity the selected university
@@ -115,5 +108,23 @@ public class ItineraryViewModel {
      */
     public Flight getSelectedFlight() {
         return flightState.getSelectedFlight();
+    }
+
+    /**
+     * Sets the selected property for the itinerary.
+     *
+     * @param selectedFlight the selected university
+     */
+    public void setSelectedFlight(Flight selectedFlight) {
+        flightState.setSelectedFlight(selectedFlight);
+    }
+
+    /**
+     * Sets the selected property for the itinerary.
+     *
+     * @param selectedProperty the selected university
+     */
+    public void setSelectedProperty(Property selectedProperty) {
+        this.propertyState.setSelectedProperty(selectedProperty);
     }
 }
