@@ -45,7 +45,7 @@ This application was inspired by our own challenges using the University of Toro
   ![Airbnb Page](docs/images/airbnb_page.png)
 
 - **Itinerary Summary**: Generates a comprehensive itinerary summarizing the user's choices.
-
+   ![Itinerary Page](docs/images/itineraryview.png)
 ---
 
 ## **Getting Started**
@@ -135,7 +135,7 @@ This application was inspired by our own challenges using the University of Toro
    ![Login Page](docs/images/login_page.png)
 
 2. **Select Programs**:  
-   Browse filtered programs and sort them by cost.
+   - Browse filtered programs and sort them by cost.
 
 3. **View Accommodations and Flights**:
     - Choose accommodations. 
@@ -145,7 +145,9 @@ This application was inspired by our own challenges using the University of Toro
       ![Flight Page](docs/images/flightoptions.png)
 
 4. **Generate Itinerary**:  
-   Get the final itinerary summarizing your study abroad plans.
+   - Get the final itinerary summarizing your study abroad plans.
+     ![Itinerary Page](docs/images/itineraryview.png)
+
 
 ---
 

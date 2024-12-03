@@ -18,7 +18,7 @@ public interface ItineraryInputBoundary {
      * @param university the university associated with the itinerary
      * @param flight the flight associated with the itinerary
      */
-    void handleforItinerary(Property property, University university, Flight flight);
+    void handleforItinerary(Property property, University university, Flight flight) throws Exception;
 
     /**
      * Switches the view to the itinerary view, typically used to update the UI or trigger view changes.

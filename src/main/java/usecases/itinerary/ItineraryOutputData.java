@@ -5,6 +5,7 @@ import java.util.List;
 import entities.Flight;
 import entities.Property;
 import entity_rosa.University;
+import interface_adapter_rosa.universities.UniversitiesState;
 
 /**
  * Data transfer object for the itinerary output data.
@@ -85,6 +86,10 @@ public class ItineraryOutputData {
      */
     public Flight getSelectedFlight() {
         return selectedFlight;
+    }
+
+    public University getSelectedUniversity() {
+        return selectedUniversity;
     }
 }
 
