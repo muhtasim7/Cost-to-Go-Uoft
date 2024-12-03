@@ -135,7 +135,8 @@ This application was inspired by our own challenges using the University of Toro
    ![Login Page](docs/images/login_page.png)
 
 2. **Select Programs**:  
-   Browse filtered programs and sort them by cost.
+   Browse filtered programs that are sorted alphabetically by country.
+   ![Universities Page](docs/images/universitiesview.png)
 
 3. **View Accommodations and Flights**:
     - Choose accommodations. 
