@@ -4,7 +4,7 @@ import entities.CommonFlightFactory;
 import entities.CommonPropertyFactory;
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 import org.junit.Before;
 import org.junit.Test;
 

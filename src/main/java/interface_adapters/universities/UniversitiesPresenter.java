@@ -42,7 +42,7 @@ public class UniversitiesPresenter implements UniversitiesOutputBoundary {
 
     public void prepareFailView(String error) {
         final UniversitiesState universitiesState = universitiesViewModel.getState();
-//        universitiesState.setUniversitiesError(error);
+        universitiesState.setUniversitiesError(error);
         universitiesViewModel.firePropertyChanged();
     }
 }

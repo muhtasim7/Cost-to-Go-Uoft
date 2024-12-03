@@ -1,7 +1,7 @@
 package interface_adapters.itinerary;
 
 import entities.*;
-import entity_rosa.University;
+import entities.University;
 import org.junit.Before;
 import org.junit.Test;
 import usecases.itinerary.ItineraryInputBoundary;
