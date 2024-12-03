@@ -4,7 +4,7 @@ import java.util.List;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 
 /**
  * Represents the state of an itinerary, including the lists of properties,

@@ -2,7 +2,7 @@ package usecases.itinerary;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 
 /**
  * Interface that defines the input boundary for handling itinerary-related use cases.

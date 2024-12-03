@@ -1,7 +1,6 @@
 package data_access;
 
 import entities.Flight;
-import entity_rosa.University;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,10 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import entities.University;
 import entities.Property;
 import entities.User;
 import entities.UserFactory;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
+import usecases.universities.UniversitiesUserDataAccessInterface;
 import usecases.change_password.ChangePasswordUserDataAccessInterface;
 import usecases.itinerary.ItineraryDataAccessInterface;
 import usecases.login.LoginUserDataAccessInterface;
