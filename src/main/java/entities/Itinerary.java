@@ -2,7 +2,7 @@ package entities;
 
 import java.util.List;
 
-import entity_rosa.University;
+import entities.University;
 
 /**
  * Interface representing an itinerary containing the rental properties, universities, and flights.

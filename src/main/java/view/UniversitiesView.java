@@ -1,11 +1,11 @@
-package view_rosa;
-import entity_rosa.University;
-import interface_adapter_rosa.universities.UniversitiesController;
-import interface_adapter_rosa.universities.UniversitiesState;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
+package view;
+import entities.University;
+import interface_adapters.universities.UniversitiesController;
+import interface_adapters.universities.UniversitiesState;
+import interface_adapters.universities.UniversitiesViewModel;
 import entities.User;
-import use_case_rosa.universities.FilterUniversities;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
+import usecases.universities.FilterUniversities;
+import usecases.universities.UniversitiesUserDataAccessInterface;
 
 
 import javax.swing.*;
@@ -15,7 +15,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 

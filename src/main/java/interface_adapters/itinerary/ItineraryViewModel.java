@@ -5,8 +5,8 @@ import java.beans.PropertyChangeSupport;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
-import interface_adapter_rosa.universities.UniversitiesState;
+import entities.University;
+import interface_adapters.universities.UniversitiesState;
 import interface_adapters.flight.FlightState;
 import interface_adapters.property.PropertyState;
 import usecases.itinerary.ItineraryOutputData;

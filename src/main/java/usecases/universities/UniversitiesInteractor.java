@@ -1,8 +1,6 @@
-package use_case_rosa.universities;
+package usecases.universities;
 
-import entity_rosa.University;
-
-import java.util.List;
+import entities.University;
 
 /**
  * The Universities Interactor

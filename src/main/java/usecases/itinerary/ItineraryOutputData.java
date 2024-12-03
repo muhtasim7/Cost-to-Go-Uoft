@@ -4,8 +4,7 @@ import java.util.List;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
-import interface_adapter_rosa.universities.UniversitiesState;
+import entities.University;
 
 /**
  * Data transfer object for the itinerary output data.

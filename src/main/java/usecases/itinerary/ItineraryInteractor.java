@@ -4,7 +4,7 @@ import java.util.List;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 
 /**
  * Interactor for managing and processing itinerary-related use cases.

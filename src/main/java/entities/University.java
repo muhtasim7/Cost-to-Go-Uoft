@@ -1,4 +1,4 @@
-package entity_rosa;
+package entities;
 
 public class University {
     String Country;

@@ -1,4 +1,4 @@
-package use_case_rosa.universities;
+package usecases.universities;
 
 public interface UniversitiesOutputBoundary {
     /**

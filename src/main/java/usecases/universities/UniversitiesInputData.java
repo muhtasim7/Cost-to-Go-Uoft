@@ -1,9 +1,6 @@
-package use_case_rosa.universities;
+package usecases.universities;
 
-import entities.User;
-import entity_rosa.University;
-
-import java.util.List;
+import entities.University;
 
 /**
  * The Input Data for the Universities Use Case

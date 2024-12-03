@@ -7,15 +7,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import data_access.AIRBNB;
-import data_access.FLIGHT;
 import data_access.FileUserDataAccessObject;
-import data_access_rosa.FileUniversitiesDataAccessObject;
+import data_access.AIRBNB;
 import entities.CommonFlightFactory;
+import data_access.FileUniversitiesDataAccessObject;
+import data_access.FLIGHT;
 import entities.CommonPropertyFactory;
 import entities.CommonUserFactory;
-import interface_adapter_rosa.universities.UniversitiesState;
-import interface_adapter_rosa.universities.UniversitiesViewModel;
+import interface_adapters.universities.UniversitiesState;
+import interface_adapters.universities.UniversitiesViewModel;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.flight.FlightState;
 import interface_adapters.flight.FlightViewModel;
@@ -25,13 +25,14 @@ import interface_adapters.login.LoginViewModel;
 import interface_adapters.property.PropertyState;
 import interface_adapters.property.PropertyViewModel;
 import interface_adapters.signup.SignupViewModel;
-import use_case_rosa.universities.UniversitiesDataAccessInterface;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
+import usecases.universities.UniversitiesDataAccessInterface;
+import usecases.universities.UniversitiesUserDataAccessInterface;
 import view.DashboardView;
 import view.LoggedInView;
 import view.LoginView;
 import view.SignupView;
 import view.ViewManager;
+
 
 /**
  * The version of Main with an external database used to persist user data.

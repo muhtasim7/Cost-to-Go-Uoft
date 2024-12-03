@@ -1,15 +1,14 @@
-package app_rosa;
+package app;
 
 
-import data_access_rosa.FileUniversitiesDataAccessObject;
-import interface_adapter_rosa.universities.*;
 import interface_adapters.ViewManagerModel;
 import interface_adapters.logged_in.LoggedInViewModel;
-import interface_adapters.login.LoginController;
-import use_case_rosa.universities.*;
+import interface_adapters.universities.UniversitiesController;
+import interface_adapters.universities.UniversitiesPresenter;
+import interface_adapters.universities.UniversitiesViewModel;
 import usecases.login.LoginUserDataAccessInterface;
-import view_rosa.UniversitiesView;
-import use_case_rosa.universities.UniversitiesUserDataAccessInterface;
+import usecases.universities.*;
+import view.UniversitiesView;
 
 /**
  * Factory for creating the Universities use case and view.

@@ -1,4 +1,4 @@
-package interface_adapter_rosa.universities;
+package interface_adapters.universities;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

@@ -1,8 +1,4 @@
-package use_case_rosa.universities;
-
-import entities.User;
-
-import java.util.List;
+package usecases.universities;
 
 /**
  * The DAO for the Universities Use Case.

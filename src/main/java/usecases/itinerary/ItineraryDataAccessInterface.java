@@ -4,7 +4,7 @@ import java.util.List;
 
 import entities.Flight;
 import entities.Property;
-import entity_rosa.University;
+import entities.University;
 
 /**
  * Interface for accessing data required for itinerary management.
