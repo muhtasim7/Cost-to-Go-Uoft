@@ -33,11 +33,11 @@ This application was inspired by our own challenges using the University of Toro
 ## **Features**
 
 - **User Account Management**: Users can create an account to store preferences and personal details.  
-  ![Signup Page](docs/images/signup_page.png)  
-  ![Login Page](docs/images/login_page.png)
+  ![Signup Page](docs/images/signUp.png)  
+  ![Login Page](docs/images/logIn.png)
 
 - **University Selection**: Provides resources for flights and accommodations in the university's city.
-
+  ![Universities Page](docs/images/universitiesview.png)
 - **Flight Recommendations**: Suggests flights tailored to the user's preferences 
    ![Flight Page](docs/images/flightoptions.png)
 
@@ -92,14 +92,21 @@ This application was inspired by our own challenges using the University of Toro
       ```  
       ![Change User File Path](docs/images/Change_user_file.png)
 
-    - Modify the file path in `data_access.Airbnb` (line 20):
+    - Modify the file path in `data_access.FileUniversitiesDataAccessObject` (line 19):
       ```java
-      private static final String FILE_PATH = 
-          "C:\\Users\\YourUsername\\path\\to\\jsonformatter.txt";
+      String file = "C:\\Users\\YourUsername\\path\\to\\Cleaned_University_Data.csv";
       ```  
-      ![Change JSON Formatter File Path](docs/images/Change_jasonformatter_filepath.png)
+      ![Change JSON University File Path](docs/images/uniChangePath.png)
 
-4. **Run the Program**:
+4. **Update File Paths (Windows Users)**:
+   - Modify the file path in `app.MainWithFile` (line 64):
+     ```java
+     final FileUserDataAccessObject userDataAccessObject = 
+         new FileUserDataAccessObject("C:\\Users\\YourUsername\\path\\to\\users.csv");
+     ```  
+     ![Change User File Path](docs/images/Change_user_file.png)
+   
+5. **Run the Program**:
     - Open the project in an IDE (e.g., IntelliJ IDEA).
     - Execute the MainWithFile class.
 
@@ -131,8 +138,8 @@ This application was inspired by our own challenges using the University of Toro
 
 1. **Create an Account**:  
    Register and provide personal details.  
-   ![Signup Page](docs/images/signup_page.png)  
-   ![Login Page](docs/images/login_page.png)
+   ![Signup Page](docs/images/signUp.png)  
+   ![Login Page](docs/images/logIn.png)
 
 2. **Select Programs**:  
    Browse filtered programs that are sorted alphabetically by country.
