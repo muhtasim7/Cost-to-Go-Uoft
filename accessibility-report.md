@@ -15,9 +15,6 @@
 - _Principle 7: Size and Space for Approach and Use_
   - The interface is designed such that it should be compatible with different screen sizes. Buttons, frames, and the overall view is appropriately sized and spaced to ensure comfort and accessibility for all users. 
 
- (a) Describe features that you could implement in the future that would adhere to the principle or
-
- (b) Explain why the principle does not apply to a program like yours.
 
 **2. Write a paragraph (3-6 sentences) about who you would market your program towards, if you were to sell or license your program to customers. This could be a specific category of users, such as "students", or more vague, such as "people who like games". Try to give a bit more detail along with the category.**
 - If we were to market this program, we would target university students and young individuals interested in studying abroad and travel planning. This group would include individuals seeking educational opportunities abroad. The program would be ideal for students looking for an efficient way to match their academic qualifications with university requirements while also managing the logistical challenges of moving abroad, such as finding accommodations and convenient flights. This program offers a reliable service that would simplify the study-abroad process. 
